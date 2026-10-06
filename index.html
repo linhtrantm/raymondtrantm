@@ -126,57 +126,55 @@
     .sec-head { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; }
     .sec-head h2 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; letter-spacing: .03em; text-transform: uppercase; white-space: nowrap; }
     .sec-head .rule { flex: 1; height: 1px; background: var(--line); }
-    .sec-head button { background: none; border: 0; color: var(--text); font: 500 .74rem var(--body); letter-spacing: .1em; text-transform: uppercase; cursor: pointer; display: inline-flex; align-items: center; gap: .6rem; }
-    .sec-head button:hover { color: var(--red-hi); }
 
     /* ── PROJECTS ── */
-    .projects { padding: 3.5rem 0 4rem; border-bottom: 1px solid var(--line); }
-    .proj-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem 1.75rem; }
-    .proj { display: flex; flex-direction: column; }
-    .thumb { position: relative; aspect-ratio: 16 / 10; overflow: hidden; border: 1px solid var(--line); background: #111; }
-    .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
-    .proj:hover .thumb img, .proj:hover .thumb.ph span { transform: scale(1.05); }
-    .thumb.ph { display: flex; align-items: center; justify-content: center; background:
-        linear-gradient(135deg, hsl(355 70% calc(var(--l) * 1%)) 0%, #0b0b0b 80%); }
-    .thumb.ph::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 28px 28px; opacity: .5; }
-    .thumb.ph span { position: relative; font-family: var(--display); font-weight: 700; font-size: 3.4rem; letter-spacing: .02em; color: rgba(255,255,255,.9); transition: transform .6s ease; }
-    .proj-meta { display: grid; grid-template-columns: auto 1fr auto; gap: .2rem 1rem; align-items: center; padding-top: 1rem; }
-    .proj-num { grid-row: span 2; font-family: var(--display); font-weight: 400; font-size: 2.3rem; line-height: 1; color: var(--red-hi); }
-    .proj-name { font-family: var(--display); font-weight: 500; font-size: 1.15rem; letter-spacing: .04em; }
-    .proj-tags { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-    .proj-go { grid-row: span 2; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); border-radius: 50%; color: var(--text); transition: border-color .2s, color .2s, transform .2s; }
-    .proj-go:hover { border-color: var(--red-hi); color: var(--red-hi); transform: translateX(3px); }
-    .proj-desc { grid-column: 1 / -1; margin-top: .6rem; font-size: .82rem; color: var(--muted); font-weight: 300; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-    .proj-more { margin-top: 2rem; }
-    .proj-more[hidden] { display: none; }
+    .projects { padding: 4rem 0; border-bottom: 1px solid var(--line); }
+    .sec-head .count { font-family: var(--display); font-size: 1rem; color: var(--red-hi); letter-spacing: .08em; white-space: nowrap; }
+    .proj-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+    .proj { position: relative; display: flex; flex-direction: column; padding: 1.6rem 1.6rem 1.4rem; background: var(--bg-2); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; transition: border-color .3s, transform .3s, background .3s; }
+    .proj::before { content: ''; position: absolute; left: 0; top: 0; height: 2px; width: 0; background: var(--red-hi); transition: width .4s; }
+    .proj::after { content: attr(data-num); position: absolute; right: .6rem; bottom: -1.4rem; font-family: var(--display); font-weight: 700; font-size: 8rem; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(212,21,27,.22); pointer-events: none; }
+    .proj:hover { border-color: var(--line-red); transform: translateY(-3px); background: #110909; }
+    .proj:hover::before { width: 100%; }
+    .proj-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.1rem; }
+    .proj-num { font-family: var(--display); font-weight: 400; font-size: 1rem; letter-spacing: .12em; color: var(--red-hi); }
+    .proj-go { position: relative; z-index: 1; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); border-radius: 50%; color: var(--text); transition: border-color .2s, color .2s, transform .2s; }
+    .proj-go:hover { border-color: var(--red-hi); color: var(--red-hi); transform: translate(2px, -2px); }
+    .proj-name { font-family: var(--display); font-weight: 500; font-size: 1.45rem; letter-spacing: .02em; line-height: 1.2; margin-bottom: .7rem; }
+    .proj-desc { position: relative; z-index: 1; flex: 1; font-size: .84rem; color: #b5b5b5; font-weight: 300; line-height: 1.7; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
+    .proj-tags { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1.2rem; }
+    .proj-tags li { font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; padding: .25rem .6rem; border: 1px solid var(--line); border-radius: 999px; color: #cfcfcf; }
+    .proj-thumb { margin: -1.6rem -1.6rem 1.2rem; aspect-ratio: 16 / 9; overflow: hidden; border-bottom: 1px solid var(--line); }
+    .proj-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* ── 3 COLUMNS ── */
-    .trio { display: grid; grid-template-columns: 1.05fr 1.15fr .8fr; border-bottom: 1px solid var(--line); }
-    .col { padding: 3.2rem 2.5rem; border-right: 1px solid var(--line); }
-    .col:first-child { padding-left: max(1.5rem, calc((100vw - 1280px) / 2)); }
-    .col:last-child { border-right: 0; }
-    .col h2 { font-family: var(--display); font-weight: 600; font-size: 1.4rem; letter-spacing: .03em; text-transform: uppercase; margin-bottom: 1.4rem; }
-    .col h3 { font-family: var(--display); font-weight: 500; font-size: .82rem; letter-spacing: .12em; text-transform: uppercase; color: var(--red-hi); margin: 1.4rem 0 .7rem; }
-    .about-p { font-size: .88rem; color: #cfcfcf; font-weight: 300; margin-bottom: .8rem; }
+    /* ── ABOUT ── */
+    .about { padding: 4rem 0; border-bottom: 1px solid var(--line); }
+    .about-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 3.5rem; align-items: start; }
+    .about h2, .process h2 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; letter-spacing: .03em; text-transform: uppercase; margin-bottom: 1.4rem; }
+    .about-p { font-size: .98rem; color: #d2d2d2; font-weight: 300; line-height: 1.85; margin-bottom: 1rem; }
+    .about-p:first-of-type { font-size: 1.15rem; color: var(--text); font-weight: 400; line-height: 1.6; }
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .skill-box { padding: 1.4rem; border: 1px solid var(--line); border-radius: 4px; background: var(--bg-2); }
+    .skill-box h3 { font-family: var(--display); font-weight: 500; font-size: .86rem; letter-spacing: .12em; text-transform: uppercase; color: var(--red-hi); margin-bottom: .9rem; }
     .chips { display: flex; flex-wrap: wrap; gap: .45rem; }
     .chips li { font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; padding: .35rem .75rem; border: 1px solid var(--line); border-radius: 4px; color: #d6d6d6; }
-    .group-note { font-size: .76rem; color: var(--muted); margin-bottom: .6rem; font-weight: 300; }
 
-    .steps { position: relative; }
-    .step { display: grid; grid-template-columns: 2rem 44px 1fr; gap: 1rem; align-items: start; padding-bottom: 1.5rem; position: relative; }
-    .step:last-child { padding-bottom: 0; }
-    .step:not(:last-child)::after { content: ''; position: absolute; left: calc(2rem + 1rem + 22px); top: 48px; bottom: 4px; width: 1px; background: var(--line-red); }
-    .step-n { font-family: var(--display); font-size: .95rem; color: var(--red-hi); padding-top: .7rem; }
-    .step-i { width: 44px; height: 44px; border: 1px solid var(--red); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text); background: var(--bg); }
-    .step-i svg { width: 19px; height: 19px; }
-    .step h4 { font-family: var(--display); font-weight: 500; font-size: .9rem; letter-spacing: .1em; text-transform: uppercase; color: var(--red-hi); }
-    .step p { font-size: .8rem; color: #bdbdbd; font-weight: 300; line-height: 1.55; margin-top: .15rem; }
+    /* ── PROCESS ── */
+    .process { padding: 4rem 0; border-bottom: 1px solid var(--line); }
+    .steps { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem; }
+    .steps::before { content: ''; position: absolute; top: 28px; left: 28px; right: 28px; height: 1px; background: var(--line-red); }
+    .step { position: relative; }
+    .step-i { position: relative; width: 56px; height: 56px; border: 1px solid var(--red); border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--bg); margin-bottom: 1.2rem; }
+    .step-i svg { width: 22px; height: 22px; }
+    .step-n { font-family: var(--display); font-size: .8rem; letter-spacing: .14em; color: var(--red-hi); }
+    .step h4 { font-family: var(--display); font-weight: 500; font-size: 1.1rem; letter-spacing: .06em; text-transform: uppercase; margin: .2rem 0 .5rem; }
+    .step p { font-size: .84rem; color: #b5b5b5; font-weight: 300; line-height: 1.7; }
 
-    .quote { background: linear-gradient(160deg, #a50f15 0%, #5b0508 70%, #2c0204 100%); display: flex; flex-direction: column; justify-content: space-between; gap: 2rem; }
-    .quote svg.qm { width: 34px; height: 34px; color: #ff6b6b; }
-    .quote blockquote { font-size: 1.15rem; line-height: 1.5; font-weight: 400; margin-top: 1rem; }
-    .sign { font-family: var(--script); font-size: 2.1rem; margin-top: 1.5rem; line-height: 1; }
-    .quote small { font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: #ffb3b3; }
+    /* ── QUOTE ── */
+    .quote-band { position: relative; overflow: hidden; padding: 5rem 0; text-align: center; background: linear-gradient(160deg, #a50f15 0%, #5b0508 65%, #2c0204 100%); }
+    .quote-band svg.qm { width: 44px; height: 44px; color: #ff7b7b; margin: 0 auto 1.2rem; }
+    .quote-band blockquote { font-family: var(--display); font-weight: 400; font-size: clamp(1.6rem, 3.4vw, 2.6rem); line-height: 1.3; letter-spacing: .01em; max-width: 880px; margin: 0 auto; }
+    .sign { font-family: var(--script); font-size: 2.4rem; margin-top: 1.5rem; line-height: 1; }
 
     /* ── CONTACT ── */
     .contact { padding: 4rem 0; }
@@ -209,16 +207,14 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 1100px) {
       .nav { display: none; }
-      .trio { grid-template-columns: 1fr 1fr; }
-      .col:nth-child(2) { border-right: 0; }
-      .col { border-bottom: 1px solid var(--line); }
-      .quote { grid-column: 1 / -1; border-bottom: 0; }
-      .col:first-child { padding-left: 2.5rem; }
+      .proj-grid { grid-template-columns: 1fr 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .steps { grid-template-columns: 1fr 1fr; gap: 2.5rem 2rem; }
+      .steps::before { display: none; }
       .contact-grid { grid-template-columns: 1fr 1fr; }
       .contact-grid > :last-child { grid-column: 1 / -1; }
     }
     @media (max-width: 980px) {
-      .proj-grid { grid-template-columns: 1fr 1fr; }
       .hero-photo { position: relative; left: auto; top: auto; bottom: auto; transform: none; width: min(420px, 86vw); height: auto; margin: -1.5rem auto 0; }
       .hero-grid { grid-template-columns: 1fr; min-height: 0; padding: 1.5rem 0 2rem; margin-top: 0; gap: 2rem; }
       .hero-mid { grid-column: 1 / -1; }
@@ -229,11 +225,10 @@
     }
     @media (max-width: 640px) {
       .wrap { width: calc(100% - 2rem); }
-      .proj-grid { grid-template-columns: 1fr; }
-      .trio { grid-template-columns: 1fr; }
-      .col, .col:first-child { padding: 2.4rem 1.25rem; border-right: 0; }
+      .proj-grid, .skills-grid, .steps { grid-template-columns: 1fr; }
       .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
       .sec-head h2 { font-size: 1.25rem; }
+      .proj::after { font-size: 6rem; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -300,71 +295,68 @@
     <section class="projects" id="projects">
       <div class="wrap">
         <div class="sec-head reveal">
-          <h2 data-i18n="s-proj">Dự án nổi bật</h2>
+          <h2 data-i18n="s-proj">Dự án đã làm</h2>
           <span class="rule"></span>
-          <button type="button" id="toggleAll" hidden>
-            <span id="toggleLabel" data-i18n="view-all">Xem tất cả</span>
-            <svg width="22" height="12" viewBox="0 0 22 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 6h20M15 1l5 5-5 5"/></svg>
-          </button>
+          <span class="count" id="projCount"></span>
         </div>
         <div class="proj-grid" id="projGrid"></div>
-        <div class="proj-grid proj-more" id="projMore" hidden></div>
       </div>
     </section>
 
-    <!-- SKILLS / PROCESS / QUOTE -->
-    <div class="trio">
-      <section class="col" id="skills">
-        <h2 data-i18n="s-about">Về mình</h2>
-        <p class="about-p" data-i18n="ab-p1">Mình là coder dạo ở TP. Hồ Chí Minh. Mình bắt đầu từ những trang web nhỏ, rồi đi dần xuống phía sau: viết API, thiết kế cơ sở dữ liệu, đưa sản phẩm lên chạy thật.</p>
-        <p class="about-p" data-i18n="ab-p2">Với mình, làm phần mềm tốt nghĩa là hiểu cả hai đầu: thứ người dùng chạm vào và thứ chạy âm thầm phía sau.</p>
+    <!-- ABOUT -->
+    <section class="about" id="skills">
+      <div class="wrap about-grid">
+        <div class="reveal">
+          <h2 data-i18n="s-about">Về mình</h2>
+          <p class="about-p" data-i18n="ab-p1">Mình là coder dạo ở TP. Hồ Chí Minh. Mình bắt đầu từ những trang web nhỏ, rồi đi dần xuống phía sau: viết API, thiết kế cơ sở dữ liệu, đưa sản phẩm lên chạy thật.</p>
+          <p class="about-p" data-i18n="ab-p2">Với mình, làm phần mềm tốt nghĩa là hiểu cả hai đầu: thứ người dùng chạm vào và thứ chạy âm thầm phía sau.</p>
+        </div>
+        <div class="skills-grid reveal">
+          <div class="skill-box"><h3 data-i18n="sk1">Giao diện</h3><ul class="chips"><li>HTML / CSS</li><li>JavaScript</li><li>TypeScript</li><li>React</li></ul></div>
+          <div class="skill-box"><h3 data-i18n="sk2">Xử lý phía sau</h3><ul class="chips"><li>PHP</li><li>REST API</li><li>Firebase</li><li>Dart</li></ul></div>
+          <div class="skill-box"><h3 data-i18n="sk3">Dữ liệu</h3><ul class="chips"><li>MySQL</li><li>Firestore</li><li>SQL</li></ul></div>
+          <div class="skill-box"><h3 data-i18n="sk4">Đưa lên chạy thật</h3><ul class="chips"><li>Git</li><li>GitHub Actions</li><li>Hosting</li><li>Domain</li></ul></div>
+        </div>
+      </div>
+    </section>
 
-        <h3 data-i18n="s-skills">Kỹ năng</h3>
-        <p class="group-note" data-i18n="sk1">Giao diện</p>
-        <ul class="chips"><li>HTML / CSS</li><li>JavaScript</li><li>TypeScript</li><li>React</li></ul>
-        <p class="group-note" style="margin-top:1rem" data-i18n="sk2">Xử lý phía sau</p>
-        <ul class="chips"><li>PHP</li><li>REST API</li><li>Firebase</li><li>Dart</li></ul>
-        <p class="group-note" style="margin-top:1rem" data-i18n="sk3">Dữ liệu</p>
-        <ul class="chips"><li>MySQL</li><li>Firestore</li><li>SQL</li></ul>
-        <p class="group-note" style="margin-top:1rem" data-i18n="sk4">Đưa lên chạy thật</p>
-        <ul class="chips"><li>Git</li><li>GitHub Actions</li><li>Hosting</li><li>Domain</li></ul>
-      </section>
-
-      <section class="col" id="process">
-        <h2 data-i18n="s-process">Quy trình làm việc</h2>
+    <!-- PROCESS -->
+    <section class="process" id="process">
+      <div class="wrap">
+        <h2 class="reveal" data-i18n="s-process">Quy trình làm việc</h2>
         <div class="steps">
-          <div class="step">
-            <span class="step-n">01</span>
-            <span class="step-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
-            <div><h4 data-i18n="p1-h">Tìm hiểu</h4><p data-i18n="p1-p">Mình nghe cách bạn thực sự vận hành và xác định đúng vấn đề trước khi viết dòng code đầu tiên.</p></div>
+          <div class="step reveal">
+            <div class="step-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+            <span class="step-n">01</span><h4 data-i18n="p1-h">Tìm hiểu</h4>
+            <p data-i18n="p1-p">Mình nghe cách bạn thực sự vận hành và xác định đúng vấn đề trước khi viết dòng code đầu tiên.</p>
           </div>
-          <div class="step">
-            <span class="step-n">02</span>
-            <span class="step-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg></span>
-            <div><h4 data-i18n="p2-h">Thiết kế</h4><p data-i18n="p2-p">Mình phác thảo giải pháp và gửi đề xuất rõ ràng. Bạn biết chính xác mình sẽ nhận gì trước khi bắt đầu.</p></div>
+          <div class="step reveal">
+            <div class="step-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg></div>
+            <span class="step-n">02</span><h4 data-i18n="p2-h">Thiết kế</h4>
+            <p data-i18n="p2-p">Mình phác thảo giải pháp và gửi đề xuất rõ ràng. Bạn biết chính xác mình sẽ nhận gì trước khi bắt đầu.</p>
           </div>
-          <div class="step">
-            <span class="step-n">03</span>
-            <span class="step-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
-            <div><h4 data-i18n="p3-h">Phát triển</h4><p data-i18n="p3-p">Mình làm sát thiết kế đã chốt và báo tiến độ thường xuyên. Không hộp đen, không bất ngờ.</p></div>
+          <div class="step reveal">
+            <div class="step-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+            <span class="step-n">03</span><h4 data-i18n="p3-h">Phát triển</h4>
+            <p data-i18n="p3-p">Mình làm sát thiết kế đã chốt và báo tiến độ thường xuyên. Không hộp đen, không bất ngờ.</p>
           </div>
-          <div class="step">
-            <span class="step-n">04</span>
-            <span class="step-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg></span>
-            <div><h4 data-i18n="p4-h">Bàn giao &amp; đồng hành</h4><p data-i18n="p4-p">Mình triển khai, hướng dẫn đội ngũ của bạn và sẵn sàng hỗ trợ khi cần mở rộng hoặc gặp sự cố.</p></div>
+          <div class="step reveal">
+            <div class="step-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg></div>
+            <span class="step-n">04</span><h4 data-i18n="p4-h">Bàn giao &amp; đồng hành</h4>
+            <p data-i18n="p4-p">Mình triển khai, hướng dẫn đội ngũ của bạn và sẵn sàng hỗ trợ khi cần mở rộng hoặc gặp sự cố.</p>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="col quote">
-        <div>
-          <svg class="qm" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 7h4v4c0 3-1.5 5-4 6l-1-1.6c1.3-.7 2-1.8 2-3.4H7zm8 0h4v4c0 3-1.5 5-4 6l-1-1.6c1.3-.7 2-1.8 2-3.4h-1z"/></svg>
-          <blockquote data-i18n="quote">Phần mềm tốt không chỉ ở chỗ nó trông thế nào, mà ở chỗ nó chạy ra sao.</blockquote>
-          <div class="sign">Raymond</div>
-        </div>
-        <small data-i18n="quote-small">Cùng làm ra thứ gì đó đáng dùng.</small>
-      </section>
-    </div>
+    <!-- QUOTE -->
+    <section class="quote-band">
+      <div class="wrap reveal">
+        <svg class="qm" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 7h4v4c0 3-1.5 5-4 6l-1-1.6c1.3-.7 2-1.8 2-3.4H7zm8 0h4v4c0 3-1.5 5-4 6l-1-1.6c1.3-.7 2-1.8 2-3.4h-1z"/></svg>
+        <blockquote data-i18n="quote">Phần mềm tốt không chỉ ở chỗ nó trông thế nào, mà ở chỗ nó chạy ra sao.</blockquote>
+        <div class="sign">Raymond</div>
+      </div>
+    </section>
 
     <!-- CONTACT -->
     <section class="contact" id="contact">
@@ -418,7 +410,7 @@
         'btn-work':'Xem dự án','btn-contact':'Liên hệ',
         'hero-mid':'Biến ý tưởng thành sản phẩm chạy thật.',
         'st-proj':'Dự án đã làm','st-resp':'Thời gian phản hồi','st-custom':'Làm theo yêu cầu',
-        's-proj':'Dự án nổi bật','view-all':'Xem tất cả','view-less':'Thu gọn','pj-demo':'Xem demo',
+        's-proj':'Dự án đã làm','pj-demo':'Xem demo',
         's-about':'Về mình',
         'ab-p1':'Mình là coder dạo ở TP. Hồ Chí Minh. Mình bắt đầu từ những trang web nhỏ, rồi đi dần xuống phía sau: viết API, thiết kế cơ sở dữ liệu, đưa sản phẩm lên chạy thật.',
         'ab-p2':'Với mình, làm phần mềm tốt nghĩa là hiểu cả hai đầu: thứ người dùng chạm vào và thứ chạy âm thầm phía sau.',
@@ -443,7 +435,7 @@
         'btn-work':'See my work','btn-contact':'Contact',
         'hero-mid':'Turning ideas into products that actually run.',
         'st-proj':'Projects done','st-resp':'Response time','st-custom':'Custom built',
-        's-proj':'Selected projects','view-all':'View all','view-less':'Show less','pj-demo':'Live demo',
+        's-proj':'Selected projects','pj-demo':'Live demo',
         's-about':'About me',
         'ab-p1':"I'm a freelance coder in Ho Chi Minh City. I started with small websites, then worked my way down the stack: writing APIs, designing databases, and getting products running for real.",
         'ab-p2':'To me, good software means understanding both ends: what users touch and what quietly runs behind it.',
@@ -464,7 +456,6 @@
 
     let currentLang = 'vi';
     let projectList = [];
-    let showAll = false;
 
     function setLang(lang) {
       const t = translations[lang];
@@ -488,7 +479,6 @@
     // ── PROJECTS: GitHub repos tagged TOPIC (repos.json built by the sync action) + curated projects.json
     const GH_USER = 'linhtrantm';
     const GH_TOPIC = 'portfolio';
-    const FEATURED = 3;
 
     const safeUrl = u => { try { if (u && !/^[a-z][a-z0-9+.-]*:/i.test(u) && !u.startsWith('/') && !u.startsWith('.')) u = 'https://' + u; const x = new URL(u, location.href); return /^https?:$/.test(x.protocol) ? x.href : ''; } catch (e) { return ''; } };
     const pick = (v, lang) => (v && typeof v === 'object') ? (v[lang] || v.en || '') : (v || '');
@@ -516,65 +506,50 @@
 
     function projectCard(p, idx) {
       const title = pick(p.title, currentLang);
+      const num = String(idx + 1).padStart(2, '0');
       const el = document.createElement('article');
       el.className = 'proj reveal visible';
+      el.dataset.num = num;
 
-      const thumb = document.createElement('div');
-      const makePh = () => {
-        const ph = document.createElement('div');
-        ph.className = 'thumb ph';
-        let h = 0; for (const ch of title) h = (h * 31 + ch.charCodeAt(0)) % 13;
-        ph.style.setProperty('--l', 22 + h);
-        const sp = document.createElement('span');
-        const words = title.replace(/^Website\s+/i, '').replace(/([a-z])([A-Z])/g, '$1 $2').split(/\s+/).filter(Boolean);
-        sp.textContent = (words.length > 1 ? words.slice(0, 2).map(w => w[0]).join('') : words[0].slice(0, 2)).toUpperCase();
-        ph.append(sp);
-        return ph;
-      };
       if (p.image) {
-        thumb.className = 'thumb';
+        const th = document.createElement('div'); th.className = 'proj-thumb';
         const img = document.createElement('img');
         img.src = p.image; img.alt = ''; img.loading = 'lazy';
-        img.addEventListener('error', () => thumb.replaceWith(makePh()), { once: true });
-        thumb.append(img);
-        el.append(thumb);
-      } else {
-        el.append(makePh());
+        img.addEventListener('error', () => th.remove(), { once: true });
+        th.append(img); el.append(th);
       }
 
-      const meta = document.createElement('div'); meta.className = 'proj-meta';
-      const num = document.createElement('div'); num.className = 'proj-num'; num.textContent = String(idx + 1).padStart(2, '0');
-      const name = document.createElement('div'); name.className = 'proj-name'; name.textContent = title;
-      const tags = document.createElement('div'); tags.className = 'proj-tags'; tags.textContent = p.tags.slice(0, 3).join(' · ');
-      meta.append(num, name);
+      const top = document.createElement('div'); top.className = 'proj-top';
+      const n = document.createElement('span'); n.className = 'proj-num'; n.textContent = num;
+      top.append(n);
       if (p.demo) {
         const go = document.createElement('a');
         go.className = 'proj-go'; go.href = p.demo; go.target = '_blank'; go.rel = 'noopener';
         go.setAttribute('aria-label', translations[currentLang]['pj-demo'] + ': ' + title);
-        go.innerHTML = '<svg width="20" height="12" viewBox="0 0 22 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 6h20M15 1l5 5-5 5"/></svg>';
-        meta.append(go);
+        go.innerHTML = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 12L12 2M5 2h7v7"/></svg>';
+        top.append(go);
       }
-      meta.append(tags);
+      el.append(top);
+
+      const h = document.createElement('h3'); h.className = 'proj-name'; h.textContent = title; el.append(h);
       const desc = pick(p.desc, currentLang);
-      if (desc) { const d = document.createElement('p'); d.className = 'proj-desc'; d.textContent = desc; meta.append(d); }
-      el.append(meta);
+      const d = document.createElement('p'); d.className = 'proj-desc'; d.textContent = desc; el.append(d);
+      if (p.tags.length) {
+        const ul = document.createElement('ul'); ul.className = 'proj-tags';
+        p.tags.slice(0, 4).forEach(t => { const li = document.createElement('li'); li.textContent = t; ul.append(li); });
+        el.append(ul);
+      }
       return el;
     }
 
     function renderProjects() {
       const grid = document.getElementById('projGrid');
-      const more = document.getElementById('projMore');
-      const btn = document.getElementById('toggleAll');
-      grid.textContent = ''; more.textContent = '';
-      projectList.forEach((p, i) => (i < FEATURED ? grid : more).append(projectCard(p, i)));
-      more.hidden = !showAll || projectList.length <= FEATURED;
-      btn.hidden = projectList.length <= FEATURED;
-      const t = translations[currentLang];
-      document.getElementById('toggleLabel').textContent = showAll ? t['view-less'] : t['view-all'];
-      document.getElementById('statProjects').textContent = projectList.length || document.getElementById('statProjects').textContent;
+      grid.textContent = '';
+      projectList.forEach((p, i) => grid.append(projectCard(p, i)));
+      const n = projectList.length;
+      document.getElementById('projCount').textContent = n ? String(n).padStart(2, '0') : '';
+      if (n) document.getElementById('statProjects').textContent = n;
     }
-
-    document.getElementById('toggleAll').addEventListener('click', () => { showAll = !showAll; renderProjects(); });
 
     async function initProjects() {
       let [repos, curated] = await Promise.all([
