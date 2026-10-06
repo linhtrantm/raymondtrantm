@@ -148,6 +148,13 @@
     .proj-thumb { margin: -1.6rem -1.6rem 1.2rem; aspect-ratio: 16 / 9; overflow: hidden; border-bottom: 1px solid var(--line); }
     .proj-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
+    .proj-group + .proj-group { margin-top: 3.2rem; }
+    .group-head { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.1rem; }
+    .group-head h3 { font-family: var(--display); font-weight: 500; font-size: 1.05rem; letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
+    .group-head h3::before { content: ''; display: inline-block; width: 8px; height: 8px; margin-right: .7rem; background: var(--red-hi); transform: rotate(45deg); }
+    .group-head .rule { flex: 1; height: 1px; background: var(--line); }
+    .group-head .count { font-family: var(--display); font-size: .85rem; letter-spacing: .08em; color: var(--muted); }
+
     /* ── ABOUT ── */
     .about { padding: 4rem 0; border-bottom: 1px solid var(--line); }
     .about-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 3.5rem; align-items: start; }
@@ -313,10 +320,12 @@
           <p class="about-p" data-i18n="ab-p2">Với mình, làm phần mềm tốt nghĩa là hiểu cả hai đầu: thứ người dùng chạm vào và thứ chạy âm thầm phía sau.</p>
         </div>
         <div class="skills-grid reveal">
-          <div class="skill-box"><h3 data-i18n="sk1">Giao diện</h3><ul class="chips"><li>HTML / CSS</li><li>JavaScript</li><li>TypeScript</li><li>React</li></ul></div>
-          <div class="skill-box"><h3 data-i18n="sk2">Xử lý phía sau</h3><ul class="chips"><li>PHP</li><li>REST API</li><li>Firebase</li><li>Dart</li></ul></div>
-          <div class="skill-box"><h3 data-i18n="sk3">Dữ liệu</h3><ul class="chips"><li>MySQL</li><li>Firestore</li><li>SQL</li></ul></div>
-          <div class="skill-box"><h3 data-i18n="sk4">Đưa lên chạy thật</h3><ul class="chips"><li>Git</li><li>GitHub Actions</li><li>Hosting</li><li>Domain</li></ul></div>
+          <div class="skill-box"><h3 data-i18n="sk1">Giao diện</h3><ul class="chips"><li>HTML / CSS</li><li>JavaScript</li><li>TypeScript</li><li>React</li><li>Next.js</li><li>Vue</li><li>Tailwind CSS</li></ul></div>
+          <div class="skill-box"><h3 data-i18n="sk2">Xử lý phía sau</h3><ul class="chips"><li>PHP</li><li>Laravel</li><li>Node.js</li><li>Python</li><li>Java</li><li>C#</li><li>Go</li><li>REST API</li><li>GraphQL</li></ul></div>
+          <div class="skill-box"><h3 data-i18n="sk5">Di động</h3><ul class="chips"><li>Flutter / Dart</li><li>React Native</li><li>Kotlin</li><li>Swift</li><li>PWA</li></ul></div>
+          <div class="skill-box"><h3 data-i18n="sk3">Dữ liệu</h3><ul class="chips"><li>MySQL</li><li>PostgreSQL</li><li>MongoDB</li><li>SQLite</li><li>Redis</li><li>Firebase</li><li>Supabase</li></ul></div>
+          <div class="skill-box"><h3 data-i18n="sk4">Đưa lên chạy thật</h3><ul class="chips"><li>Git</li><li>GitHub Actions</li><li>Docker</li><li>Linux</li><li>Nginx</li><li>Cloudflare</li><li>Vercel</li><li>Hosting & Domain</li></ul></div>
+          <div class="skill-box"><h3 data-i18n="sk6">AI & công cụ</h3><ul class="chips"><li>Vibe coding</li><li>Claude Code</li><li>Prompt design</li><li>Automation</li></ul></div>
         </div>
       </div>
     </section>
@@ -411,11 +420,11 @@
         'btn-work':'Xem dự án','btn-contact':'Liên hệ',
         'hero-mid':'Biến ý tưởng thành sản phẩm chạy thật.',
         'st-proj':'Dự án đã làm','st-resp':'Thời gian phản hồi','st-custom':'Làm theo yêu cầu',
-        's-proj':'Dự án đã làm','pj-demo':'Xem demo',
+        's-proj':'Dự án đã làm','cat-product':'Sản phẩm SaaS','cat-business':'Hệ thống cho doanh nghiệp','cat-app':'Ứng dụng & công cụ','cat-website':'Website','cat-other':'Khác','pj-demo':'Xem demo',
         's-about':'Về mình',
         'ab-p1':'Mình là coder dạo ở TP. Hồ Chí Minh. Mình bắt đầu từ những trang web nhỏ, rồi đi dần xuống phía sau: viết API, thiết kế cơ sở dữ liệu, đưa sản phẩm lên chạy thật.',
         'ab-p2':'Với mình, làm phần mềm tốt nghĩa là hiểu cả hai đầu: thứ người dùng chạm vào và thứ chạy âm thầm phía sau.',
-        's-skills':'Kỹ năng','sk1':'Giao diện','sk2':'Xử lý phía sau','sk3':'Dữ liệu','sk4':'Đưa lên chạy thật',
+        's-skills':'Kỹ năng','sk1':'Giao diện','sk2':'Xử lý phía sau','sk3':'Dữ liệu','sk4':'Đưa lên chạy thật','sk5':'Di động','sk6':'AI & công cụ',
         's-process':'Quy trình làm việc',
         'p1-h':'Tìm hiểu','p1-p':'Mình nghe cách bạn thực sự vận hành và xác định đúng vấn đề trước khi viết dòng code đầu tiên.',
         'p2-h':'Thiết kế','p2-p':'Mình phác thảo giải pháp và gửi đề xuất rõ ràng. Bạn biết chính xác mình sẽ nhận gì trước khi bắt đầu.',
@@ -436,11 +445,11 @@
         'btn-work':'See my work','btn-contact':'Contact',
         'hero-mid':'Turning ideas into products that actually run.',
         'st-proj':'Projects done','st-resp':'Response time','st-custom':'Custom built',
-        's-proj':'Selected projects','pj-demo':'Live demo',
+        's-proj':'Selected projects','cat-product':'SaaS products','cat-business':'Business systems','cat-app':'Apps & tools','cat-website':'Websites','cat-other':'Other','pj-demo':'Live demo',
         's-about':'About me',
         'ab-p1':"I'm a freelance coder in Ho Chi Minh City. I started with small websites, then worked my way down the stack: writing APIs, designing databases, and getting products running for real.",
         'ab-p2':'To me, good software means understanding both ends: what users touch and what quietly runs behind it.',
-        's-skills':'Skills','sk1':'Interface','sk2':'Behind the scenes','sk3':'Data','sk4':'Going live',
+        's-skills':'Skills','sk1':'Interface','sk2':'Behind the scenes','sk3':'Data','sk4':'Going live','sk5':'Mobile','sk6':'AI & tools',
         's-process':'How I work',
         'p1-h':'Discover','p1-p':'I listen to how your business actually runs and define the real problem before writing a single line of code.',
         'p2-h':'Design','p2-p':"I map out the solution and send a clear proposal. You know what you're getting before I start.",
@@ -495,8 +504,11 @@
       } catch (e) { return null; }
     }
 
+    const CATEGORIES = ['product', 'business', 'app', 'website'];
+
     function buildProject(c, r) {
       return {
+        category: CATEGORIES.includes(c.category) ? c.category : 'other',
         title: c.title || (r && r.name) || '',
         desc:  c.desc  || (r && r.description) || '',
         tags:  c.tags  || (r ? [r.language, ...(r.topics || []).filter(t => t !== GH_TOPIC)].filter(Boolean).slice(0, 5) : []),
@@ -544,9 +556,24 @@
     }
 
     function renderProjects() {
-      const grid = document.getElementById('projGrid');
-      grid.textContent = '';
-      projectList.forEach((p, i) => grid.append(projectCard(p, i)));
+      const wrap = document.getElementById('projGrid');
+      wrap.textContent = '';
+      wrap.className = '';
+      const t = translations[currentLang];
+      [...CATEGORIES, 'other'].forEach(cat => {
+        const items = projectList.filter(p => p.category === cat);
+        if (!items.length) return;
+        const group = document.createElement('div'); group.className = 'proj-group';
+        const head = document.createElement('div'); head.className = 'group-head';
+        const h = document.createElement('h3'); h.textContent = t['cat-' + cat];
+        const rule = document.createElement('span'); rule.className = 'rule';
+        const cnt = document.createElement('span'); cnt.className = 'count'; cnt.textContent = String(items.length).padStart(2, '0');
+        head.append(h, rule, cnt);
+        const grid = document.createElement('div'); grid.className = 'proj-grid';
+        items.forEach((p, i) => grid.append(projectCard(p, i)));
+        group.append(head, grid);
+        wrap.append(group);
+      });
       const n = projectList.length;
       document.getElementById('projCount').textContent = n ? String(n).padStart(2, '0') : '';
       if (n) document.getElementById('statProjects').textContent = n;

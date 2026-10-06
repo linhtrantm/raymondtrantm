@@ -11,50 +11,62 @@
       "CSS",
       "JavaScript"
     ],
-    "demo": "https://simplesoft.com.vn"
+    "demo": "https://simplesoft.com.vn",
+    "category": "website"
   },
   {
     "repo": "linhtrantm/simpleRMS",
-    "title": "simpleRMS"
+    "title": "simpleRMS",
+    "category": "product"
   },
   {
     "repo": "linhtrantm/simpleWork",
-    "title": "simpleWork"
+    "title": "simpleWork",
+    "category": "product"
   },
   {
     "repo": "linhtrantm/simpleDMS",
-    "title": "simpleDMS"
+    "title": "simpleDMS",
+    "category": "product"
   },
   {
     "repo": "linhtrantm/brezelgerman",
-    "title": "Brezel German"
+    "title": "Brezel German",
+    "category": "app"
   },
   {
     "repo": "linhtrantm/pos",
-    "title": "Smart POS"
+    "title": "Smart POS",
+    "category": "business"
   },
   {
     "repo": "linhtrantm/hanvet-order",
-    "title": "Hanvet Order System"
+    "title": "Hanvet Order System",
+    "category": "business"
   },
   {
     "repo": "linhtrantm/water-supply",
-    "title": "Water Supply System"
+    "title": "Water Supply System",
+    "category": "business"
   },
   {
     "repo": "linhtrantm/loungefinder",
-    "title": "Lounge Finder"
+    "title": "Lounge Finder",
+    "category": "app"
   },
   {
     "repo": "linhtrantm/antgroupvn",
-    "title": "Website Antgroup"
+    "title": "Website Antgroup",
+    "category": "website"
   },
   {
     "repo": "linhtrantm/askedu",
-    "title": "Website AskEdu"
+    "title": "Website AskEdu",
+    "category": "website"
   },
   {
     "repo": "linhtrantm/shplogistic",
-    "title": "Website SHP Logistic"
+    "title": "Website SHP Logistic",
+    "category": "website"
   }
 ]
