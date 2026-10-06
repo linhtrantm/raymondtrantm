@@ -100,7 +100,7 @@
     }
     .hero-photo {
       position: absolute; z-index: 2; left: 50%; transform: translateX(-46%);
-      top: calc(4.4rem + var(--word) * .3); bottom: 0; aspect-ratio: 864 / 1083; pointer-events: none;
+      top: calc(4.4rem + var(--word) * .1); bottom: 0; aspect-ratio: 864 / 1083; pointer-events: none;
     }
     .hero-photo img { width: 100%; height: 100%; object-fit: contain; object-position: bottom; -webkit-mask-image: linear-gradient(180deg, #000 86%, transparent); mask-image: linear-gradient(180deg, #000 86%, transparent); filter: drop-shadow(0 0 2px rgba(255,70,70,.55)) drop-shadow(0 0 18px rgba(212,21,27,.38)); }
     .hero-grid { position: relative; z-index: 3; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); min-height: 500px; align-items: end; padding: 2rem 0 3rem; margin-top: -3rem; }
@@ -216,7 +216,7 @@
       .contact-grid > :last-child { grid-column: 1 / -1; }
     }
     @media (max-width: 980px) {
-      .hero-photo { position: relative; left: auto; top: auto; bottom: auto; transform: none; width: min(460px, 94vw); height: auto; margin: -34vw auto 0; transform: none; }
+      .hero-photo { position: relative; left: auto; top: auto; bottom: auto; transform: none; width: min(560px, 112vw); height: auto; margin: -40vw auto 0; transform: none; }
       .hero-grid { grid-template-columns: 1fr; min-height: 0; padding: 1.5rem 0 2rem; margin-top: 0; gap: 2rem; }
       .hero-mid { grid-column: 1 / -1; }
       .hero-right { grid-column: 1; justify-self: stretch; width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
