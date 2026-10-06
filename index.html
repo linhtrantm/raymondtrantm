@@ -85,24 +85,27 @@
     .lang button.active { background: var(--red); color: #fff; }
 
     /* ── HERO ── */
-.hero { --word: clamp(5rem, 19.5vw, 19rem); position: relative; padding-top: 5.2rem; overflow: hidden; border-bottom: 1px solid var(--line); }
+    .hero { --word: 21.8vw; --stretch: 1.45; position: relative; padding-top: 4.2rem; overflow: hidden; border-bottom: 1px solid var(--line); }
     .hero-word {
-      position: relative; z-index: 2; width: 100%;
-      text-align: center; white-space: nowrap; user-select: none; pointer-events: none;
+      position: relative; z-index: 1; width: 100%; height: calc(var(--word) * .72 * var(--stretch)); margin-top: .5rem;
+      text-align: center; white-space: nowrap; user-select: none; pointer-events: none; overflow: hidden;
       font-family: var(--display); font-weight: 700; line-height: .86; letter-spacing: -.01em;
       font-size: var(--word);
-      background: linear-gradient(180deg, #e0161d 0%, #9d0b11 55%, rgba(60,3,5,.35) 100%);
+    }
+    .hero-word span {
+      display: block; transform: scaleY(var(--stretch)); transform-origin: 50% 0;
+      background: linear-gradient(180deg, #e0161d 0%, #a30c12 60%, rgba(70,4,6,.55) 100%);
       -webkit-background-clip: text; background-clip: text; color: transparent;
     }
     .hero-photo {
-      position: absolute; z-index: 1; left: 50%; transform: translateX(-50%);
-      top: calc(5.2rem + var(--word) * .5); bottom: 0; aspect-ratio: 864 / 1184; overflow: hidden;
-      -webkit-mask-image: linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent), linear-gradient(180deg, transparent, #000 14%);
-              mask-image: linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent), linear-gradient(180deg, transparent, #000 14%);
+      position: absolute; z-index: 2; left: 50%; transform: translateX(-46%);
+      top: calc(4.2rem + var(--word) * .36); bottom: 0; aspect-ratio: 864 / 1184; overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent), linear-gradient(180deg, transparent, #000 22%);
+              mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent), linear-gradient(180deg, transparent, #000 22%);
       -webkit-mask-composite: source-in; mask-composite: intersect;
     }
     .hero-photo img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.2); transform-origin: 40% 30%; }
-    .hero-grid { position: relative; z-index: 3; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); min-height: 540px; align-items: end; padding: 2rem 0 3rem; margin-top: -1.2rem; }
+    .hero-grid { position: relative; z-index: 3; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); min-height: 470px; align-items: end; padding: 2rem 0 3rem; margin-top: -2.5rem; }
     .hero-left { align-self: end; max-width: 380px; }
     .hello { font-family: var(--script); font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 500; line-height: 1; margin-bottom: .6rem; }
     .name { font-family: var(--display); font-weight: 700; text-transform: uppercase; line-height: .95; letter-spacing: .005em; font-size: clamp(3.2rem, 6.2vw, 5.6rem); }
@@ -215,7 +218,7 @@
       .contact-grid > :last-child { grid-column: 1 / -1; }
     }
     @media (max-width: 980px) {
-      .hero-photo { position: relative; left: auto; top: auto; bottom: auto; transform: none; width: min(420px, 86vw); height: auto; margin: -1.5rem auto 0; }
+      .hero-photo { position: relative; left: auto; top: auto; bottom: auto; transform: none; width: min(440px, 88vw); height: auto; margin: -22vw auto 0; transform: none; }
       .hero-grid { grid-template-columns: 1fr; min-height: 0; padding: 1.5rem 0 2rem; margin-top: 0; gap: 2rem; }
       .hero-mid { grid-column: 1 / -1; }
       .hero-right { grid-column: 1; justify-self: stretch; width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
@@ -264,7 +267,7 @@
   <main>
     <!-- HERO -->
     <section class="hero">
-      <div class="hero-word" aria-hidden="true">PORTFOLIO</div>
+      <div class="hero-word" aria-hidden="true"><span>PORTFOLIO</span></div>
       <div class="hero-photo"><img src="avatar.jpg" alt="Raymond Tran" width="864" height="1184" fetchpriority="high" onerror="this.remove()" /></div>
 
       <div class="wrap hero-grid">
@@ -552,6 +555,7 @@
     }
 
     async function initProjects() {
+      if (location.protocol === 'file:') console.warn('Opened via file://: repos.json / projects.json cannot be loaded. Run a local server (python3 -m http.server).');
       let [repos, curated] = await Promise.all([
         loadJson('repos.json', 'ss-repos-json'),
         loadJson('projects.json', 'ss-projects-json')
