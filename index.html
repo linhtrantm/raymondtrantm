@@ -91,18 +91,52 @@
       text-align: center; white-space: nowrap; user-select: none; pointer-events: none;
       font-family: 'Antonio', var(--display); font-weight: 500; line-height: .92; letter-spacing: .01em;
       font-size: var(--word); margin-bottom: calc(var(--word) * .92 * (var(--stretch) - 1));
+      transform: translate3d(calc(var(--mx, 0) * -18px), calc(var(--sy, 0) * .14px), 0); transition: transform .35s ease-out; will-change: transform;
     }
     .hero-word span {
       display: block; transform: scaleY(var(--stretch)); transform-origin: 50% 0;
-      background: linear-gradient(180deg, #e0161d 0%, #b30e14 50%, #8f0a10 100%);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
       -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent 90%); mask-image: linear-gradient(180deg, #000 60%, transparent 90%);
     }
+    .hero-word i {
+      display: inline-block; font-style: normal;
+      background: linear-gradient(180deg, #e0161d 0%, #b30e14 50%, #8f0a10 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      animation: letterUp .95s cubic-bezier(.2,.8,.2,1) backwards; animation-delay: calc(var(--i) * 70ms + 120ms);
+    }
+    @keyframes letterUp { from { opacity: 0; transform: translateY(45%); } }
     .hero-photo {
       position: absolute; z-index: 2; left: 50%; transform: translateX(-46%);
       top: calc(4.4rem + var(--word) * .1); bottom: 0; aspect-ratio: 864 / 1083; pointer-events: none;
     }
-    .hero-photo img { width: 100%; height: 100%; object-fit: contain; object-position: bottom; -webkit-mask-image: linear-gradient(180deg, #000 86%, transparent); mask-image: linear-gradient(180deg, #000 86%, transparent); filter: drop-shadow(0 0 2px rgba(255,70,70,.55)) drop-shadow(0 0 18px rgba(212,21,27,.38)); }
+    .hero-photo img { width: 100%; height: 100%; object-fit: contain; object-position: bottom; -webkit-mask-image: linear-gradient(180deg, #000 86%, transparent); mask-image: linear-gradient(180deg, #000 86%, transparent); filter: drop-shadow(0 0 2px rgba(255,70,70,.55)) drop-shadow(0 0 18px rgba(212,21,27,.38));
+      transform: translate3d(calc(var(--mx, 0) * 14px), calc(var(--my, 0) * 6px - var(--sy, 0) * .04px), 0); transition: transform .35s ease-out; will-change: transform;
+      animation: photoIn 1.2s cubic-bezier(.2,.8,.2,1) .55s backwards, glow 4.8s ease-in-out 2s infinite; }
+    @keyframes photoIn { from { opacity: 0; transform: translate3d(0, 7%, 0); } }
+    @keyframes glow {
+      0%, 100% { filter: drop-shadow(0 0 2px rgba(255,70,70,.55)) drop-shadow(0 0 18px rgba(212,21,27,.38)); }
+      50%      { filter: drop-shadow(0 0 3px rgba(255,90,90,.75)) drop-shadow(0 0 34px rgba(212,21,27,.6)); }
+    }
+    .hero-left > *, .hero-right > * { animation: riseIn .9s cubic-bezier(.2,.8,.2,1) backwards; }
+    .hero-left > :nth-child(1) { animation-delay: .9s; }
+    .hero-left > :nth-child(2) { animation-delay: 1s; }
+    .hero-left > :nth-child(3) { animation-delay: 1.1s; }
+    .hero-left > :nth-child(4) { animation-delay: 1.18s; }
+    .hero-left > :nth-child(5) { animation-delay: 1.26s; }
+    .hero-left > :nth-child(6) { animation-delay: 1.34s; }
+    .hero-right > :nth-child(1) { animation-delay: 1.2s; }
+    .hero-right > :nth-child(2) { animation-delay: 1.3s; }
+    .hero-right > :nth-child(3) { animation-delay: 1.4s; }
+    .hero-right > :nth-child(4) { animation-delay: 1.5s; }
+    @keyframes riseIn { from { opacity: 0; transform: translateY(22px); } }
+
+    /* ── MARQUEE ── */
+    .marquee { overflow: hidden; border-bottom: 1px solid var(--line); padding: 1.1rem 0; background: var(--bg); }
+    .marquee-track { display: flex; width: max-content; animation: marquee 48s linear infinite; }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    .marquee span { flex-shrink: 0; font-family: 'Antonio', var(--display); font-weight: 500; font-size: clamp(1.6rem, 3.2vw, 2.6rem); letter-spacing: .06em; padding: 0 1.6rem; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.35); }
+    .marquee span:nth-child(3n) { color: var(--red); -webkit-text-stroke: 0; }
+    .marquee span.dot { color: var(--red-hi); -webkit-text-stroke: 0; padding: 0; font-size: 1.1rem; align-self: center; }
+    @keyframes marquee { to { transform: translateX(-50%); } }
     .hero-grid { position: relative; z-index: 3; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); min-height: 500px; align-items: end; padding: 2rem 0 3rem; margin-top: -3rem; }
     .hero-left { align-self: end; max-width: 380px; }
     .hello { font-family: var(--script); font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 500; line-height: 1; margin-bottom: .6rem; }
@@ -124,7 +158,7 @@
     .stat { display: flex; align-items: baseline; gap: 1rem; padding: .95rem 0; border-bottom: 1px solid var(--line); }
     .stat:last-child { border-bottom: 0; }
     .stat b { font-family: var(--display); font-weight: 500; font-size: 2.1rem; line-height: 1; color: var(--red-hi); min-width: 3.6rem; }
-    .stat span { font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+    .stat > span { font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 
     /* ── SECTIONS ── */
     section { position: relative; }
@@ -136,10 +170,12 @@
     .projects { padding: 4rem 0; border-bottom: 1px solid var(--line); }
     .sec-head .count { font-family: var(--display); font-size: 1rem; color: var(--red-hi); letter-spacing: .08em; white-space: nowrap; }
     .proj-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
-    .proj { position: relative; display: flex; flex-direction: column; padding: 1.6rem 1.6rem 1.4rem; background: var(--bg-2); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; transition: border-color .3s, transform .3s, background .3s; }
+    .proj { position: relative; display: flex; flex-direction: column; padding: 1.6rem 1.6rem 1.4rem; background: var(--bg-2); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; transition: border-color .3s, transform .18s ease-out, background .3s; will-change: transform; }
+    .proj.visible { animation: cardIn .8s cubic-bezier(.2,.8,.2,1) backwards; }
+    @keyframes cardIn { from { opacity: 0; transform: translateY(28px); } }
     .proj::before { content: ''; position: absolute; left: 0; top: 0; height: 2px; width: 0; background: var(--red-hi); transition: width .4s; }
     .proj::after { content: attr(data-num); position: absolute; right: .6rem; bottom: -1.4rem; font-family: var(--display); font-weight: 700; font-size: 8rem; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(212,21,27,.22); pointer-events: none; }
-    .proj:hover { border-color: var(--line-red); transform: translateY(-3px); background: #110909; }
+    .proj:hover { border-color: var(--line-red); transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-3px); background: radial-gradient(280px circle at var(--x, 50%) var(--y, 50%), rgba(212,21,27,.22), transparent 65%), #110909; }
     .proj:hover::before { width: 100%; }
     .proj-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.1rem; }
     .proj-num { font-family: var(--display); font-weight: 400; font-size: 1rem; letter-spacing: .12em; color: var(--red-hi); }
@@ -189,9 +225,14 @@
     /* ── PROCESS ── */
     .process { padding: 4rem 0; border-bottom: 1px solid var(--line); }
     .steps { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem; }
-    .steps::before { content: ''; position: absolute; top: 28px; left: 28px; right: 28px; height: 1px; background: var(--line-red); }
+    .steps::before { content: ''; position: absolute; top: 28px; left: 28px; right: 28px; height: 1px; background: var(--red-hi); transform: scaleX(0); transform-origin: left; transition: transform 1.8s cubic-bezier(.4,0,.2,1) .2s; }
+    .steps.in::before { transform: scaleX(1); }
     .step { position: relative; }
-    .step-i { position: relative; width: 56px; height: 56px; border: 1px solid var(--red); border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--bg); margin-bottom: 1.2rem; }
+    .step-i { position: relative; width: 56px; height: 56px; border: 1px solid var(--red); border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--bg); margin-bottom: 1.2rem; border-color: var(--line); color: var(--muted); transition: border-color .5s, color .5s, box-shadow .5s; }
+    .step.visible .step-i { border-color: var(--red-hi); color: var(--text); box-shadow: 0 0 22px rgba(212,21,27,.5); }
+    .step:nth-child(2).visible .step-i { transition-delay: .35s; }
+    .step:nth-child(3).visible .step-i { transition-delay: .7s; }
+    .step:nth-child(4).visible .step-i { transition-delay: 1.05s; }
     .step-i svg { width: 22px; height: 22px; }
     .step-n { font-family: var(--display); font-size: .8rem; letter-spacing: .14em; color: var(--red-hi); }
     .step h4 { font-family: var(--display); font-weight: 500; font-size: 1.1rem; letter-spacing: .06em; text-transform: uppercase; margin: .2rem 0 .5rem; }
@@ -262,6 +303,9 @@
       html { scroll-behavior: auto; }
       .reveal { opacity: 1; transform: none; transition: none; }
       .avail::before { animation: none; }
+      .hero-word i, .hero-photo img, .hero-left > *, .hero-right > *, .marquee-track { animation: none; }
+      .hero-word, .hero-photo img, .proj { transform: none !important; transition: none; }
+      .steps::before { transform: none; transition: none; }
     }
   </style>
 </head>
@@ -292,7 +336,7 @@
   <main>
     <!-- HERO -->
     <section class="hero">
-      <div class="hero-word" aria-hidden="true"><span>PORTFOLIO</span></div>
+      <div class="hero-word" aria-hidden="true"><span><i style="--i:0">P</i><i style="--i:1">O</i><i style="--i:2">R</i><i style="--i:3">T</i><i style="--i:4">F</i><i style="--i:5">O</i><i style="--i:6">L</i><i style="--i:7">I</i><i style="--i:8">O</i></span></div>
       <div class="hero-photo"><img src="avatar-cutout.png" alt="Raymond Tran" width="864" height="1083" fetchpriority="high" onerror="this.remove()" /></div>
 
       <div class="wrap hero-grid">
@@ -313,12 +357,14 @@
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/></svg>
           <span data-i18n="hero-mid">Biến ý tưởng thành sản phẩm chạy thật.</span>
           </div>
-          <div class="stat"><b id="statProjects">12</b><span data-i18n="st-proj">Dự án đã làm</span></div>
-          <div class="stat"><b>&lt;24h</b><span data-i18n="st-resp">Thời gian phản hồi</span></div>
-          <div class="stat"><b>100%</b><span data-i18n="st-custom">Làm theo yêu cầu</span></div>
+          <div class="stat"><b><span id="statProjects" data-count="12">12</span></b><span data-i18n="st-proj">Dự án đã làm</span></div>
+          <div class="stat"><b>&lt;<span data-count="24">24</span>h</b><span data-i18n="st-resp">Thời gian phản hồi</span></div>
+          <div class="stat"><b><span data-count="100">100</span>%</b><span data-i18n="st-custom">Làm theo yêu cầu</span></div>
         </div>
       </div>
     </section>
+
+    <div class="marquee" aria-hidden="true"><div class="marquee-track"><span>REACT</span><span class="dot">✦</span><span>PHP</span><span class="dot">✦</span><span>FIREBASE</span><span class="dot">✦</span><span>FLUTTER</span><span class="dot">✦</span><span>MYSQL</span><span class="dot">✦</span><span>TYPESCRIPT</span><span class="dot">✦</span><span>NODE.JS</span><span class="dot">✦</span><span>PYTHON</span><span class="dot">✦</span><span>LARAVEL</span><span class="dot">✦</span><span>POSTGRESQL</span><span class="dot">✦</span><span>DOCKER</span><span class="dot">✦</span><span>GITHUB ACTIONS</span><span class="dot">✦</span><span>REACT</span><span class="dot">✦</span><span>PHP</span><span class="dot">✦</span><span>FIREBASE</span><span class="dot">✦</span><span>FLUTTER</span><span class="dot">✦</span><span>MYSQL</span><span class="dot">✦</span><span>TYPESCRIPT</span><span class="dot">✦</span><span>NODE.JS</span><span class="dot">✦</span><span>PYTHON</span><span class="dot">✦</span><span>LARAVEL</span><span class="dot">✦</span><span>POSTGRESQL</span><span class="dot">✦</span><span>DOCKER</span><span class="dot">✦</span><span>GITHUB ACTIONS</span><span class="dot">✦</span></div></div>
 
     <!-- PROJECTS -->
     <section class="projects" id="projects">
@@ -370,7 +416,7 @@
     <section class="process" id="process">
       <div class="wrap">
         <h2 class="reveal" data-i18n="s-process">Quy trình làm việc</h2>
-        <div class="steps">
+        <div class="steps" id="steps">
           <div class="step reveal">
             <div class="step-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
             <span class="step-n">01</span><h4 data-i18n="p1-h">Tìm hiểu</h4>
@@ -561,7 +607,8 @@
       const title = pick(p.title, currentLang);
       const num = String(idx + 1).padStart(2, '0');
       const el = document.createElement('article');
-      el.className = 'proj reveal visible';
+      el.className = 'proj reveal';
+      el.dataset.i = idx;
       el.dataset.num = num;
 
       if (p.image) {
@@ -616,7 +663,9 @@
       });
       const n = projectList.length;
       document.getElementById('projCount').textContent = n ? String(n).padStart(2, '0') : '';
-      if (n) document.getElementById('statProjects').textContent = n;
+      const sp = document.getElementById('statProjects');
+      if (n && String(n) !== sp.dataset.count) { sp.dataset.count = n; runCount(sp); }
+      observeReveals();
     }
 
     async function initProjects() {
@@ -649,14 +698,91 @@
       renderProjects();
     }
 
-    // ── SCROLL REVEAL
-    const reveals = document.querySelectorAll('.reveal');
+    // ── SCROLL REVEAL (staggered by data-i) + one-off triggers
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    let revealIO = null;
     if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver(entries => entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-      }), { threshold: 0.1 });
-      reveals.forEach(r => io.observe(r));
-    } else reveals.forEach(r => r.classList.add('visible'));
+      revealIO = new IntersectionObserver(entries => entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const t = e.target;
+        revealIO.unobserve(t);
+        const delay = reduceMotion ? 0 : (Number(t.dataset.i || 0) % 3) * 90;
+        setTimeout(() => t.classList.add('visible'), delay);
+      }), { threshold: 0.12 });
+    }
+    function observeReveals() {
+      document.querySelectorAll('.reveal:not(.visible):not([data-w])').forEach(el => {
+        el.dataset.w = '1';
+        if (revealIO) revealIO.observe(el); else el.classList.add('visible');
+      });
+    }
+    observeReveals();
+
+    // process line draws once when the row scrolls into view
+    const stepsEl = document.getElementById('steps');
+    if (stepsEl && 'IntersectionObserver' in window) {
+      const sio = new IntersectionObserver(es => es.forEach(e => {
+        if (e.isIntersecting) { stepsEl.classList.add('in'); sio.disconnect(); }
+      }), { threshold: 0.3 });
+      sio.observe(stepsEl);
+    } else if (stepsEl) stepsEl.classList.add('in');
+
+    // ── COUNT-UP NUMBERS
+    function runCount(el) {
+      const target = Number(el.dataset.count);
+      if (!target) return;
+      if (reduceMotion) { el.textContent = target; return; }
+      const start = performance.now(), dur = 1300;
+      const from = 0;
+      (function tick(now) {
+        const k = Math.min((now - start) / dur, 1);
+        el.textContent = Math.round(from + (target - from) * (1 - Math.pow(1 - k, 3)));
+        if (k < 1) requestAnimationFrame(tick);
+      })(start);
+    }
+    // wait for the hero intro to settle, then count the stats
+    setTimeout(() => document.querySelectorAll('.hero-right [data-count]').forEach(runCount), reduceMotion ? 0 : 1300);
+
+    // ── HERO PARALLAX (mouse + scroll)
+    const heroEl = document.querySelector('.hero');
+    if (heroEl && !reduceMotion) {
+      let ticking = false;
+      const setScroll = () => {
+        heroEl.style.setProperty('--sy', Math.min(window.scrollY, 900));
+        ticking = false;
+      };
+      window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(setScroll); } }, { passive: true });
+      if (finePointer) {
+        heroEl.addEventListener('pointermove', e => {
+          const r = heroEl.getBoundingClientRect();
+          heroEl.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 2 - 1).toFixed(3));
+          heroEl.style.setProperty('--my', ((e.clientY - r.top) / r.height * 2 - 1).toFixed(3));
+        });
+        heroEl.addEventListener('pointerleave', () => {
+          heroEl.style.setProperty('--mx', 0); heroEl.style.setProperty('--my', 0);
+        });
+      }
+    }
+
+    // ── PROJECT CARDS: cursor spotlight + tilt
+    if (finePointer && !reduceMotion) {
+      const grid = document.getElementById('projGrid');
+      grid.addEventListener('pointermove', e => {
+        const card = e.target.closest('.proj');
+        if (!card) return;
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+        card.style.setProperty('--x', (px * 100).toFixed(1) + '%');
+        card.style.setProperty('--y', (py * 100).toFixed(1) + '%');
+        card.style.setProperty('--ry', ((px - .5) * 7).toFixed(2) + 'deg');
+        card.style.setProperty('--rx', ((.5 - py) * 7).toFixed(2) + 'deg');
+      });
+      grid.addEventListener('pointerout', e => {
+        const card = e.target.closest('.proj');
+        if (card && !card.contains(e.relatedTarget)) { card.style.setProperty('--rx', '0deg'); card.style.setProperty('--ry', '0deg'); }
+      });
+    }
 
     // ── INIT
     let savedLang = null;
