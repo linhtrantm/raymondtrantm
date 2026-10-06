@@ -273,17 +273,12 @@
     .flag { display: inline-block; width: 1.3em; height: .87em; vertical-align: -.1em; border-radius: 2px; }
 
     /* ── RESPONSIVE ── */
-    /* desktop: hero fills the first screen so the tech marquee is visible without scrolling */
+    /* desktop: hero fills the first screen; the big word is a background layer behind everything */
     @media (min-width: 981px) {
-      .hero { --word: min(26.4vw, 37svh); height: max(580px, calc(100svh - 5rem)); display: flex; flex-direction: column; }
-      .hero-grid { flex: 1; min-height: 0; grid-template-rows: minmax(0, 1fr); padding-bottom: 1.6rem; }
+      .hero { --word: 26.4vw; --stretch: 1.42; height: max(580px, calc(100svh - 5rem)); display: flex; flex-direction: column; }
+      .hero-word { position: absolute; top: 4.2rem; left: 0; right: 0; margin: 0; }
+      .hero-grid { flex: 1; min-height: 0; grid-template-rows: minmax(0, 1fr); padding-bottom: 1.6rem; margin-top: 0; }
       .name { font-size: clamp(2.6rem, min(6.2vw, 9.5svh), 5.6rem); }
-    }
-    @media (min-width: 981px) and (max-height: 860px) {
-      .hero-p { display: none; }
-    }
-    @media (min-width: 981px) and (max-height: 760px) {
-      .cta-row { display: none; }
     }
     @media (max-width: 1100px) {
       .nav { display: none; }
