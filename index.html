@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Raymond Tran — Coder dạo</title>
+  <meta name="description" content="Raymond Tran, freelance developer tại TP. Hồ Chí Minh: làm phần mềm, web app và tự động hóa theo đúng quy trình của bạn." />
+  <link rel="canonical" href="https://raymondtrantm.id.vn/" />
+  <meta name="theme-color" content="#070707" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Raymond Tran" />
+  <meta property="og:title" content="Raymond Tran — Coder dạo" />
+  <meta property="og:description" content="Raymond Tran, freelance developer tại TP. Hồ Chí Minh: làm phần mềm, web app và tự động hóa theo đúng quy trình của bạn." />
+  <meta property="og:url" content="https://raymondtrantm.id.vn/" />
+  <meta property="og:image" content="https://raymondtrantm.id.vn/avatar.jpg" />
+  <meta property="og:locale" content="vi_VN" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Raymond Tran — Coder dạo" />
+  <meta name="twitter:description" content="Raymond Tran, freelance developer tại TP. Hồ Chí Minh: làm phần mềm, web app và tự động hóa theo đúng quy trình của bạn." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23070707'/><text x='50' y='70' text-anchor='middle' font-family='Arial' font-weight='900' font-size='60' fill='%23d4151b'>R</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&family=Inter:wght@300;400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #070707;
+      --bg-2:    #0d0d0d;
+      --red:     #d4151b;
+      --red-hi:  #ff3b3b;
+      --red-lo:  #5b0508;
+      --text:    #f5f5f5;
+      --muted:   #9b9b9b;
+      --line:    rgba(255,255,255,0.09);
+      --line-red:rgba(212,21,27,0.35);
+      --display: 'Oswald', 'Arial Narrow', sans-serif;
+      --body:    'Inter', system-ui, sans-serif;
+      --script:  'Dancing Script', cursive;
+    }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    img { display: block; max-width: 100%; }
+    :focus-visible { outline: 2px solid var(--red-hi); outline-offset: 3px; border-radius: 4px; }
+
+    .wrap { width: min(1280px, 100% - 3rem); margin-inline: auto; }
+    .eyebrow { font-family: var(--display); font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; }
+    .red { color: var(--red-hi); }
+
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── TOP BAR ── */
+    .top {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      background: linear-gradient(180deg, rgba(7,7,7,.92), rgba(7,7,7,.6));
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .top-in { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: .85rem 0; }
+    .brand { line-height: 1.25; }
+    .brand b { display: block; font-family: var(--display); font-weight: 600; font-size: .78rem; letter-spacing: .12em; color: var(--red-hi); }
+    .brand span { font-size: .68rem; letter-spacing: .1em; color: var(--muted); text-transform: uppercase; }
+    .nav { display: flex; gap: 2rem; }
+    .nav a { font-family: var(--display); font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); transition: color .2s; }
+    .nav a:hover { color: var(--text); }
+    .top-right { display: flex; align-items: center; gap: 1.25rem; }
+    .avail { display: flex; align-items: center; gap: .5rem; font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--text); }
+    .avail::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px #22c55e; animation: pulse 2.2s infinite; }
+    @keyframes pulse { 50% { opacity: .35; } }
+    .lang { display: flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+    .lang button { background: none; border: 0; color: var(--muted); font: 500 .7rem var(--body); letter-spacing: .08em; padding: .3rem .7rem; cursor: pointer; }
+    .lang button.active { background: var(--red); color: #fff; }
+
+    /* ── HERO ── */
+    .hero { position: relative; min-height: min(100vh, 880px); padding-top: 5.5rem; overflow: hidden; border-bottom: 1px solid var(--line); }
+    .hero-word {
+      position: absolute; top: 4.6rem; left: 0; right: 0; z-index: 0;
+      text-align: center; white-space: nowrap; user-select: none; pointer-events: none;
+      font-family: var(--display); font-weight: 700; line-height: .86; letter-spacing: -.01em;
+      font-size: clamp(5rem, 19.5vw, 19rem);
+      background: linear-gradient(180deg, #e0161d 0%, #9d0b11 55%, rgba(60,3,5,.4) 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero-photo {
+      position: absolute; z-index: 1; bottom: 0; left: 50%; transform: translateX(-30%);
+      width: min(600px, 54vw); aspect-ratio: 864 / 1184;
+      -webkit-mask-image: radial-gradient(ellipse 52% 54% at 50% 46%, #000 52%, transparent 100%);
+              mask-image: radial-gradient(ellipse 52% 54% at 50% 46%, #000 52%, transparent 100%);
+    }
+    .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-grid { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); min-height: calc(min(100vh, 880px) - 5.5rem); align-items: end; padding-bottom: 3rem; }
+    .hero-left { align-self: end; max-width: 380px; }
+    .hello { font-family: var(--script); font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 500; line-height: 1; margin-bottom: .6rem; }
+    .name { font-family: var(--display); font-weight: 700; text-transform: uppercase; line-height: .95; letter-spacing: .005em; font-size: clamp(3.2rem, 6.2vw, 5.6rem); }
+    .role { margin-top: 1.1rem; font-family: var(--display); font-weight: 500; font-size: 1.05rem; letter-spacing: .08em; text-transform: uppercase; color: var(--red-hi); }
+    .hero-p { margin-top: .9rem; font-size: .88rem; color: #cfcfcf; font-weight: 300; max-width: 340px; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.5rem; }
+    .btn { display: inline-flex; align-items: center; gap: .55rem; font-family: var(--display); font-weight: 500; font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; padding: .7rem 1.3rem; border: 1px solid var(--red); border-radius: 999px; background: var(--red); color: #fff; cursor: pointer; transition: background .2s, border-color .2s, transform .2s; }
+    .btn:hover { background: var(--red-hi); border-color: var(--red-hi); transform: translateY(-2px); }
+    .btn.ghost { background: transparent; color: var(--text); border-color: var(--line); }
+    .btn.ghost:hover { border-color: var(--red-hi); background: transparent; }
+    .hero-mid { display: flex; gap: .9rem; align-items: center; font-size: .78rem; color: #d8d8d8; font-weight: 300; line-height: 1.5; margin-bottom: 1.2rem; }
+    .hero-mid svg { flex-shrink: 0; width: 44px; height: 44px; padding: 11px; border: 1px solid var(--line-red); border-radius: 50%; color: var(--red-hi); }
+    .hero-right { align-self: end; justify-self: end; width: min(240px, 100%); }
+    .stat { display: flex; align-items: baseline; gap: 1rem; padding: .95rem 0; border-bottom: 1px solid var(--line); }
+    .stat:last-child { border-bottom: 0; }
+    .stat b { font-family: var(--display); font-weight: 500; font-size: 2.1rem; line-height: 1; color: var(--red-hi); min-width: 3.6rem; }
+    .stat span { font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+
+    /* ── SECTIONS ── */
+    section { position: relative; }
+    .sec-head { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; }
+    .sec-head h2 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; letter-spacing: .03em; text-transform: uppercase; white-space: nowrap; }
+    .sec-head .rule { flex: 1; height: 1px; background: var(--line); }
+    .sec-head button { background: none; border: 0; color: var(--text); font: 500 .74rem var(--body); letter-spacing: .1em; text-transform: uppercase; cursor: pointer; display: inline-flex; align-items: center; gap: .6rem; }
+    .sec-head button:hover { color: var(--red-hi); }
+
+    /* ── PROJECTS ── */
+    .projects { padding: 3.5rem 0 4rem; border-bottom: 1px solid var(--line); }
+    .proj-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem 1.75rem; }
+    .proj { display: flex; flex-direction: column; }
+    .thumb { position: relative; aspect-ratio: 16 / 10; overflow: hidden; border: 1px solid var(--line); background: #111; }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+    .proj:hover .thumb img, .proj:hover .thumb.ph span { transform: scale(1.05); }
+    .thumb.ph { display: flex; align-items: center; justify-content: center; background:
+        linear-gradient(135deg, hsl(355 70% calc(var(--l) * 1%)) 0%, #0b0b0b 80%); }
+    .thumb.ph::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 28px 28px; opacity: .5; }
+    .thumb.ph span { position: relative; font-family: var(--display); font-weight: 700; font-size: 3.4rem; letter-spacing: .02em; color: rgba(255,255,255,.9); transition: transform .6s ease; }
+    .proj-meta { display: grid; grid-template-columns: auto 1fr auto; gap: .2rem 1rem; align-items: center; padding-top: 1rem; }
+    .proj-num { grid-row: span 2; font-family: var(--display); font-weight: 400; font-size: 2.3rem; line-height: 1; color: var(--red-hi); }
+    .proj-name { font-family: var(--display); font-weight: 500; font-size: 1.15rem; letter-spacing: .04em; }
+    .proj-tags { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    .proj-go { grid-row: span 2; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); border-radius: 50%; color: var(--text); transition: border-color .2s, color .2s, transform .2s; }
+    .proj-go:hover { border-color: var(--red-hi); color: var(--red-hi); transform: translateX(3px); }
+    .proj-desc { grid-column: 1 / -1; margin-top: .6rem; font-size: .82rem; color: var(--muted); font-weight: 300; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .proj-more { margin-top: 2rem; }
+    .proj-more[hidden] { display: none; }
+
+    /* ── 3 COLUMNS ── */
+    .trio { display: grid; grid-template-columns: 1.05fr 1.15fr .8fr; border-bottom: 1px solid var(--line); }
+    .col { padding: 3.2rem 2.5rem; border-right: 1px solid var(--line); }
+    .col:first-child { padding-left: max(1.5rem, calc((100vw - 1280px) / 2)); }
+    .col:last-child { border-right: 0; }
+    .col h2 { font-family: var(--display); font-weight: 600; font-size: 1.4rem; letter-spacing: .03em; text-transform: uppercase; margin-bottom: 1.4rem; }
+    .col h3 { font-family: var(--display); font-weight: 500; font-size: .82rem; letter-spacing: .12em; text-transform: uppercase; color: var(--red-hi); margin: 1.4rem 0 .7rem; }
+    .about-p { font-size: .88rem; color: #cfcfcf; font-weight: 300; margin-bottom: .8rem; }
+    .chips { display: flex; flex-wrap: wrap; gap: .45rem; }
+    .chips li { font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; padding: .35rem .75rem; border: 1px solid var(--line); border-radius: 4px; color: #d6d6d6; }
+    .group-note { font-size: .76rem; color: var(--muted); margin-bottom: .6rem; font-weight: 300; }
+
+    .steps { position: relative; }
+    .step { display: grid; grid-template-columns: 2rem 44px 1fr; gap: 1rem; align-items: start; padding-bottom: 1.5rem; position: relative; }
+    .step:last-child { padding-bottom: 0; }
+    .step:not(:last-child)::after { content: ''; position: absolute; left: calc(2rem + 1rem + 22px); top: 48px; bottom: 4px; width: 1px; background: var(--line-red); }
+    .step-n { font-family: var(--display); font-size: .95rem; color: var(--red-hi); padding-top: .7rem; }
+    .step-i { width: 44px; height: 44px; border: 1px solid var(--red); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text); background: var(--bg); }
+    .step-i svg { width: 19px; height: 19px; }
+    .step h4 { font-family: var(--display); font-weight: 500; font-size: .9rem; letter-spacing: .1em; text-transform: uppercase; color: var(--red-hi); }
+    .step p { font-size: .8rem; color: #bdbdbd; font-weight: 300; line-height: 1.55; margin-top: .15rem; }
+
+    .quote { background: linear-gradient(160deg, #a50f15 0%, #5b0508 70%, #2c0204 100%); display: flex; flex-direction: column; justify-content: space-between; gap: 2rem; }
+    .quote svg.qm { width: 34px; height: 34px; color: #ff6b6b; }
+    .quote blockquote { font-size: 1.15rem; line-height: 1.5; font-weight: 400; margin-top: 1rem; }
+    .sign { font-family: var(--script); font-size: 2.1rem; margin-top: 1.5rem; line-height: 1; }
+    .quote small { font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: #ffb3b3; }
+
+    /* ── CONTACT ── */
+    .contact { padding: 4rem 0; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr 1.1fr; gap: 3rem; align-items: start; }
+    .contact h2 { font-family: var(--display); font-weight: 600; font-size: clamp(1.9rem, 2.9vw, 2.5rem); line-height: 1.1; letter-spacing: .02em; text-transform: uppercase; }
+    .contact h2 svg { display: inline-block; width: .5em; height: .5em; color: var(--red-hi); vertical-align: top; margin-left: .3rem; }
+    .contact-p { margin-top: 1rem; font-size: .9rem; color: #cfcfcf; font-weight: 300; max-width: 340px; }
+    .avail-pill { margin-top: 1.6rem; display: inline-flex; align-items: center; gap: .8rem; font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--red-hi); }
+    .avail-pill i { width: 34px; height: 34px; border: 1px solid var(--red); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-style: normal; }
+    .rows li { display: flex; align-items: center; gap: 1rem; padding: .9rem 0; border-bottom: 1px solid var(--line); font-size: .9rem; }
+    .rows li:first-child { padding-top: 0; }
+    .rows i { width: 38px; height: 38px; flex-shrink: 0; border: 1px solid var(--red); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--red-hi); }
+    .rows i svg { width: 16px; height: 16px; }
+    .rows a:hover { color: var(--red-hi); }
+
+    form { display: grid; gap: .85rem; }
+    .field label { display: block; font-size: .64rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: .3rem; }
+    .field input, .field textarea { width: 100%; background: var(--bg-2); border: 1px solid var(--line); border-radius: 6px; color: var(--text); font: 400 .9rem var(--body); padding: .7rem .85rem; transition: border-color .2s; }
+    .field input:focus, .field textarea:focus { outline: none; border-color: var(--red-hi); }
+    .field textarea { min-height: 110px; resize: vertical; }
+    form .btn { justify-content: center; width: 100%; }
+    form .btn:disabled { opacity: .6; cursor: wait; }
+    .form-note { padding: 1.2rem; border: 1px solid var(--line-red); border-radius: 8px; font-size: .86rem; }
+    .form-note[hidden] { display: none; }
+
+    footer { border-top: 1px solid var(--line); padding: 1.5rem 0; font-size: .74rem; color: var(--muted); letter-spacing: .04em; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: center; }
+    .flag { display: inline-block; width: 1.3em; height: .87em; vertical-align: -.1em; border-radius: 2px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .nav { display: none; }
+      .trio { grid-template-columns: 1fr 1fr; }
+      .col:nth-child(2) { border-right: 0; }
+      .col { border-bottom: 1px solid var(--line); }
+      .quote { grid-column: 1 / -1; border-bottom: 0; }
+      .col:first-child { padding-left: 2.5rem; }
+      .contact-grid { grid-template-columns: 1fr 1fr; }
+      .contact-grid > :last-child { grid-column: 1 / -1; }
+    }
+    @media (max-width: 820px) {
+      .proj-grid { grid-template-columns: 1fr 1fr; }
+      .hero { min-height: 0; }
+      .hero-photo { position: relative; left: auto; bottom: auto; transform: none; width: min(460px, 92vw); margin: 4rem auto -1rem; order: 2; }
+      .hero-grid { grid-template-columns: 1fr; min-height: 0; padding-bottom: 2rem; gap: 2rem; }
+      .hero-word { top: 4.5rem; }
+      .hero-mid { grid-column: 1 / -1; }
+      .hero-right { justify-self: stretch; width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+      .stat { flex-direction: column; gap: .2rem; border-bottom: 0; border-right: 1px solid var(--line); padding: .5rem 0 .5rem 1rem; }
+      .stat:last-child { border-right: 0; }
+      .avail { display: none; }
+    }
+    @media (max-width: 640px) {
+      .wrap { width: calc(100% - 2rem); }
+      .proj-grid { grid-template-columns: 1fr; }
+      .trio { grid-template-columns: 1fr; }
+      .col, .col:first-child { padding: 2.4rem 1.25rem; border-right: 0; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .sec-head h2 { font-size: 1.25rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .avail::before { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top">
+    <div class="wrap top-in">
+      <a href="#" class="brand" aria-label="Raymond Tran">
+        <b>RAYMOND TRAN</b>
+        <span data-i18n="brand-sub">Coder dạo · Freelance</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="#projects" data-i18n="nav-proj">Dự án</a>
+        <a href="#skills" data-i18n="nav-skills">Kỹ năng</a>
+        <a href="#process" data-i18n="nav-process">Quy trình</a>
+        <a href="#contact" data-i18n="nav-contact">Liên hệ</a>
+      </nav>
+      <div class="top-right">
+        <span class="avail" data-i18n="avail">Nhận dự án</span>
+        <div class="lang" role="group" aria-label="Language">
+          <button type="button" class="active" data-lang="vi" aria-pressed="true">VI</button>
+          <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-word" aria-hidden="true">PORTFOLIO</div>
+      <div class="hero-photo"><img src="avatar.jpg" alt="Raymond Tran" width="864" height="1184" fetchpriority="high" onerror="this.remove()" /></div>
+
+      <div class="wrap hero-grid">
+        <div class="hero-left">
+          <div class="hello" data-i18n="hello">Xin chào, mình là</div>
+          <h1 class="name">Raymond<br>Tran</h1>
+          <div class="role" data-i18n="role">Coder dạo &amp; Web developer</div>
+          <p class="hero-p" data-i18n="hero-p">Mình thiết kế, viết và đưa phần mềm lên chạy thật: từ giao diện, API đến cơ sở dữ liệu. Làm gọn, làm đúng, giao đúng hẹn.</p>
+          <div class="cta-row">
+            <a href="#projects" class="btn" data-i18n="btn-work">Xem dự án</a>
+            <a href="#contact" class="btn ghost" data-i18n="btn-contact">Liên hệ</a>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="hero-mid">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/></svg>
+          <span data-i18n="hero-mid">Biến ý tưởng thành sản phẩm chạy thật.</span>
+          </div>
+          <div class="stat"><b id="statProjects">12</b><span data-i18n="st-proj">Dự án đã làm</span></div>
+          <div class="stat"><b>&lt;24h</b><span data-i18n="st-resp">Thời gian phản hồi</span></div>
+          <div class="stat"><b>100%</b><span data-i18n="st-custom">Làm theo yêu cầu</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="projects" id="projects">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <h2 data-i18n="s-proj">Dự án nổi bật</h2>
+          <span class="rule"></span>
+          <button type="button" id="toggleAll" hidden>
+            <span id="toggleLabel" data-i18n="view-all">Xem tất cả</span>
+            <svg width="22" height="12" viewBox="0 0 22 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 6h20M15 1l5 5-5 5"/></svg>
+          </button>
+        </div>
+        <div class="proj-grid" id="projGrid"></div>
+        <div class="proj-grid proj-more" id="projMore" hidden></div>
+      </div>
+    </section>
+
+    <!-- SKILLS / PROCESS / QUOTE -->
+    <div class="trio">
+      <section class="col" id="skills">
+        <h2 data-i18n="s-about">Về mình</h2>
+        <p class="about-p" data-i18n="ab-p1">Mình là coder dạo ở TP. Hồ Chí Minh. Mình bắt đầu từ những trang web nhỏ, rồi đi dần xuống phía sau: viết API, thiết kế cơ sở dữ liệu, đưa sản phẩm lên chạy thật.</p>
+        <p class="about-p" data-i18n="ab-p2">Với mình, làm phần mềm tốt nghĩa là hiểu cả hai đầu: thứ người dùng chạm vào và thứ chạy âm thầm phía sau.</p>
+
+        <h3 data-i18n="s-skills">Kỹ năng</h3>
+        <p class="group-note" data-i18n="sk1">Giao diện</p>
+        <ul class="chips"><li>HTML / CSS</li><li>JavaScript</li><li>TypeScript</li><li>React</li></ul>
+        <p class="group-note" style="margin-top:1rem" data-i18n="sk2">Xử lý phía sau</p>
+        <ul class="chips"><li>PHP</li><li>REST API</li><li>Firebase</li><li>Dart</li></ul>
+        <p class="group-note" style="margin-top:1rem" data-i18n="sk3">Dữ liệu</p>
+        <ul class="chips"><li>MySQL</li><li>Firestore</li><li>SQL</li></ul>
+        <p class="group-note" style="margin-top:1rem" data-i18n="sk4">Đưa lên chạy thật</p>
+        <ul class="chips"><li>Git</li><li>GitHub Actions</li><li>Hosting</li><li>Domain</li></ul>
+      </section>
+
+      <section class="col" id="process">
+        <h2 data-i18n="s-process">Quy trình làm việc</h2>
+        <div class="steps">
+          <div class="step">
+            <span class="step-n">01</span>
+            <span class="step-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
+            <div><h4 data-i18n="p1-h">Tìm hiểu</h4><p data-i18n="p1-p">Mình nghe cách bạn thực sự vận hành và xác định đúng vấn đề trước khi viết dòng code đầu tiên.</p></div>
+          </div>
+          <div class="step">
+            <span class="step-n">02</span>
+            <span class="step-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg></span>
+            <div><h4 data-i18n="p2-h">Thiết kế</h4><p data-i18n="p2-p">Mình phác thảo giải pháp và gửi đề xuất rõ ràng. Bạn biết chính xác mình sẽ nhận gì trước khi bắt đầu.</p></div>
+          </div>
+          <div class="step">
+            <span class="step-n">03</span>
+            <span class="step-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
+            <div><h4 data-i18n="p3-h">Phát triển</h4><p data-i18n="p3-p">Mình làm sát thiết kế đã chốt và báo tiến độ thường xuyên. Không hộp đen, không bất ngờ.</p></div>
+          </div>
+          <div class="step">
+            <span class="step-n">04</span>
+            <span class="step-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg></span>
+            <div><h4 data-i18n="p4-h">Bàn giao &amp; đồng hành</h4><p data-i18n="p4-p">Mình triển khai, hướng dẫn đội ngũ của bạn và sẵn sàng hỗ trợ khi cần mở rộng hoặc gặp sự cố.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="col quote">
+        <div>
+          <svg class="qm" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 7h4v4c0 3-1.5 5-4 6l-1-1.6c1.3-.7 2-1.8 2-3.4H7zm8 0h4v4c0 3-1.5 5-4 6l-1-1.6c1.3-.7 2-1.8 2-3.4h-1z"/></svg>
+          <blockquote data-i18n="quote">Phần mềm tốt không chỉ ở chỗ nó trông thế nào, mà ở chỗ nó chạy ra sao.</blockquote>
+          <div class="sign">Raymond</div>
+        </div>
+        <small data-i18n="quote-small">Cùng làm ra thứ gì đó đáng dùng.</small>
+      </section>
+    </div>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+      <div class="wrap contact-grid">
+        <div class="reveal">
+          <h2><span data-i18n="c-h">Cùng làm việc nào</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/></svg></h2>
+          <p class="contact-p" data-i18n="c-p">Mình đang nhận dự án mới và hợp tác dài hạn. Kể mình nghe bài toán của bạn, mình phản hồi trong 24 giờ.</p>
+          <div class="avail-pill"><i>→</i><span data-i18n="c-avail">Đang nhận dự án</span></div>
+        </div>
+
+        <ul class="rows reveal">
+          <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></i><a href="mailto:raymondtrantm@gmail.com">raymondtrantm@gmail.com</a></li>
+          <li><i><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.34.96.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 015.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0023.5 12C23.5 5.65 18.35.5 12 .5z"/></svg></i><a href="https://github.com/linhtrantm" target="_blank" rel="noopener">github.com/linhtrantm</a></li>
+          <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.8 19.8 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg></i><a href="tel:+84932197026">0932 197 026</a></li>
+          <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></i><span data-i18n="c-loc">TP. Hồ Chí Minh, Việt Nam</span></li>
+        </ul>
+
+        <div class="reveal">
+          <form id="contactForm">
+            <input type="hidden" name="access_key" value="7108fe4f-a3bc-4cfa-b651-209011e9f86f" />
+            <input type="hidden" name="subject" value="New inquiry — Raymond Tran Portfolio" />
+            <input type="hidden" name="from_name" value="Raymond Tran Portfolio" />
+            <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
+            <div class="field"><label for="name" data-i18n="f-name">Họ và tên</label><input type="text" id="name" name="name" autocomplete="name" required /></div>
+            <div class="field"><label for="email" data-i18n="f-email">Email</label><input type="email" id="email" name="email" autocomplete="email" required /></div>
+            <div class="field"><label for="message" data-i18n="f-msg">Bạn cần làm gì?</label><textarea id="message" name="message" required></textarea></div>
+            <button type="submit" class="btn" id="submitBtn"><span id="btnText" data-i18n="f-send">Gửi cho mình</span></button>
+          </form>
+          <div id="formOk" class="form-note" role="status" hidden data-i18n="f-ok">Đã gửi. Mình sẽ phản hồi bạn trong vòng 24 giờ.</div>
+          <div id="formErr" class="form-note" role="alert" hidden><span data-i18n="f-err">Gửi không thành công. Vui lòng thử lại hoặc email</span> <a href="mailto:raymondtrantm@gmail.com" class="red">raymondtrantm@gmail.com</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© 2026 Raymond Tran · raymondtrantm.id.vn</span>
+      <span><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#DA251D"/><polygon fill="#FFFF00" points="15,4 18.53,14.85 9.29,8.15 20.71,8.15 11.47,14.85"/></svg> <span data-i18n="foot-made">Làm tại Việt Nam</span></span>
+    </div>
+  </footer>
+
+  <script>
+    // ── TRANSLATIONS ([data-i18n] sets textContent)
+    const translations = {
+      vi: {
+        'brand-sub':'Coder dạo · Freelance','avail':'Nhận dự án',
+        'nav-proj':'Dự án','nav-skills':'Kỹ năng','nav-process':'Quy trình','nav-contact':'Liên hệ',
+        'hello':'Xin chào, mình là','role':'Coder dạo & Web developer',
+        'hero-p':'Mình thiết kế, viết và đưa phần mềm lên chạy thật: từ giao diện, API đến cơ sở dữ liệu. Làm gọn, làm đúng, giao đúng hẹn.',
+        'btn-work':'Xem dự án','btn-contact':'Liên hệ',
+        'hero-mid':'Biến ý tưởng thành sản phẩm chạy thật.',
+        'st-proj':'Dự án đã làm','st-resp':'Thời gian phản hồi','st-custom':'Làm theo yêu cầu',
+        's-proj':'Dự án nổi bật','view-all':'Xem tất cả','view-less':'Thu gọn','pj-demo':'Xem demo',
+        's-about':'Về mình',
+        'ab-p1':'Mình là coder dạo ở TP. Hồ Chí Minh. Mình bắt đầu từ những trang web nhỏ, rồi đi dần xuống phía sau: viết API, thiết kế cơ sở dữ liệu, đưa sản phẩm lên chạy thật.',
+        'ab-p2':'Với mình, làm phần mềm tốt nghĩa là hiểu cả hai đầu: thứ người dùng chạm vào và thứ chạy âm thầm phía sau.',
+        's-skills':'Kỹ năng','sk1':'Giao diện','sk2':'Xử lý phía sau','sk3':'Dữ liệu','sk4':'Đưa lên chạy thật',
+        's-process':'Quy trình làm việc',
+        'p1-h':'Tìm hiểu','p1-p':'Mình nghe cách bạn thực sự vận hành và xác định đúng vấn đề trước khi viết dòng code đầu tiên.',
+        'p2-h':'Thiết kế','p2-p':'Mình phác thảo giải pháp và gửi đề xuất rõ ràng. Bạn biết chính xác mình sẽ nhận gì trước khi bắt đầu.',
+        'p3-h':'Phát triển','p3-p':'Mình làm sát thiết kế đã chốt và báo tiến độ thường xuyên. Không hộp đen, không bất ngờ.',
+        'p4-h':'Bàn giao & đồng hành','p4-p':'Mình triển khai, hướng dẫn đội ngũ của bạn và sẵn sàng hỗ trợ khi cần mở rộng hoặc gặp sự cố.',
+        'quote':'Phần mềm tốt không chỉ ở chỗ nó trông thế nào, mà ở chỗ nó chạy ra sao.','quote-small':'Cùng làm ra thứ gì đó đáng dùng.',
+        'c-h':'Cùng làm việc nào','c-p':'Mình đang nhận dự án mới và hợp tác dài hạn. Kể mình nghe bài toán của bạn, mình phản hồi trong 24 giờ.',
+        'c-avail':'Đang nhận dự án','c-loc':'TP. Hồ Chí Minh, Việt Nam',
+        'f-name':'Họ và tên','f-email':'Email','f-msg':'Bạn cần làm gì?','f-send':'Gửi cho mình','f-sending':'Đang gửi...',
+        'f-ok':'Đã gửi. Mình sẽ phản hồi bạn trong vòng 24 giờ.','f-err':'Gửi không thành công. Vui lòng thử lại hoặc email',
+        'foot-made':'Làm tại Việt Nam'
+      },
+      en: {
+        'brand-sub':'Freelance developer','avail':'Open for projects',
+        'nav-proj':'Projects','nav-skills':'Skills','nav-process':'Process','nav-contact':'Contact',
+        'hello':"Hello, I'm",'role':'Freelance coder & Web developer',
+        'hero-p':'I design, build and ship software for real: from interface and API to database. Clean, correct, on time.',
+        'btn-work':'See my work','btn-contact':'Contact',
+        'hero-mid':'Turning ideas into products that actually run.',
+        'st-proj':'Projects done','st-resp':'Response time','st-custom':'Custom built',
+        's-proj':'Selected projects','view-all':'View all','view-less':'Show less','pj-demo':'Live demo',
+        's-about':'About me',
+        'ab-p1':"I'm a freelance coder in Ho Chi Minh City. I started with small websites, then worked my way down the stack: writing APIs, designing databases, and getting products running for real.",
+        'ab-p2':'To me, good software means understanding both ends: what users touch and what quietly runs behind it.',
+        's-skills':'Skills','sk1':'Interface','sk2':'Behind the scenes','sk3':'Data','sk4':'Going live',
+        's-process':'How I work',
+        'p1-h':'Discover','p1-p':'I listen to how your business actually runs and define the real problem before writing a single line of code.',
+        'p2-h':'Design','p2-p':"I map out the solution and send a clear proposal. You know what you're getting before I start.",
+        'p3-h':'Build','p3-p':'I build close to the agreed design and keep you updated. No black boxes, no surprises.',
+        'p4-h':'Deliver & support','p4-p':'I deploy, train your team, and stay available when you need to scale or hit a snag.',
+        'quote':"Good software isn't just how it looks, but how it works.",'quote-small':"Let's build something worth using.",
+        'c-h':"Let's work together",'c-p':"I'm open to new projects and long-term collaboration. Tell me the problem you're trying to solve and I'll reply within 24 hours.",
+        'c-avail':'Open for projects','c-loc':'Ho Chi Minh City, Vietnam',
+        'f-name':'Full name','f-email':'Email','f-msg':'What do you need?','f-send':'Send message','f-sending':'Sending...',
+        'f-ok':"Sent. I'll get back to you within 24 hours.",'f-err':'Failed to send. Please try again or email',
+        'foot-made':'Made in Vietnam'
+      }
+    };
+
+    let currentLang = 'vi';
+    let projectList = [];
+    let showAll = false;
+
+    function setLang(lang) {
+      const t = translations[lang];
+      if (!t) return;
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      try { localStorage.setItem('ss-lang', lang); } catch (e) {}
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const v = t[el.dataset.i18n];
+        if (typeof v === 'string') el.textContent = v;
+      });
+      document.querySelectorAll('.lang button').forEach(b => {
+        const on = b.dataset.lang === lang;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      renderProjects();
+    }
+    document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+    // ── PROJECTS: GitHub repos tagged TOPIC (repos.json built by the sync action) + curated projects.json
+    const GH_USER = 'linhtrantm';
+    const GH_TOPIC = 'portfolio';
+    const FEATURED = 3;
+
+    const safeUrl = u => { try { if (u && !/^[a-z][a-z0-9+.-]*:/i.test(u) && !u.startsWith('/') && !u.startsWith('.')) u = 'https://' + u; const x = new URL(u, location.href); return /^https?:$/.test(x.protocol) ? x.href : ''; } catch (e) { return ''; } };
+    const pick = (v, lang) => (v && typeof v === 'object') ? (v[lang] || v.en || '') : (v || '');
+
+    async function loadJson(url, cacheKey) {
+      try { const c = sessionStorage.getItem(cacheKey); if (c) return JSON.parse(c); } catch (e) {}
+      try {
+        const r = await fetch(url, { headers: { 'Accept': 'application/vnd.github+json' } });
+        if (!r.ok) return null;
+        const j = await r.json();
+        try { sessionStorage.setItem(cacheKey, JSON.stringify(j)); } catch (e) {}
+        return j;
+      } catch (e) { return null; }
+    }
+
+    function buildProject(c, r) {
+      return {
+        title: c.title || (r && r.name) || '',
+        desc:  c.desc  || (r && r.description) || '',
+        tags:  c.tags  || (r ? [r.language, ...(r.topics || []).filter(t => t !== GH_TOPIC)].filter(Boolean).slice(0, 5) : []),
+        image: safeUrl(c.image || ''),
+        demo:  safeUrl(c.demo || (r && r.homepage) || '')
+      };
+    }
+
+    function projectCard(p, idx) {
+      const title = pick(p.title, currentLang);
+      const el = document.createElement('article');
+      el.className = 'proj reveal visible';
+
+      const thumb = document.createElement('div');
+      const makePh = () => {
+        const ph = document.createElement('div');
+        ph.className = 'thumb ph';
+        let h = 0; for (const ch of title) h = (h * 31 + ch.charCodeAt(0)) % 13;
+        ph.style.setProperty('--l', 22 + h);
+        const sp = document.createElement('span');
+        const words = title.replace(/^Website\s+/i, '').replace(/([a-z])([A-Z])/g, '$1 $2').split(/\s+/).filter(Boolean);
+        sp.textContent = (words.length > 1 ? words.slice(0, 2).map(w => w[0]).join('') : words[0].slice(0, 2)).toUpperCase();
+        ph.append(sp);
+        return ph;
+      };
+      if (p.image) {
+        thumb.className = 'thumb';
+        const img = document.createElement('img');
+        img.src = p.image; img.alt = ''; img.loading = 'lazy';
+        img.addEventListener('error', () => thumb.replaceWith(makePh()), { once: true });
+        thumb.append(img);
+        el.append(thumb);
+      } else {
+        el.append(makePh());
+      }
+
+      const meta = document.createElement('div'); meta.className = 'proj-meta';
+      const num = document.createElement('div'); num.className = 'proj-num'; num.textContent = String(idx + 1).padStart(2, '0');
+      const name = document.createElement('div'); name.className = 'proj-name'; name.textContent = title;
+      const tags = document.createElement('div'); tags.className = 'proj-tags'; tags.textContent = p.tags.slice(0, 3).join(' · ');
+      meta.append(num, name);
+      if (p.demo) {
+        const go = document.createElement('a');
+        go.className = 'proj-go'; go.href = p.demo; go.target = '_blank'; go.rel = 'noopener';
+        go.setAttribute('aria-label', translations[currentLang]['pj-demo'] + ': ' + title);
+        go.innerHTML = '<svg width="20" height="12" viewBox="0 0 22 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 6h20M15 1l5 5-5 5"/></svg>';
+        meta.append(go);
+      }
+      meta.append(tags);
+      const desc = pick(p.desc, currentLang);
+      if (desc) { const d = document.createElement('p'); d.className = 'proj-desc'; d.textContent = desc; meta.append(d); }
+      el.append(meta);
+      return el;
+    }
+
+    function renderProjects() {
+      const grid = document.getElementById('projGrid');
+      const more = document.getElementById('projMore');
+      const btn = document.getElementById('toggleAll');
+      grid.textContent = ''; more.textContent = '';
+      projectList.forEach((p, i) => (i < FEATURED ? grid : more).append(projectCard(p, i)));
+      more.hidden = !showAll || projectList.length <= FEATURED;
+      btn.hidden = projectList.length <= FEATURED;
+      const t = translations[currentLang];
+      document.getElementById('toggleLabel').textContent = showAll ? t['view-less'] : t['view-all'];
+      document.getElementById('statProjects').textContent = projectList.length || document.getElementById('statProjects').textContent;
+    }
+
+    document.getElementById('toggleAll').addEventListener('click', () => { showAll = !showAll; renderProjects(); });
+
+    async function initProjects() {
+      let [repos, curated] = await Promise.all([
+        loadJson('repos.json', 'ss-repos-json'),
+        loadJson('projects.json', 'ss-projects-json')
+      ]);
+      if (!repos || !repos.items) {
+        repos = await loadJson(`https://api.github.com/search/repositories?q=user:${GH_USER}+topic:${GH_TOPIC}&sort=updated&per_page=30`, 'ss-gh-repos');
+      }
+      const items = (repos && repos.items) || [];
+      const list = Array.isArray(curated) ? curated : [];
+      const overrides = {};
+      list.forEach(c => { if (c && c.repo) overrides[c.repo.toLowerCase()] = c; });
+      const seen = new Set();
+      const out = [];
+      list.forEach(c => {
+        if (!c || c.hidden) return;
+        const r = items.find(x => c.repo && x.full_name.toLowerCase() === c.repo.toLowerCase());
+        seen.add((c.repo || '').toLowerCase());
+        out.push(buildProject(c, r));
+      });
+      items.forEach(r => {
+        const key = r.full_name.toLowerCase();
+        if (seen.has(key) || (overrides[key] && overrides[key].hidden) || r.fork) return;
+        out.push(buildProject(overrides[key] || {}, r));
+      });
+      projectList = out.filter(p => p.title);
+      renderProjects();
+    }
+
+    // ── SCROLL REVEAL
+    const reveals = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(entries => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      }), { threshold: 0.1 });
+      reveals.forEach(r => io.observe(r));
+    } else reveals.forEach(r => r.classList.add('visible'));
+
+    // ── INIT
+    let savedLang = null;
+    try { savedLang = localStorage.getItem('ss-lang'); } catch (e) {}
+    setLang(savedLang === 'en' ? 'en' : 'vi');
+    initProjects();
+
+    // ── CONTACT FORM (Web3Forms)
+    document.getElementById('contactForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const t = translations[currentLang];
+      const btn = document.getElementById('submitBtn');
+      const txt = document.getElementById('btnText');
+      const ok = document.getElementById('formOk');
+      const err = document.getElementById('formErr');
+      const json = Object.fromEntries(new FormData(this).entries());
+      txt.textContent = t['f-sending'];
+      btn.disabled = true;
+      err.hidden = true;
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(json)
+        });
+        const result = await res.json();
+        if (!result.success) throw new Error(result.message || 'Submission failed');
+        this.hidden = true;
+        ok.hidden = false;
+      } catch (ex) {
+        err.hidden = false;
+        txt.textContent = translations[currentLang]['f-send'];
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
