@@ -161,18 +161,26 @@
 
     /* ── ABOUT ── */
     .about { padding: 4rem 0; border-bottom: 1px solid var(--line); }
-    .about-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 3.5rem; align-items: start; }
+    .about-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 3.5rem; align-items: stretch; }
     .about h2, .process h2 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; letter-spacing: .03em; text-transform: uppercase; margin-bottom: 1.4rem; }
     .about-p { font-size: .98rem; color: #d2d2d2; font-weight: 300; line-height: 1.85; margin-bottom: 1rem; }
     .about-p:first-of-type { font-size: 1.15rem; color: var(--text); font-weight: 400; line-height: 1.6; }
-    .founder-card { display: flex; align-items: center; justify-content: space-between; gap: 1.2rem; margin-top: 1.8rem; padding: 1.4rem 1.5rem; border: 1px solid var(--line-red); border-left: 3px solid var(--red-hi); border-radius: 4px; background: linear-gradient(90deg, rgba(212,21,27,.16), rgba(212,21,27,.03)); transition: background .25s, transform .25s; }
+    .about-left > .founder-card { margin-top: auto; }
+    .about-left .principles + .founder-card { margin-top: 1.8rem; }
+    .about-left { display: flex; flex-direction: column; height: 100%; }
+    .principles { margin: 1.4rem 0 0; display: grid; gap: .9rem; }
+    .principles li { display: grid; grid-template-columns: 2.2rem 1fr; gap: .8rem; padding-top: .9rem; border-top: 1px solid var(--line); }
+    .principles .pn { font-family: var(--display); font-size: .9rem; letter-spacing: .1em; color: var(--red-hi); padding-top: .15rem; }
+    .principles b { display: block; font-family: var(--display); font-weight: 500; font-size: 1rem; letter-spacing: .06em; text-transform: uppercase; margin-bottom: .15rem; }
+    .principles span.t { font-size: .84rem; color: #b5b5b5; font-weight: 300; line-height: 1.65; }
+    .founder-card { display: flex; align-items: center; justify-content: space-between; gap: 1.2rem; margin-top: auto; padding: 1.4rem 1.5rem; border: 1px solid var(--line-red); border-left: 3px solid var(--red-hi); border-radius: 4px; background: linear-gradient(90deg, rgba(212,21,27,.16), rgba(212,21,27,.03)); transition: background .25s, transform .25s; }
     .founder-card:hover { background: linear-gradient(90deg, rgba(212,21,27,.28), rgba(212,21,27,.06)); transform: translateY(-2px); }
     .founder-card small { font-family: var(--display); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--red-hi); }
     .founder-card b { display: block; font-family: var(--display); font-weight: 600; font-size: 1.35rem; letter-spacing: .02em; margin: .15rem 0 .4rem; }
     .founder-card p { font-size: .84rem; color: #c4c4c4; font-weight: 300; line-height: 1.65; margin: 0 0 .7rem; }
     .founder-card span.cta { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text); }
     .founder-card .go { flex-shrink: 0; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--red); border-radius: 50%; color: var(--red-hi); }
-    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 1fr); gap: 1.25rem; }
     .skill-box { padding: 1.4rem; border: 1px solid var(--line); border-radius: 4px; background: var(--bg-2); }
     .skill-box h3 { font-family: var(--display); font-weight: 500; font-size: .86rem; letter-spacing: .12em; text-transform: uppercase; color: var(--red-hi); margin-bottom: .9rem; }
     .chips { display: flex; flex-wrap: wrap; gap: .45rem; }
@@ -228,6 +236,7 @@
       .nav { display: none; }
       .proj-grid { grid-template-columns: 1fr 1fr; }
       .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .skills-grid { grid-template-rows: auto; }
       .steps { grid-template-columns: 1fr 1fr; gap: 2.5rem 2rem; }
       .steps::before { display: none; }
       .contact-grid { grid-template-columns: 1fr 1fr; }
@@ -326,10 +335,16 @@
     <!-- ABOUT -->
     <section class="about" id="skills">
       <div class="wrap about-grid">
-        <div class="reveal">
+        <div class="reveal about-left">
           <h2 data-i18n="s-about">Về mình</h2>
           <p class="about-p" data-i18n="ab-p1">Mình là coder dạo ở TP. Hồ Chí Minh. Mình bắt đầu từ những trang web nhỏ, rồi đi dần xuống phía sau: viết API, thiết kế cơ sở dữ liệu, đưa sản phẩm lên chạy thật.</p>
           <p class="about-p" data-i18n="ab-p2">Với mình, làm phần mềm tốt nghĩa là hiểu cả hai đầu: thứ người dùng chạm vào và thứ chạy âm thầm phía sau.</p>
+          <p class="about-p" data-i18n="ab-p3">Mình làm việc cùng AI hằng ngày: AI lo phần lặp đi lặp lại, còn mình giữ phần quan trọng nhất là quyết định bài toán có đúng không, dữ liệu có khớp không, và người dùng có dùng nổi không.</p>
+          <ul class="principles">
+            <li><span class="pn">01</span><div><b data-i18n="pr1-h">Đơn giản trước</b><span class="t" data-i18n="pr1-t">Làm bản gọn nhất chạy được, rồi mới thêm.</span></div></li>
+            <li><span class="pn">02</span><div><b data-i18n="pr2-h">Chạy thật sớm</b><span class="t" data-i18n="pr2-t">Đưa bản dùng được cho người dùng thật càng sớm càng tốt, rồi sửa theo phản hồi.</span></div></li>
+            <li><span class="pn">03</span><div><b data-i18n="pr3-h">Nói rõ, làm rõ</b><span class="t" data-i18n="pr3-t">Phạm vi, tiến độ và chi phí minh bạch ngay từ đầu.</span></div></li>
+          </ul>
           <a class="founder-card" href="https://simplesoft.com.vn" target="_blank" rel="noopener">
             <div>
               <small data-i18n="fc-small">Người sáng lập</small>
@@ -445,6 +460,8 @@
         's-about':'Về mình',
         'ab-p1':'Mình là coder dạo ở TP. Hồ Chí Minh. Mình bắt đầu từ những trang web nhỏ, rồi đi dần xuống phía sau: viết API, thiết kế cơ sở dữ liệu, đưa sản phẩm lên chạy thật.',
         'ab-p2':'Với mình, làm phần mềm tốt nghĩa là hiểu cả hai đầu: thứ người dùng chạm vào và thứ chạy âm thầm phía sau.',
+        'ab-p3':'Mình làm việc cùng AI hằng ngày: AI lo phần lặp đi lặp lại, còn mình giữ phần quan trọng nhất là quyết định bài toán có đúng không, dữ liệu có khớp không, và người dùng có dùng nổi không.',
+        'pr1-h':'Đơn giản trước','pr1-t':'Làm bản gọn nhất chạy được, rồi mới thêm.','pr2-h':'Chạy thật sớm','pr2-t':'Đưa bản dùng được cho người dùng thật càng sớm càng tốt, rồi sửa theo phản hồi.','pr3-h':'Nói rõ, làm rõ','pr3-t':'Phạm vi, tiến độ và chi phí minh bạch ngay từ đầu.',
         's-skills':'Kỹ năng','sk1':'Giao diện','sk2':'Xử lý phía sau','sk3':'Dữ liệu','sk4':'Đưa lên chạy thật','sk5':'Di động','sk6':'AI & công cụ',
         's-process':'Quy trình làm việc',
         'p1-h':'Tìm hiểu','p1-p':'Mình nghe cách bạn thực sự vận hành và xác định đúng vấn đề trước khi viết dòng code đầu tiên.',
@@ -470,6 +487,8 @@
         's-about':'About me',
         'ab-p1':"I'm a freelance coder in Ho Chi Minh City. I started with small websites, then worked my way down the stack: writing APIs, designing databases, and getting products running for real.",
         'ab-p2':'To me, good software means understanding both ends: what users touch and what quietly runs behind it.',
+        'ab-p3':"I work with AI every day: it handles the repetitive parts, while I keep the part that matters most: deciding whether it's the right problem, whether the data adds up, and whether people can actually use it.",
+        'pr1-h':'Simple first','pr1-t':'Ship the leanest version that works, then add.','pr2-h':'Go live early','pr2-t':'Put a usable version in front of real users as soon as possible, then adjust to feedback.','pr3-h':'Clear scope, clear work','pr3-t':'Scope, progress and cost made transparent from day one.',
         's-skills':'Skills','sk1':'Interface','sk2':'Behind the scenes','sk3':'Data','sk4':'Going live','sk5':'Mobile','sk6':'AI & tools',
         's-process':'How I work',
         'p1-h':'Discover','p1-p':'I listen to how your business actually runs and define the real problem before writing a single line of code.',
