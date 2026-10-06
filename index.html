@@ -108,6 +108,10 @@
     .hello { font-family: var(--script); font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 500; line-height: 1; margin-bottom: .6rem; }
     .name { font-family: var(--display); font-weight: 700; text-transform: uppercase; line-height: .95; letter-spacing: .005em; font-size: clamp(3.2rem, 6.2vw, 5.6rem); }
     .role { margin-top: 1.1rem; font-family: var(--display); font-weight: 500; font-size: 1.05rem; letter-spacing: .08em; text-transform: uppercase; color: var(--red-hi); }
+    .founder { display: inline-flex; align-items: center; gap: .6rem; margin-top: .9rem; padding: .45rem .95rem; border: 1px solid var(--red); border-radius: 999px; background: rgba(212,21,27,.14); font-family: var(--display); font-weight: 500; font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text); transition: background .2s, transform .2s; }
+    .founder:hover { background: rgba(212,21,27,.3); transform: translateY(-2px); }
+    .founder::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--red-hi); box-shadow: 0 0 8px var(--red-hi); }
+    .founder svg { width: 12px; height: 12px; }
     .hero-p { margin-top: .9rem; font-size: .88rem; color: #cfcfcf; font-weight: 300; max-width: 340px; }
     .cta-row { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.5rem; }
     .btn { display: inline-flex; align-items: center; gap: .55rem; font-family: var(--display); font-weight: 500; font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; padding: .7rem 1.3rem; border: 1px solid var(--red); border-radius: 999px; background: var(--red); color: #fff; cursor: pointer; transition: background .2s, border-color .2s, transform .2s; }
@@ -161,6 +165,13 @@
     .about h2, .process h2 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; letter-spacing: .03em; text-transform: uppercase; margin-bottom: 1.4rem; }
     .about-p { font-size: .98rem; color: #d2d2d2; font-weight: 300; line-height: 1.85; margin-bottom: 1rem; }
     .about-p:first-of-type { font-size: 1.15rem; color: var(--text); font-weight: 400; line-height: 1.6; }
+    .founder-card { display: flex; align-items: center; justify-content: space-between; gap: 1.2rem; margin-top: 1.8rem; padding: 1.4rem 1.5rem; border: 1px solid var(--line-red); border-left: 3px solid var(--red-hi); border-radius: 4px; background: linear-gradient(90deg, rgba(212,21,27,.16), rgba(212,21,27,.03)); transition: background .25s, transform .25s; }
+    .founder-card:hover { background: linear-gradient(90deg, rgba(212,21,27,.28), rgba(212,21,27,.06)); transform: translateY(-2px); }
+    .founder-card small { font-family: var(--display); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--red-hi); }
+    .founder-card b { display: block; font-family: var(--display); font-weight: 600; font-size: 1.35rem; letter-spacing: .02em; margin: .15rem 0 .4rem; }
+    .founder-card p { font-size: .84rem; color: #c4c4c4; font-weight: 300; line-height: 1.65; margin: 0 0 .7rem; }
+    .founder-card span.cta { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text); }
+    .founder-card .go { flex-shrink: 0; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--red); border-radius: 50%; color: var(--red-hi); }
     .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
     .skill-box { padding: 1.4rem; border: 1px solid var(--line); border-radius: 4px; background: var(--bg-2); }
     .skill-box h3 { font-family: var(--display); font-weight: 500; font-size: .86rem; letter-spacing: .12em; text-transform: uppercase; color: var(--red-hi); margin-bottom: .9rem; }
@@ -280,6 +291,7 @@
           <div class="hello" data-i18n="hello">Xin chào, mình là</div>
           <h1 class="name">Raymond<br>Tran</h1>
           <div class="role" data-i18n="role">Coder dạo &amp; Web developer</div>
+          <a class="founder" href="https://simplesoft.com.vn" target="_blank" rel="noopener"><span data-i18n="founder">Người sáng lập SimpleSoft</span><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 12L12 2M5 2h7v7"/></svg></a>
           <p class="hero-p" data-i18n="hero-p">Mình thiết kế, viết và đưa phần mềm lên chạy thật: từ giao diện, API đến cơ sở dữ liệu. Làm gọn, làm đúng, giao đúng hẹn.</p>
           <div class="cta-row">
             <a href="#projects" class="btn" data-i18n="btn-work">Xem dự án</a>
@@ -318,6 +330,15 @@
           <h2 data-i18n="s-about">Về mình</h2>
           <p class="about-p" data-i18n="ab-p1">Mình là coder dạo ở TP. Hồ Chí Minh. Mình bắt đầu từ những trang web nhỏ, rồi đi dần xuống phía sau: viết API, thiết kế cơ sở dữ liệu, đưa sản phẩm lên chạy thật.</p>
           <p class="about-p" data-i18n="ab-p2">Với mình, làm phần mềm tốt nghĩa là hiểu cả hai đầu: thứ người dùng chạm vào và thứ chạy âm thầm phía sau.</p>
+          <a class="founder-card" href="https://simplesoft.com.vn" target="_blank" rel="noopener">
+            <div>
+              <small data-i18n="fc-small">Người sáng lập</small>
+              <b>SimpleSoft</b>
+              <p data-i18n="fc-p">Đơn vị làm phần mềm theo yêu cầu và tích hợp hệ thống, nơi các sản phẩm simpleRMS, simpleDMS và simpleWork ra đời.</p>
+              <span class="cta" data-i18n="fc-cta">Truy cập simplesoft.com.vn</span>
+            </div>
+            <span class="go" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12L12 2M5 2h7v7"/></svg></span>
+          </a>
         </div>
         <div class="skills-grid reveal">
           <div class="skill-box"><h3 data-i18n="sk1">Giao diện</h3><ul class="chips"><li>HTML / CSS</li><li>JavaScript</li><li>TypeScript</li><li>React</li><li>Next.js</li><li>Vue</li><li>Tailwind CSS</li></ul></div>
@@ -404,7 +425,7 @@
 
   <footer>
     <div class="wrap">
-      <span>© 2026 Raymond Tran · raymondtrantm.id.vn</span>
+      <span>© 2026 Raymond Tran · <span data-i18n="founder">Người sáng lập SimpleSoft</span> · <a href="https://simplesoft.com.vn" target="_blank" rel="noopener" style="color:var(--text)">simplesoft.com.vn</a></span>
       <span><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#DA251D"/><polygon fill="#FFFF00" points="15,4 18.53,14.85 9.29,8.15 20.71,8.15 11.47,14.85"/></svg> <span data-i18n="foot-made">Làm tại Việt Nam</span></span>
     </div>
   </footer>
@@ -415,7 +436,7 @@
       vi: {
         'brand-sub':'Coder dạo · Freelance','avail':'Nhận dự án',
         'nav-proj':'Dự án','nav-skills':'Kỹ năng','nav-process':'Quy trình','nav-contact':'Liên hệ',
-        'hello':'Xin chào, mình là','role':'Coder dạo & Web developer',
+        'hello':'Xin chào, mình là','founder':'Người sáng lập SimpleSoft','fc-small':'Người sáng lập','fc-p':'Đơn vị làm phần mềm theo yêu cầu và tích hợp hệ thống, nơi các sản phẩm simpleRMS, simpleDMS và simpleWork ra đời.','fc-cta':'Truy cập simplesoft.com.vn','role':'Coder dạo & Web developer',
         'hero-p':'Mình thiết kế, viết và đưa phần mềm lên chạy thật: từ giao diện, API đến cơ sở dữ liệu. Làm gọn, làm đúng, giao đúng hẹn.',
         'btn-work':'Xem dự án','btn-contact':'Liên hệ',
         'hero-mid':'Biến ý tưởng thành sản phẩm chạy thật.',
@@ -440,7 +461,7 @@
       en: {
         'brand-sub':'Freelance developer','avail':'Open for projects',
         'nav-proj':'Projects','nav-skills':'Skills','nav-process':'Process','nav-contact':'Contact',
-        'hello':"Hello, I'm",'role':'Freelance coder & Web developer',
+        'hello':"Hello, I'm",'founder':'Founder of SimpleSoft','fc-small':'Founder','fc-p':'A custom software and system integration company, where simpleRMS, simpleDMS and simpleWork were born.','fc-cta':'Visit simplesoft.com.vn','role':'Freelance coder & Web developer',
         'hero-p':'I design, build and ship software for real: from interface and API to database. Clean, correct, on time.',
         'btn-work':'See my work','btn-contact':'Contact',
         'hero-mid':'Turning ideas into products that actually run.',
