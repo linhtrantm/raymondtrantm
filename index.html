@@ -296,9 +296,9 @@
       .hero-photo { position: relative; left: 50%; top: auto; bottom: auto; transform: translateX(-50%); width: min(560px, 112vw); height: auto; margin: 0; }
       .hero-grid { grid-template-columns: 1fr; min-height: 0; padding: 1.5rem 0 2rem; margin-top: 0; gap: 2rem; }
       .hero-mid { grid-column: 1 / -1; }
-      .hero-right { grid-column: 1; justify-self: stretch; width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-      .stat { flex-direction: column; gap: .2rem; border-bottom: 0; border-right: 1px solid var(--line); padding: .5rem 0 .5rem 1rem; }
-      .stat:last-child { border-right: 0; }
+      .hero-right { grid-column: 1; justify-self: stretch; width: 100%; }
+      .stat { white-space: nowrap; }
+      .stat b { min-width: 4.6rem; }
       .avail { display: none; }
     }
     @media (max-width: 640px) {
