@@ -311,19 +311,6 @@
     .intro-skip { position: absolute; bottom: 1.6rem; right: 1.6rem; background: none; border: 1px solid var(--line); color: var(--muted); font: 500 .66rem var(--body); letter-spacing: .14em; text-transform: uppercase; padding: .45rem .9rem; border-radius: 999px; cursor: pointer; }
     html.intro-on:not(.intro-out) .hero * { animation-play-state: paused; }
 
-    /* ── custom cursor (3) ── */
-    .cursor, .cursor-dot { position: fixed; top: 0; left: 0; z-index: 10001; pointer-events: none; opacity: 0; transition: opacity .25s; }
-    body.has-cursor .cursor, body.has-cursor .cursor-dot { opacity: 1; }
-    body.cursor-off .cursor, body.cursor-off .cursor-dot { opacity: 0; }
-    .cursor { width: 38px; height: 38px; margin: -19px 0 0 -19px; border: 1.5px solid var(--red-hi); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: width .3s cubic-bezier(.2,.8,.2,1), height .3s cubic-bezier(.2,.8,.2,1), margin .3s cubic-bezier(.2,.8,.2,1), background .25s, border-color .25s, opacity .25s; }
-    .cursor::after { content: attr(data-label); font-family: var(--display); font-size: .62rem; font-weight: 500; letter-spacing: .14em; color: #fff; text-transform: uppercase; opacity: 0; transition: opacity .2s; }
-    .cursor.hot { width: 62px; height: 62px; margin: -31px 0 0 -31px; background: rgba(212,21,27,.16); }
-    .cursor.lab { width: 84px; height: 84px; margin: -42px 0 0 -42px; background: var(--red); border-color: var(--red); }
-    .cursor.lab::after { opacity: 1; }
-    .cursor-dot { width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: var(--red-hi); }
-    body.has-cursor, body.has-cursor a, body.has-cursor button, body.has-cursor label { cursor: none; }
-    body.has-cursor input, body.has-cursor textarea { cursor: text; }
-
     /* ── per-letter titles (4) ── */
     .split .w { display: inline-block; white-space: nowrap; }
     .split .ch { display: inline-block; opacity: 0; transform: translateY(75%) rotate(5deg); transition: opacity .6s ease, transform .85s cubic-bezier(.2,.8,.2,1); transition-delay: calc(var(--i) * 34ms); }
@@ -839,7 +826,7 @@
       top.append(n);
       if (p.demo) {
         const go = document.createElement('a');
-        go.className = 'proj-go mag'; go.dataset.cursor = 'DEMO'; go.href = p.demo; go.target = '_blank'; go.rel = 'noopener';
+        go.className = 'proj-go mag'; go.href = p.demo; go.target = '_blank'; go.rel = 'noopener';
         go.setAttribute('aria-label', translations[currentLang]['pj-demo'] + ': ' + title);
         go.innerHTML = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 12L12 2M5 2h7v7"/></svg>';
         top.append(go);
@@ -1114,35 +1101,6 @@
         mx = e.clientX; my = e.clientY;
         if (!mbusy) { mbusy = true; requestAnimationFrame(pull); }
       });
-    }
-
-    // ── custom cursor (3)
-    if (finePointer && !reduceMotion) {
-      const ring = document.createElement('div'); ring.className = 'cursor'; ring.setAttribute('aria-hidden', 'true');
-      const dot = document.createElement('div'); dot.className = 'cursor-dot'; dot.setAttribute('aria-hidden', 'true');
-      document.body.append(ring, dot);
-      let tx = -100, ty = -100, rx = -100, ry = -100, first = true, running = false;
-      function tick() {
-        rx += (tx - rx) * 0.2; ry += (ty - ry) * 0.2;
-        ring.style.transform = 'translate3d(' + rx.toFixed(1) + 'px,' + ry.toFixed(1) + 'px,0)';
-        if (Math.abs(tx - rx) > 0.3 || Math.abs(ty - ry) > 0.3) requestAnimationFrame(tick); else running = false;
-      }
-      document.addEventListener('pointermove', e => {
-        tx = e.clientX; ty = e.clientY;
-        if (first) { first = false; rx = tx; ry = ty; document.body.classList.add('has-cursor'); }
-        dot.style.transform = 'translate3d(' + tx + 'px,' + ty + 'px,0)';
-        if (!running) { running = true; requestAnimationFrame(tick); }
-        const t = e.target;
-        const textField = t.closest && t.closest('input, textarea');
-        document.body.classList.toggle('cursor-off', !!textField);
-        const hot = t.closest && t.closest('a, button, .proj, [data-cursor]');
-        const lab = t.closest && t.closest('[data-cursor]');
-        ring.classList.toggle('hot', !!hot);
-        ring.classList.toggle('lab', !!lab);
-        ring.dataset.label = lab ? lab.dataset.cursor : '';
-      });
-      document.addEventListener('mouseleave', () => document.body.classList.add('cursor-off'));
-      document.addEventListener('mouseenter', () => document.body.classList.remove('cursor-off'));
     }
 
     // ── INIT
