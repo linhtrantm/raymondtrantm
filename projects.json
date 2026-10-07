@@ -3,8 +3,8 @@
     "repo": "linhtrantm/simplesoftwebsite",
     "title": "Website SimpleSoft",
     "desc": {
-      "en": "Company website: bilingual EN/VI, canvas background, contact form. Pure HTML, no framework.",
-      "vi": "Website công ty: song ngữ EN/VI, nền canvas, form liên hệ. HTML thuần, không framework."
+      "vi": "Website giới thiệu công ty SimpleSoft: song ngữ Việt – Anh, có form liên hệ, viết bằng HTML thuần, không dùng framework.",
+      "en": "The SimpleSoft company website: bilingual, with a contact form, written in plain HTML with no framework."
     },
     "tags": [
       "HTML",
@@ -17,56 +17,133 @@
   {
     "repo": "linhtrantm/simpleRMS",
     "title": "simpleRMS",
-    "category": "product"
+    "category": "product",
+    "desc": {
+      "vi": "Phần mềm quản lý tiệm sửa chữa cho các doanh nghiệp nhỏ ở Việt Nam. Từ lúc nhận máy, báo giá, xuất linh kiện đến bảo hành và công nợ đều nằm trong một chỗ, khách còn tự tra được tình trạng máy của mình.",
+      "en": "Repair-shop management software for small businesses in Vietnam. Intake, quotes, parts, warranty and debts all live in one place, and customers can look up the status of their own device."
+    },
+    "tags": [
+      "PHP",
+      "MySQL"
+    ]
   },
   {
     "repo": "linhtrantm/simpleWork",
     "title": "simpleWork",
-    "category": "product"
+    "category": "product",
+    "desc": {
+      "vi": "Nền tảng quản trị nội bộ chia theo module cho doanh nghiệp vừa và nhỏ. Mỗi công ty chỉ bật những phần mình cần: nhân sự, công việc, khách hàng, hợp đồng điện tử. Nhiều công ty dùng chung một hệ thống mà dữ liệu vẫn tách riêng.",
+      "en": "A modular internal-management platform for small and mid-sized companies. Each company switches on only what it needs: HR, work, customers, e-contracts. Many companies share one system while their data stays separate."
+    },
+    "tags": [
+      "PHP",
+      "MySQL"
+    ]
   },
   {
     "repo": "linhtrantm/simpleDMS",
     "title": "simpleDMS",
-    "category": "product"
+    "category": "product",
+    "desc": {
+      "vi": "Hệ thống quản lý phân phối cho các doanh nghiệp phân phối ở Việt Nam. Nhận đơn, duyệt đơn, xuất kho, theo dõi công nợ, và nhân viên thị trường phải check-in bằng GPS tại điểm bán nên khó khai gian.",
+      "en": "A distribution management system for distributors in Vietnam. Orders, approvals, stock-out and debts, plus GPS check-ins for field staff so visits are hard to fake."
+    },
+    "tags": [
+      "PHP",
+      "MySQL"
+    ]
   },
   {
     "repo": "linhtrantm/brezelgerman",
     "title": "Brezel German",
-    "category": "app"
+    "category": "app",
+    "desc": {
+      "vi": "Web học từ vựng tiếng Đức dành cho người Việt, từ A1 đến B2. Làm bài test để biết mình đang ở trình độ nào, tra từ, luyện dịch hai chiều Việt – Đức và nhớ der/die/das. Từ nào hay quên thì app tự nhắc lại theo lịch ôn Leitner.",
+      "en": "A German vocabulary web app for Vietnamese learners, A1 to B2. Take a placement test, look words up, practise Vietnamese ↔ German and der/die/das. Words you tend to forget come back on a Leitner review schedule."
+    },
+    "tags": [
+      "TypeScript",
+      "React",
+      "Firebase"
+    ]
   },
   {
     "repo": "linhtrantm/pos",
     "title": "Smart POS",
-    "category": "business"
+    "category": "business",
+    "desc": {
+      "vi": "Hệ thống đặt món cho chuỗi cà phê nhiều chi nhánh. Khách đặt trên web, tự chọn chi nhánh gần nhất còn món; mỗi chi nhánh có giá riêng và kho nguyên liệu tính theo công thức. Quản lý có Dashboard, nhân viên có app riêng và đơn mới báo về ngay.",
+      "en": "An ordering system for a multi-branch coffee chain. Customers order on the web and get the nearest branch that has the item; each branch has its own prices and recipe-based stock. Managers get a dashboard, staff get their own app, and new orders show up instantly."
+    },
+    "tags": [
+      "React",
+      "Firebase",
+      "Dart"
+    ]
   },
   {
     "repo": "linhtrantm/hanvet-order",
     "title": "Hanvet Order System",
-    "category": "business"
+    "category": "business",
+    "desc": {
+      "vi": "Hệ thống đặt hàng nội bộ cho một công ty dược thú y. Kinh doanh lên đơn, kế toán duyệt, thủ kho xuất hàng và in phiếu, giám đốc xem báo cáo. Dùng tốt trên điện thoại, giao diện tiếng Việt hoàn toàn.",
+      "en": "An internal ordering system for a veterinary pharma company. Sales create orders, accounting approves, the warehouse ships and prints slips, and the director reads the reports. Works well on phones, fully in Vietnamese."
+    },
+    "tags": [
+      "PHP",
+      "MySQL"
+    ]
   },
   {
     "repo": "linhtrantm/water-supply",
     "title": "Water Supply System",
-    "category": "business"
+    "category": "business",
+    "desc": {
+      "vi": "Phần mềm quản lý kho và bán hàng cho doanh nghiệp phân phối nước đóng chai. Tồn kho được tính từ sổ nhập xuất chỉ ghi thêm, không sửa, nên số liệu luôn khớp, không bị lệch như khi làm bằng Excel.",
+      "en": "Stock and sales software for a bottled-water distributor. Inventory is calculated from an append-only ledger, so the numbers always add up instead of drifting apart like in Excel."
+    },
+    "tags": [
+      "PHP"
+    ]
   },
   {
     "repo": "linhtrantm/loungefinder",
     "title": "Lounge Finder",
-    "category": "app"
+    "category": "app",
+    "desc": {
+      "vi": "Công cụ nội bộ để tra phòng chờ sân bay. Dữ liệu tự cập nhật mỗi ngày, có cả tiếng Việt và tiếng Anh, chạy như một trang web tĩnh trên Firebase.",
+      "en": "An internal tool for looking up airport lounges. Data refreshes daily, it comes in Vietnamese and English, and runs as a static site on Firebase."
+    },
+    "tags": [
+      "JavaScript",
+      "Firebase"
+    ]
   },
   {
     "repo": "linhtrantm/antgroupvn",
     "title": "Website Antgroup",
-    "category": "website"
+    "category": "website",
+    "desc": {
+      "vi": "Website mình làm cho Antgroup.",
+      "en": "A website I built for Antgroup."
+    }
   },
   {
     "repo": "linhtrantm/askedu",
     "title": "Website AskEdu",
-    "category": "website"
+    "category": "website",
+    "desc": {
+      "vi": "Website mình làm cho Askedu.",
+      "en": "A website I built for Askedu."
+    }
   },
   {
     "repo": "linhtrantm/shplogistic",
     "title": "Website SHP Logistic",
-    "category": "website"
+    "category": "website",
+    "desc": {
+      "vi": "Website mình làm cho SHP Logistic.",
+      "en": "A website I built for SHP Logistic."
+    }
   }
 ]
