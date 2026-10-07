@@ -103,6 +103,12 @@
       -webkit-background-clip: text; background-clip: text; color: transparent;
       animation: letterUp .95s cubic-bezier(.2,.8,.2,1) backwards; animation-delay: calc(var(--i) * 70ms + 120ms);
     }
+    /* per-letter glow: a bright copy of each letter fades in and out in turn, left to right (opacity only, GPU friendly) */
+    .hero-word i { position: relative; }
+    .hero-word i::after { content: attr(data-c); position: absolute; left: 0; top: 0; font-style: normal; color: #ff6b5e; -webkit-text-fill-color: #ff6b5e;
+      text-shadow: 0 0 .1em rgba(255,90,80,.95), 0 0 .38em rgba(255,40,40,.65); opacity: 0; will-change: opacity; pointer-events: none;
+      animation: letterGlow 8s ease-in-out infinite; animation-delay: calc(var(--i) * .28s + 3.6s); }
+    @keyframes letterGlow { 0%, 22%, 100% { opacity: 0; } 7% { opacity: 1; } }
     @keyframes letterUp { from { opacity: 0; transform: translateY(45%); } }
     .hero-photo {
       position: absolute; z-index: 2; left: 50%; transform: translateX(-46%);
@@ -429,7 +435,7 @@
       .hero-word, .hero-photo img, .proj { transform: none !important; transition: none; }
       .steps::before { transform: none; transition: none; }
       .grain, .orb { animation: none; }
-      .hero-rays::before, .hero-photo img { animation: none; }
+      .hero-rays::before, .hero-photo img, .hero-word i::after { animation: none; }
       .hero-rays { transform: none; }
       .hero-word { filter: none; opacity: 1; }
       .hero-photo { scale: none; }
@@ -486,7 +492,7 @@
   <main>
     <!-- HERO -->
     <section class="hero">
-      <div class="hero-word" aria-hidden="true"><span><i style="--i:0">P</i><i style="--i:1">O</i><i style="--i:2">R</i><i style="--i:3">T</i><i style="--i:4">F</i><i style="--i:5">O</i><i style="--i:6">L</i><i style="--i:7">I</i><i style="--i:8">O</i></span></div>
+      <div class="hero-word" aria-hidden="true"><span><i style="--i:0" data-c="P">P</i><i style="--i:1" data-c="O">O</i><i style="--i:2" data-c="R">R</i><i style="--i:3" data-c="T">T</i><i style="--i:4" data-c="F">F</i><i style="--i:5" data-c="O">O</i><i style="--i:6" data-c="L">L</i><i style="--i:7" data-c="I">I</i><i style="--i:8" data-c="O">O</i></span></div>
       <div class="hero-rays" aria-hidden="true"></div>
       <div class="hero-photo"><img src="avatar-cutout.png" alt="Raymond Tran" width="864" height="1083" fetchpriority="high" onerror="this.remove()" /></div>
 
