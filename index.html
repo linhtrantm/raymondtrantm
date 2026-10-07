@@ -177,7 +177,18 @@
     /* ── PROJECTS ── */
     .projects { padding: 4rem 0; border-bottom: 1px solid var(--line); }
     .sec-head .count { font-family: var(--display); font-size: 1rem; color: var(--red-hi); letter-spacing: .08em; white-space: nowrap; }
-    .proj-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+    /* each category shows 3 cards; any further card sits off to the right and is reached by scrolling sideways */
+    .proj-grid { --gap: 1.25rem; --per: 3; display: flex; gap: var(--gap); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scroll-padding-left: 2px;
+      padding: 8px 2px 16px; margin: -8px -2px -8px; scrollbar-width: thin; scrollbar-color: rgba(212,21,27,.7) transparent; }
+    .proj-grid::-webkit-scrollbar { height: 4px; }
+    .proj-grid::-webkit-scrollbar-track { background: transparent; }
+    .proj-grid::-webkit-scrollbar-thumb { background: rgba(212,21,27,.7); border-radius: 4px; }
+    .proj-grid > .proj { flex: 0 0 calc((100% - (var(--per) - 1) * var(--gap)) / var(--per)); min-width: 0; scroll-snap-align: start; }
+    .pg-nav { display: none; gap: .4rem; }
+    .proj-group.can-scroll .pg-nav { display: flex; }
+    .pg-btn { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: none; border: 1px solid var(--line); border-radius: 50%; color: var(--text); cursor: pointer; transition: border-color .2s, color .2s, opacity .2s; }
+    .pg-btn:hover:not(:disabled) { border-color: var(--red-hi); color: var(--red-hi); }
+    .pg-btn:disabled { opacity: .3; cursor: default; }
     .proj { position: relative; display: flex; flex-direction: column; padding: 1.6rem 1.6rem 1.4rem; background: var(--bg-2); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; transition: border-color .3s, transform .18s ease-out, background .3s; will-change: transform; }
     .proj.visible { animation: cardIn .8s cubic-bezier(.2,.8,.2,1) backwards; }
     @keyframes cardIn { from { opacity: 0; transform: translateY(28px); } }
@@ -400,7 +411,7 @@
     }
     @media (max-width: 1100px) {
       .nav { display: none; }
-      .proj-grid { grid-template-columns: 1fr 1fr; }
+      .proj-grid { --per: 2; }
       .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .skills-grid { grid-template-rows: auto; }
       .steps { grid-template-columns: 1fr 1fr; gap: 2.5rem 2rem; }
@@ -421,7 +432,8 @@
     }
     @media (max-width: 640px) {
       .wrap { width: calc(100% - 2rem); }
-      .proj-grid, .skills-grid, .steps { grid-template-columns: 1fr; }
+      .skills-grid, .steps { grid-template-columns: 1fr; }
+      .proj-grid { --per: 1.12; }
       .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
       .sec-head h2 { font-size: 1.25rem; }
       .proj::after { font-size: 6rem; }
@@ -865,11 +877,32 @@
         const h = document.createElement('h3'); h.textContent = t['cat-' + cat];
         const rule = document.createElement('span'); rule.className = 'rule';
         const cnt = document.createElement('span'); cnt.className = 'count'; cnt.textContent = String(items.length).padStart(2, '0');
-        head.append(h, rule, cnt);
+        const nav = document.createElement('div'); nav.className = 'pg-nav';
+        const mk = dir => {
+          const b = document.createElement('button'); b.type = 'button'; b.className = 'pg-btn';
+          b.setAttribute('aria-label', dir < 0 ? 'Previous' : 'Next');
+          b.innerHTML = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="' + (dir < 0 ? 'M9 2L4 7l5 5' : 'M5 2l5 5-5 5') + '"/></svg>';
+          return b;
+        };
+        const prev = mk(-1), next = mk(1);
+        nav.append(prev, next);
+        head.append(h, rule, nav, cnt);
         const grid = document.createElement('div'); grid.className = 'proj-grid';
         items.forEach((p, i) => grid.append(projectCard(p, i)));
+        const step = () => { const c = grid.querySelector('.proj'); return c ? c.getBoundingClientRect().width + parseFloat(getComputedStyle(grid).columnGap || 20) : 300; };
+        const sync = () => {
+          const over = grid.scrollWidth - grid.clientWidth > 4;
+          group.classList.toggle('can-scroll', over);
+          prev.disabled = grid.scrollLeft <= 2;
+          next.disabled = grid.scrollLeft >= grid.scrollWidth - grid.clientWidth - 2;
+        };
+        prev.addEventListener('click', () => grid.scrollBy({ left: -step(), behavior: 'smooth' }));
+        next.addEventListener('click', () => grid.scrollBy({ left: step(), behavior: 'smooth' }));
+        grid.addEventListener('scroll', sync, { passive: true });
+        if ('ResizeObserver' in window) new ResizeObserver(sync).observe(grid); else window.addEventListener('resize', sync);
         group.append(head, grid);
         wrap.append(group);
+        requestAnimationFrame(() => group.querySelector('.proj-grid').dispatchEvent(new Event('scroll')));
       });
       const n = projectList.length;
       document.getElementById('projCount').textContent = n ? String(n).padStart(2, '0') : '';
