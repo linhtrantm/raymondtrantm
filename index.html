@@ -99,17 +99,20 @@
     }
     .hero-word i {
       display: inline-block; font-style: normal;
-      background: linear-gradient(180deg, #e0161d 0%, #b30e14 50%, #8f0a10 100%);
+      background: linear-gradient(105deg, transparent 38%, rgba(255,255,255,.6) 50%, transparent 62%) 160% 0 / 300% 100% no-repeat,
+                  linear-gradient(180deg, #e0161d 0%, #b30e14 50%, #8f0a10 100%);
       -webkit-background-clip: text; background-clip: text; color: transparent;
-      animation: letterUp .95s cubic-bezier(.2,.8,.2,1) backwards; animation-delay: calc(var(--i) * 70ms + 120ms);
+      animation: letterUp .95s cubic-bezier(.2,.8,.2,1) backwards, sweep 9s ease-in-out infinite;
+      animation-delay: calc(var(--i) * 70ms + 120ms), calc(var(--i) * 95ms + 3.4s);
     }
+    @keyframes sweep { 0%, 58% { background-position: 160% 0, 0 0; } 86%, 100% { background-position: -70% 0, 0 0; } }
     @keyframes letterUp { from { opacity: 0; transform: translateY(45%); } }
     .hero-photo {
       position: absolute; z-index: 2; left: 50%; transform: translateX(-46%);
       top: calc(4.4rem + var(--word) * .1); bottom: 0; aspect-ratio: 864 / 1083; pointer-events: none;
     }
     .hero-photo img { width: 100%; height: 100%; object-fit: contain; object-position: bottom; -webkit-mask-image: linear-gradient(180deg, #000 86%, transparent); mask-image: linear-gradient(180deg, #000 86%, transparent); filter: drop-shadow(0 0 2px rgba(255,70,70,.55)) drop-shadow(0 0 18px rgba(212,21,27,.38));
-      transform: translate3d(calc(var(--mx, 0) * 14px), calc(var(--my, 0) * 6px - var(--sy, 0) * .04px), 0); transition: transform .35s ease-out; will-change: transform;
+      transform: perspective(1100px) rotateY(calc(var(--mx, 0) * 5deg)) rotateX(calc(var(--my, 0) * -3deg)) translate3d(calc(var(--mx, 0) * 14px), calc(var(--my, 0) * 6px - var(--sy, 0) * .04px), 0); transition: transform .35s ease-out; will-change: transform;
       animation: photoIn 1.2s cubic-bezier(.2,.8,.2,1) .55s backwards, glow 4.8s ease-in-out 2s infinite, dolly 26s ease-in-out 1.8s infinite alternate; }
     @keyframes photoIn { from { opacity: 0; transform: translate3d(0, 7%, 0); } }
     @keyframes glow {
@@ -395,6 +398,57 @@
     .scene > i { width: 38px; height: 1px; background: var(--red-hi); box-shadow: 0 0 8px rgba(255,59,59,.7); }
     .scene > span:last-child { color: var(--muted); }
 
+
+    /* ══════════ POLISH2 LAYER ══════════ */
+    /* hero spotlight + cursor trail */
+    .hero-spot { position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0; transition: opacity .6s ease;
+      background: radial-gradient(circle 360px at var(--spx, 50%) var(--spy, 40%), rgba(0,0,0,0) 0%, rgba(0,0,0,.14) 45%, rgba(0,0,0,.6) 100%); }
+    .hero.spot-on .hero-spot { opacity: 1; }
+    .hero-trail { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 4; pointer-events: none; mix-blend-mode: screen; }
+
+    /* dip-to-black scene change with a light leak */
+    .fade { position: fixed; inset: 0; z-index: 8000; background: #050505; opacity: 0; pointer-events: none; transition: opacity .6s ease; }
+    .fade.on { opacity: .97; pointer-events: auto; transition-duration: .3s; }
+    .leak { position: fixed; inset: -10% -30%; z-index: 8001; pointer-events: none; opacity: 0; mix-blend-mode: screen; transform: translateX(-60%);
+      background: radial-gradient(40% 70% at 30% 50%, rgba(255,125,40,.8), rgba(255,50,50,.34) 45%, transparent 75%); }
+    .leak.go { animation: leak 1.15s cubic-bezier(.4,0,.2,1) forwards; }
+    @keyframes leak { 0% { opacity: 0; transform: translateX(-60%); } 35% { opacity: 1; } 100% { opacity: 0; transform: translateX(60%); } }
+
+    /* film subtitles */
+    .subtitle { position: fixed; left: 50%; bottom: 2.2rem; z-index: 46; transform: translate(-50%, 14px); max-width: min(780px, 88vw); padding: .55rem 1.1rem; text-align: center;
+      font: 500 clamp(.9rem, 1.5vw, 1.15rem)/1.5 var(--body); color: #fff; background: rgba(0,0,0,.66); border-radius: 4px; text-shadow: 0 1px 2px #000;
+      opacity: 0; transition: opacity .6s ease, transform .6s ease; pointer-events: none; }
+    .subtitle.show { opacity: 1; transform: translate(-50%, 0); }
+
+    /* end credits */
+    .credits { position: relative; padding: 4rem 0 1rem; border-top: 1px solid var(--line); overflow: hidden; text-align: center;
+      -webkit-mask-image: linear-gradient(180deg, transparent, #000 14%, #000 88%, transparent); mask-image: linear-gradient(180deg, transparent, #000 14%, #000 88%, transparent); }
+    .credits-roll { max-width: 680px; margin: 0 auto; padding: 1rem 1rem 2rem; opacity: 0; transform: translateY(60vh); }
+    .credits.in .credits-roll { animation: roll 15s cubic-bezier(.2,.6,.2,1) forwards; }
+    @keyframes roll { 0% { transform: translateY(60vh); opacity: 0; } 10% { opacity: 1; } 100% { transform: translateY(0); opacity: 1; } }
+    .cr-group + .cr-group { margin-top: 2.1rem; }
+    .cr-role { font-family: var(--display); font-weight: 500; font-size: .72rem; letter-spacing: .34em; text-transform: uppercase; color: var(--red-hi); margin-bottom: .5rem; }
+    .cr-name { font-family: 'Antonio', var(--display); font-weight: 500; font-size: clamp(1.3rem, 2.6vw, 1.9rem); letter-spacing: .06em; text-transform: uppercase; line-height: 1.35; }
+    .cr-thanks { font-family: var(--script); font-size: clamp(2.4rem, 5vw, 4rem); margin-top: 2.4rem; line-height: 1.1; }
+
+    /* project screenshot in a tilted laptop frame */
+    .proj-device { margin: -.2rem -.3rem 1.4rem; perspective: 900px; }
+    .device { transform: rotateX(7deg) rotateY(-9deg); transform-origin: 50% 85%; transition: transform .55s cubic-bezier(.2,.8,.2,1);
+      filter: drop-shadow(0 18px 26px rgba(0,0,0,.55)) drop-shadow(0 0 22px rgba(212,21,27,.28)); }
+    .proj:hover .device { transform: rotateX(0) rotateY(0) translateY(-3px); }
+    .device .scr { border: 7px solid #1b1b1b; border-bottom-width: 9px; border-radius: 10px 10px 4px 4px; background: #000; aspect-ratio: 16 / 10; overflow: hidden; }
+    .device .scr img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .device .base { height: 9px; margin: 0 -3%; background: linear-gradient(#3b3b3b, #151515); border-radius: 0 0 10px 10px; }
+
+    /* desktop: the hero pins while PORTFOLIO shrinks into the corner and the portrait pushes in */
+    @media (min-width: 981px) {
+      .hero-pin { position: sticky; top: 0; }
+      .hero-word { transform-origin: 0 0; transform: translate3d(calc(var(--mx, 0) * -18px), 0, 0) scale(calc(1 - var(--pin, 0) * .76)); filter: none; opacity: 1; transition: transform .25s linear; }
+      .hero-photo { scale: calc(1 + var(--pin, 0) * .34); }
+      .hero-left, .hero-right { opacity: calc(1 - var(--pin, 0) * 1.8); translate: 0 calc(var(--pin, 0) * 36px); }
+      .hero-rays { opacity: calc(1 - var(--pin, 0) * .55); }
+    }
+
     /* ── RESPONSIVE ── */
     /* desktop: hero fills the first screen; the big word is a background layer behind everything */
     @media (min-width: 981px) {
@@ -442,6 +496,11 @@
       .hero-word, .hero-photo img, .proj { transform: none !important; transition: none; }
       .steps::before { transform: none; transition: none; }
       .grain, .orb { animation: none; }
+      .hero-spot, .hero-trail, .fade, .leak { display: none; }
+      .subtitle { transition: none; }
+      .credits-roll { animation: none !important; opacity: 1; transform: none; }
+      .device { transform: none; }
+      .hero-pin { position: static; }
       .hero-rays::before, .hero-photo img { animation: none; }
       .hero-rays { transform: none; }
       .hero-word { filter: none; opacity: 1; }
@@ -473,6 +532,9 @@
   <div class="grade" aria-hidden="true"></div>
   <div class="vignette" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
+  <div class="fade" id="fade" aria-hidden="true"></div>
+  <div class="leak" id="leak" aria-hidden="true"></div>
+  <div class="subtitle" id="subtitle" role="status" aria-live="polite"></div>
 
   <header class="top">
     <div class="wrap top-in">
@@ -498,10 +560,13 @@
 
   <main>
     <!-- HERO -->
+    <div class="hero-stage" id="heroStage"><div class="hero-pin" id="heroPin">
     <section class="hero">
       <div class="hero-word" aria-hidden="true"><span><i style="--i:0">P</i><i style="--i:1">O</i><i style="--i:2">R</i><i style="--i:3">T</i><i style="--i:4">F</i><i style="--i:5">O</i><i style="--i:6">L</i><i style="--i:7">I</i><i style="--i:8">O</i></span></div>
       <div class="hero-rays" aria-hidden="true"></div>
       <div class="hero-photo"><img src="avatar-cutout.png" alt="Raymond Tran" width="864" height="1083" fetchpriority="high" onerror="this.remove()" /></div>
+      <div class="hero-spot" aria-hidden="true"></div>
+      <canvas class="hero-trail" aria-hidden="true"></canvas>
 
       <div class="wrap hero-grid">
         <div class="hero-left">
@@ -529,12 +594,13 @@
     </section>
 
     <div class="marquee" aria-hidden="true"><div class="marquee-track"><span>REACT</span><span class="dot">✦</span><span>PHP</span><span class="dot">✦</span><span>FIREBASE</span><span class="dot">✦</span><span>FLUTTER</span><span class="dot">✦</span><span>MYSQL</span><span class="dot">✦</span><span>TYPESCRIPT</span><span class="dot">✦</span><span>NODE.JS</span><span class="dot">✦</span><span>PYTHON</span><span class="dot">✦</span><span>LARAVEL</span><span class="dot">✦</span><span>POSTGRESQL</span><span class="dot">✦</span><span>DOCKER</span><span class="dot">✦</span><span>GITHUB ACTIONS</span><span class="dot">✦</span><span>REACT</span><span class="dot">✦</span><span>PHP</span><span class="dot">✦</span><span>FIREBASE</span><span class="dot">✦</span><span>FLUTTER</span><span class="dot">✦</span><span>MYSQL</span><span class="dot">✦</span><span>TYPESCRIPT</span><span class="dot">✦</span><span>NODE.JS</span><span class="dot">✦</span><span>PYTHON</span><span class="dot">✦</span><span>LARAVEL</span><span class="dot">✦</span><span>POSTGRESQL</span><span class="dot">✦</span><span>DOCKER</span><span class="dot">✦</span><span>GITHUB ACTIONS</span><span class="dot">✦</span></div></div>
+    </div></div>
 
     <!-- PROJECTS -->
     <section class="projects" id="projects">
       <div class="bg-word" data-bg="-1" aria-hidden="true" data-i18n="bg-proj">DỰ ÁN</div>
       <div class="wrap">
-        <div class="scene reveal"><span><span data-i18n="scene">CẢNH</span> 01</span><i></i><span data-i18n="sc1">Những thứ đã làm</span></div>
+        <div class="scene reveal" data-cap="cap1"><span><span data-i18n="scene">CẢNH</span> 01</span><i></i><span data-i18n="sc1">Những thứ đã làm</span></div>
         <div class="sec-head reveal">
           <h2 class="split" data-i18n="s-proj">Dự án đã làm</h2>
           <span class="rule"></span>
@@ -549,7 +615,7 @@
       <div class="bg-word" data-bg="1" aria-hidden="true" data-i18n="bg-about">VỀ MÌNH</div>
       <div class="wrap about-grid">
         <div class="reveal about-left">
-          <div class="scene reveal"><span><span data-i18n="scene">CẢNH</span> 02</span><i></i><span data-i18n="sc2">Người đứng sau</span></div>
+          <div class="scene reveal" data-cap="cap2"><span><span data-i18n="scene">CẢNH</span> 02</span><i></i><span data-i18n="sc2">Người đứng sau</span></div>
           <h2 class="split" data-i18n="s-about">Về mình</h2>
           <p class="about-p" data-i18n="ab-p1">Mình là Raymond, làm freelance ở TP. Hồ Chí Minh. Hồi đầu mình chỉ làm mấy trang web nhỏ, sau đó dần dần làm cả phần phía sau: viết API, thiết kế cơ sở dữ liệu, rồi đưa sản phẩm lên chạy thật.</p>
           <p class="about-p" data-i18n="ab-p2">Theo mình, phần mềm tốt là khi hiểu được cả hai đầu: cái người dùng nhìn thấy và cái chạy âm thầm đằng sau.</p>
@@ -584,7 +650,7 @@
     <section class="process" id="process">
       <div class="bg-word" data-bg="-1" aria-hidden="true" data-i18n="bg-process">QUY TRÌNH</div>
       <div class="wrap">
-        <div class="scene reveal"><span><span data-i18n="scene">CẢNH</span> 03</span><i></i><span data-i18n="sc3">Cách mình làm</span></div>
+        <div class="scene reveal" data-cap="cap3"><span><span data-i18n="scene">CẢNH</span> 03</span><i></i><span data-i18n="sc3">Cách mình làm</span></div>
         <h2 class="reveal split" data-i18n="s-process">Mình làm việc thế nào</h2>
         <div class="steps" id="steps">
           <div class="step reveal">
@@ -626,7 +692,7 @@
     <section class="contact" id="contact">
       <div class="wrap contact-grid">
         <div class="reveal">
-          <div class="scene reveal"><span><span data-i18n="scene">CẢNH</span> 04</span><i></i><span data-i18n="sc4">Hẹn gặp</span></div>
+          <div class="scene reveal" data-cap="cap4"><span><span data-i18n="scene">CẢNH</span> 04</span><i></i><span data-i18n="sc4">Hẹn gặp</span></div>
           <h2 class="split"><span data-i18n="c-h">Cùng làm việc nào</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/></svg></h2>
           <p class="contact-p" data-i18n="c-p">Mình đang nhận thêm dự án mới và cả hợp tác lâu dài. Bạn cứ kể bài toán của mình, mình sẽ trả lời trong vòng 24 giờ.</p>
           <div class="avail-pill"><i>→</i><span data-i18n="c-avail">Đang nhận dự án</span></div>
@@ -655,6 +721,20 @@
         </div>
       </div>
     </section>
+    <!-- CREDITS -->
+    <section class="credits" id="credits" aria-hidden="true">
+      <div class="credits-roll">
+        <div class="cr-group"><div class="cr-role" data-i18n="cr1-r">Thiết kế & lập trình</div><div class="cr-name">Raymond Tran</div></div>
+        <div class="cr-group"><div class="cr-role" data-i18n="cr2-r">Sản phẩm</div><div class="cr-name">simpleRMS · simpleDMS · simpleWork</div></div>
+        <div class="cr-group"><div class="cr-role" data-i18n="cr3-r">Làm cho doanh nghiệp</div><div class="cr-name">Smart POS · Hanvet Order System · Water Supply System</div></div>
+        <div class="cr-group"><div class="cr-role" data-i18n="cr4-r">App & công cụ</div><div class="cr-name">Brezel German · Lounge Finder</div></div>
+        <div class="cr-group"><div class="cr-role" data-i18n="cr5-r">Website</div><div class="cr-name">SimpleSoft · Antgroup · AskEdu · SHP Logistic</div></div>
+        <div class="cr-group"><div class="cr-role" data-i18n="cr6-r">Công nghệ</div><div class="cr-name">React · PHP · MySQL · Firebase · Flutter</div></div>
+        <div class="cr-group"><div class="cr-role" data-i18n="cr7-r">Quay tại</div><div class="cr-name" data-i18n="cr7-n">TP. Hồ Chí Minh, Việt Nam</div></div>
+        <div class="cr-thanks" data-i18n="cr-thanks">Cảm ơn bạn đã ghé thăm.</div>
+      </div>
+    </section>
+
     <!-- SIGNATURE -->
     <section class="signature" aria-hidden="true">
       <div class="wrap">
@@ -707,6 +787,8 @@
     // ── TRANSLATIONS ([data-i18n] sets textContent)
     const translations = {
       vi: {
+        'cap1':'Từ tiệm sửa chữa đến chuỗi cà phê: mỗi dự án một bài toán khác nhau.','cap2':'Hiểu cả hai đầu: cái người ta nhìn thấy và cái chạy phía sau.','cap3':'Nói rõ từ đầu, báo tiến độ đều đặn, không bất ngờ.','cap4':'Kể mình nghe bài toán của bạn.',
+        'cr1-r':'Thiết kế & lập trình','cr2-r':'Sản phẩm','cr3-r':'Làm cho doanh nghiệp','cr4-r':'App & công cụ','cr5-r':'Website','cr6-r':'Công nghệ','cr7-r':'Quay tại','cr7-n':'TP. Hồ Chí Minh, Việt Nam','cr-thanks':'Cảm ơn bạn đã ghé thăm.',
         'scene':'CẢNH','sc1':'Những thứ đã làm','sc2':'Người đứng sau','sc3':'Cách mình làm','sc4':'Hẹn gặp',
         'brand-sub':'Coder dạo · Freelance','avail':"Đang nhận dự án",
         'nav-proj':'Dự án','nav-skills':'Kỹ năng','nav-process':'Quy trình','nav-contact':'Liên hệ',
@@ -735,6 +817,8 @@
         'foot-made':'Làm tại Việt Nam'
       },
       en: {
+        'cap1':'From repair shops to coffee chains: every project a different problem.','cap2':'Understanding both ends: what people see and what runs behind it.','cap3':'Clear from day one, regular updates, no surprises.','cap4':'Tell me about the problem you are solving.',
+        'cr1-r':'Design & development','cr2-r':'Products','cr3-r':'Built for businesses','cr4-r':'Apps & tools','cr5-r':'Websites','cr6-r':'Technology','cr7-r':'Filmed in','cr7-n':'Ho Chi Minh City, Vietnam','cr-thanks':'Thanks for stopping by.',
         'scene':'SCENE','sc1':'Selected work','sc2':'The person behind','sc3':'How I work','sc4':"Let's meet",
         'brand-sub':'Freelance developer','avail':'Open for projects',
         'nav-proj':'Projects','nav-skills':'Skills','nav-process':'Process','nav-contact':'Contact',
@@ -784,6 +868,7 @@
       });
       renderProjects();
       splitTitles();
+      if (window.refreshCaption) window.refreshCaption();
     }
     document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
 
@@ -792,6 +877,8 @@
     const GH_TOPIC = 'portfolio';
 
     const safeUrl = u => { try { if (u && !/^[a-z][a-z0-9+.-]*:/i.test(u) && !u.startsWith('/') && !u.startsWith('.')) u = 'https://' + u; const x = new URL(u, location.href); return /^https?:$/.test(x.protocol) ? x.href : ''; } catch (e) { return ''; } };
+    // images: absolute http(s) URLs or a relative path inside this site (no scheme, no ..)
+    const safeImg = u => { if (!u) return ''; if (/^https?:\/\//i.test(u)) return u; if (/^[a-z][a-z0-9+.-]*:/i.test(u) || u.includes('..')) return ''; return u.replace(/^\/+/, ''); };
     const pick = (v, lang) => (v && typeof v === 'object') ? (v[lang] || v.en || '') : (v || '');
 
     async function loadJson(url, cacheKey) {
@@ -813,7 +900,7 @@
         title: c.title || (r && r.name) || '',
         desc:  c.desc  || (r && r.description) || '',
         tags:  c.tags  || (r ? [r.language, ...(r.topics || []).filter(t => t !== GH_TOPIC)].filter(Boolean).slice(0, 5) : []),
-        image: safeUrl(c.image || ''),
+        image: safeImg(c.image || ''),
         demo:  safeUrl(c.demo || (r && r.homepage) || '')
       };
     }
@@ -827,11 +914,14 @@
       el.dataset.num = num;
 
       if (p.image) {
-        const th = document.createElement('div'); th.className = 'proj-thumb';
+        const th = document.createElement('div'); th.className = 'proj-device';
+        const dv = document.createElement('div'); dv.className = 'device';
+        const scr = document.createElement('div'); scr.className = 'scr';
         const img = document.createElement('img');
         img.src = p.image; img.alt = ''; img.loading = 'lazy';
         img.addEventListener('error', () => th.remove(), { once: true });
-        th.append(img); el.append(th);
+        const base = document.createElement('div'); base.className = 'base';
+        scr.append(img); dv.append(scr, base); th.append(dv); el.append(th);
       }
 
       const top = document.createElement('div'); top.className = 'proj-top';
@@ -923,7 +1013,10 @@
         const t = e.target;
         revealIO.unobserve(t);
         const delay = reduceMotion ? 0 : (Number(t.dataset.i || 0) % 3) * 90;
-        setTimeout(() => t.classList.add('visible'), delay);
+        setTimeout(() => {
+          t.classList.add('visible');
+          if (t.classList.contains('scene')) t.querySelectorAll('span').forEach(sp => { if (!sp.children.length) scrambleEl(sp); });
+        }, delay);
       }), { threshold: 0.12 });
     }
     function observeReveals() {
@@ -959,23 +1052,67 @@
     // wait for the hero intro to settle, then count the stats
     introDone.then(() => setTimeout(() => document.querySelectorAll('.hero-right [data-count]').forEach(runCount), reduceMotion ? 0 : 1300));
 
-    // ── HERO PARALLAX (mouse + scroll)
+    // ── HERO PARALLAX (mouse + scroll), pinned zoom, spotlight, cursor trail
     const heroEl = document.querySelector('.hero');
     if (heroEl && !reduceMotion) {
+      const stage = document.getElementById('heroStage');
+      const pinEl = document.getElementById('heroPin');
+      const desk = window.matchMedia('(min-width: 981px)');
+      const PIN_VH = 0.8;
+      const sizeStage = () => {
+        if (desk.matches) stage.style.height = (pinEl.offsetHeight + window.innerHeight * PIN_VH) + 'px';
+        else { stage.style.height = ''; heroEl.style.setProperty('--pin', 0); }
+      };
       let ticking = false;
       const setScroll = () => {
         heroEl.style.setProperty('--sy', Math.min(window.scrollY, 900));
+        if (desk.matches) {
+          const range = Math.max(1, stage.offsetHeight - pinEl.offsetHeight);
+          heroEl.style.setProperty('--pin', Math.min(Math.max(window.scrollY / range, 0), 1).toFixed(4));
+        }
         ticking = false;
       };
+      sizeStage(); setScroll();
+      window.addEventListener('resize', () => { sizeStage(); setScroll(); });
       window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(setScroll); } }, { passive: true });
+
       if (finePointer) {
+        const cv = heroEl.querySelector('.hero-trail');
+        const ctx = cv.getContext('2d');
+        const DPR = Math.min(window.devicePixelRatio || 1, 2);
+        const fit = () => { cv.width = heroEl.clientWidth * DPR; cv.height = heroEl.clientHeight * DPR; };
+        fit(); window.addEventListener('resize', fit);
+        let pts = [], raf = 0;
+        const LIFE = 650;
+        const draw = () => {
+          const now = performance.now();
+          pts = pts.filter(q => now - q.t < LIFE);
+          ctx.clearRect(0, 0, cv.width, cv.height);
+          ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+          for (let i = 1; i < pts.length; i++) {
+            const a = pts[i - 1], b = pts[i];
+            const k = 1 - (now - b.t) / LIFE;
+            ctx.strokeStyle = 'rgba(255,70,70,' + (k * 0.55).toFixed(3) + ')';
+            ctx.lineWidth = (1 + k * 4) * DPR;
+            ctx.beginPath(); ctx.moveTo(a.x * DPR, a.y * DPR); ctx.lineTo(b.x * DPR, b.y * DPR); ctx.stroke();
+          }
+          raf = pts.length ? requestAnimationFrame(draw) : 0;
+        };
         heroEl.addEventListener('pointermove', e => {
           const r = heroEl.getBoundingClientRect();
-          heroEl.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 2 - 1).toFixed(3));
-          heroEl.style.setProperty('--my', ((e.clientY - r.top) / r.height * 2 - 1).toFixed(3));
+          const x = e.clientX - r.left, y = e.clientY - r.top;
+          heroEl.style.setProperty('--mx', (x / r.width * 2 - 1).toFixed(3));
+          heroEl.style.setProperty('--my', (y / r.height * 2 - 1).toFixed(3));
+          heroEl.style.setProperty('--spx', x.toFixed(0) + 'px');
+          heroEl.style.setProperty('--spy', y.toFixed(0) + 'px');
+          heroEl.classList.add('spot-on');
+          pts.push({ x, y, t: performance.now() });
+          if (pts.length > 60) pts.shift();
+          if (!raf) raf = requestAnimationFrame(draw);
         });
         heroEl.addEventListener('pointerleave', () => {
           heroEl.style.setProperty('--mx', 0); heroEl.style.setProperty('--my', 0);
+          heroEl.classList.remove('spot-on');
         });
       }
     }
@@ -1025,7 +1162,7 @@
       });
     }
     {
-      const targets = document.querySelectorAll('.split, #sig');
+      const targets = document.querySelectorAll('.split, #sig, #credits');
       if ('IntersectionObserver' in window) {
         const tio = new IntersectionObserver(es => es.forEach(e => {
           if (e.isIntersecting) { e.target.classList.add('in'); tio.unobserve(e.target); }
@@ -1053,15 +1190,33 @@
       })(t0);
     }
     ['wheel', 'touchstart', 'keydown'].forEach(ev => window.addEventListener(ev, () => { scrollToken++; document.documentElement.style.scrollBehavior = ''; }, { passive: true }));
+    const fadeEl = document.getElementById('fade');
+    const leakEl = document.getElementById('leak');
+    let dipBusy = false;
+    function dipTo(y) {
+      if (reduceMotion) { window.scrollTo(0, y); return; }
+      if (dipBusy) return;
+      dipBusy = true; scrollToken++;
+      leakEl.classList.remove('go'); void leakEl.offsetWidth; leakEl.classList.add('go');
+      fadeEl.classList.add('on');
+      setTimeout(() => {
+        const h = document.documentElement;
+        h.style.scrollBehavior = 'auto';
+        window.scrollTo(0, y);
+        h.style.scrollBehavior = '';
+        fadeEl.classList.remove('on');
+        setTimeout(() => { dipBusy = false; leakEl.classList.remove('go'); }, 700);
+      }, 330);
+    }
     document.addEventListener('click', e => {
       const a = e.target.closest('a[href^="#"]');
       if (!a) return;
       const id = a.getAttribute('href');
-      if (id === '#') { e.preventDefault(); scrollToY(0); return; }
+      if (id === '#') { e.preventDefault(); dipTo(0); return; }
       const target = document.querySelector(id);
       if (!target) return;
       e.preventDefault();
-      scrollToY(target.getBoundingClientRect().top + window.scrollY - 60);
+      dipTo(target.getBoundingClientRect().top + window.scrollY - 60);
     });
 
     // ── scroll effects: progress bar (7), nav spy (11), drifting outline words (5)
@@ -1143,6 +1298,48 @@
       });
       document.addEventListener('mouseleave', () => document.body.classList.add('cursor-off'));
       document.addEventListener('mouseenter', () => document.body.classList.remove('cursor-off'));
+    }
+
+    // ══════════ POLISH2 ══════════
+    // ── text scramble (nav hover, scene labels)
+    const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&*+=<>/0123456789';
+    function scrambleEl(el) {
+      if (reduceMotion || el.dataset.scr) return;
+      const final = el.textContent;
+      if (!final.trim()) return;
+      el.dataset.scr = '1';
+      const n = final.length, t0 = performance.now(), dur = 650;
+      (function step(now) {
+        const k = Math.min((now - t0) / dur, 1);
+        let out = '';
+        for (let i = 0; i < n; i++) {
+          const ch = final[i];
+          out += (ch === ' ' || i < k * n) ? ch : GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+        }
+        el.textContent = out;
+        if (k < 1) requestAnimationFrame(step); else { el.textContent = final; delete el.dataset.scr; }
+      })(t0);
+    }
+    document.querySelectorAll('.nav a').forEach(a => a.addEventListener('mouseenter', () => scrambleEl(a)));
+
+    // ── film subtitles: one line per scene, shown briefly when the scene comes into view
+    {
+      const sub = document.getElementById('subtitle');
+      let hideT = 0, curKey = '';
+      const showCap = key => {
+        curKey = key;
+        sub.textContent = translations[currentLang][key] || '';
+        sub.classList.add('show');
+        clearTimeout(hideT);
+        hideT = setTimeout(() => sub.classList.remove('show'), 4200);
+      };
+      window.refreshCaption = () => { if (sub.classList.contains('show') && curKey) sub.textContent = translations[currentLang][curKey] || ''; };
+      if ('IntersectionObserver' in window) {
+        const cio = new IntersectionObserver(es => es.forEach(e => {
+          if (e.isIntersecting && e.intersectionRatio > 0.6) showCap(e.target.dataset.cap);
+        }), { threshold: [0.6] });
+        document.querySelectorAll('.scene[data-cap]').forEach(sc => cio.observe(sc));
+      }
     }
 
     // ── INIT
