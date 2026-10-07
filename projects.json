@@ -12,8 +12,7 @@
       "JavaScript"
     ],
     "demo": "https://simplesoft.com.vn",
-    "category": "website",
-    "image": "images/simplesoft.jpg"
+    "category": "website"
   },
   {
     "repo": "linhtrantm/simpleRMS",
@@ -66,8 +65,7 @@
       "TypeScript",
       "React",
       "Firebase"
-    ],
-    "image": "images/brezel.jpg"
+    ]
   },
   {
     "repo": "linhtrantm/pos",
@@ -119,8 +117,7 @@
     "tags": [
       "JavaScript",
       "Firebase"
-    ],
-    "image": "images/lounge.jpg"
+    ]
   },
   {
     "repo": "linhtrantm/antgroupvn",
