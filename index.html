@@ -413,8 +413,8 @@
     }
   </style>
   <script>
-    // show the intro curtain only on the first visit of a session (and never with reduced motion)
-    try { if (!sessionStorage.getItem('ss-intro') && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('intro-on'); } catch (e) {}
+    // show the intro curtain on every load (but never with reduced motion)
+    try { if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('intro-on'); } catch (e) {}
   </script>
 </head>
 <body>
@@ -634,7 +634,6 @@
       let ended = false;
       const end = () => {
         if (ended) return; ended = true;
-        try { sessionStorage.setItem('ss-intro', '1'); } catch (e) {}
         html.classList.add('intro-out');
         el.classList.add('out');
         introResolve();
