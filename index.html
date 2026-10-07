@@ -384,13 +384,6 @@
     @keyframes lbT { to { transform: translateY(-101%); } }
     @keyframes lbB { to { transform: translateY(101%); } }
 
-    /* light rays behind the head */
-    .hero-rays { position: absolute; z-index: 1; left: 53%; top: calc(4.4rem + var(--word) * .72); width: 96vmin; height: 96vmin; margin: -48vmin 0 0 -48vmin; pointer-events: none; mix-blend-mode: screen;
-      -webkit-mask-image: radial-gradient(circle, #000 0, rgba(0,0,0,.55) 38%, transparent 68%); mask-image: radial-gradient(circle, #000 0, rgba(0,0,0,.55) 38%, transparent 68%);
-      transform: translate3d(calc(var(--mx, 0) * 22px), calc(var(--my, 0) * 10px), 0); transition: transform .45s ease-out; }
-    .hero-rays::before { content: ''; position: absolute; inset: 0; background: conic-gradient(from 0deg, transparent 0 8deg, rgba(255,70,70,.20) 13deg, transparent 20deg 46deg, rgba(255,70,70,.14) 52deg, transparent 60deg 112deg, rgba(255,70,70,.18) 120deg, transparent 130deg 182deg, rgba(255,70,70,.12) 190deg, transparent 200deg 244deg, rgba(255,70,70,.19) 252deg, transparent 262deg 316deg, rgba(255,70,70,.13) 324deg, transparent 334deg); animation: raySpin 70s linear infinite; }
-    @keyframes raySpin { to { transform: rotate(360deg); } }
-
     /* slow camera dolly on the portrait + pull back and defocus on scroll */
     .hero-photo { scale: calc(1 - var(--sy, 0) * .00011); transform-origin: 50% 85%; }
     @keyframes dolly { to { scale: 1.05; } }
@@ -440,7 +433,6 @@
       .marquee.big span { padding: 0 1.2rem; }
     }
     @media (hover: none) { .grain { animation: none; } }
-    @media (max-width: 980px) { .hero-rays { left: 50%; top: calc(4rem + var(--word) * 1.45); width: 120vw; height: 120vw; margin: -60vw 0 0 -60vw; } }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .reveal { opacity: 1; transform: none; transition: none; }
@@ -449,8 +441,7 @@
       .hero-word, .hero-photo img, .proj { transform: none !important; transition: none; }
       .steps::before { transform: none; transition: none; }
       .grain, .orb { animation: none; }
-      .hero-rays::before, .hero-photo img, .hero-word i::before, .hero-word i::after { animation: none; }
-      .hero-rays { transform: none; }
+      .hero-photo img, .hero-word i::before, .hero-word i::after { animation: none; }
       .hero-word { filter: none; opacity: 1; }
       .hero-photo { scale: none; }
       .split .ch { opacity: 1; transform: none; transition: none; }
@@ -507,7 +498,6 @@
     <!-- HERO -->
     <section class="hero">
       <div class="hero-word" aria-hidden="true"><span><i style="--i:0" data-c="P">P</i><i style="--i:1" data-c="O">O</i><i style="--i:2" data-c="R">R</i><i style="--i:3" data-c="T">T</i><i style="--i:4" data-c="F">F</i><i style="--i:5" data-c="O">O</i><i style="--i:6" data-c="L">L</i><i style="--i:7" data-c="I">I</i><i style="--i:8" data-c="O">O</i></span></div>
-      <div class="hero-rays" aria-hidden="true"></div>
       <div class="hero-photo"><img src="avatar-cutout.png" alt="Raymond Tran" width="864" height="1083" fetchpriority="high" onerror="this.remove()" /></div>
 
       <div class="wrap hero-grid">
