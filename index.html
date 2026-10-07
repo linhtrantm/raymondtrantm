@@ -389,11 +389,6 @@
     @keyframes dolly { to { scale: 1.05; } }
     .hero-word { filter: blur(calc(var(--sy, 0) * .011px)); opacity: calc(1 - var(--sy, 0) * .00055); }
 
-    /* scene labels */
-    .scene { display: flex; align-items: center; gap: .85rem; margin-bottom: 1rem; font-family: var(--display); font-weight: 500; font-size: .72rem; letter-spacing: .3em; text-transform: uppercase; color: var(--red-hi); }
-    .scene > i { width: 38px; height: 1px; background: var(--red-hi); box-shadow: 0 0 8px rgba(255,59,59,.7); }
-    .scene > span:last-child { color: var(--muted); }
-
     /* ── RESPONSIVE ── */
     /* desktop: hero fills the first screen; the big word is a background layer behind everything */
     @media (min-width: 981px) {
@@ -531,7 +526,6 @@
     <section class="projects" id="projects">
       <div class="bg-word" data-bg="-1" aria-hidden="true" data-i18n="bg-proj">DỰ ÁN</div>
       <div class="wrap">
-        <div class="scene reveal"><span><span data-i18n="scene">CẢNH</span> 01</span><i></i><span data-i18n="sc1">Những thứ đã làm</span></div>
         <div class="sec-head reveal">
           <h2 class="split" data-i18n="s-proj">Dự án đã làm</h2>
           <span class="rule"></span>
@@ -546,7 +540,6 @@
       <div class="bg-word" data-bg="1" aria-hidden="true" data-i18n="bg-about">VỀ MÌNH</div>
       <div class="wrap about-grid">
         <div class="reveal about-left">
-          <div class="scene reveal"><span><span data-i18n="scene">CẢNH</span> 02</span><i></i><span data-i18n="sc2">Người đứng sau</span></div>
           <h2 class="split" data-i18n="s-about">Về mình</h2>
           <p class="about-p" data-i18n="ab-p1">Mình là Raymond, làm freelance ở TP. Hồ Chí Minh. Hồi đầu mình chỉ làm mấy trang web nhỏ, sau đó dần dần làm cả phần phía sau: viết API, thiết kế cơ sở dữ liệu, rồi đưa sản phẩm lên chạy thật.</p>
           <p class="about-p" data-i18n="ab-p2">Theo mình, phần mềm tốt là khi hiểu được cả hai đầu: cái người dùng nhìn thấy và cái chạy âm thầm đằng sau.</p>
@@ -581,7 +574,6 @@
     <section class="process" id="process">
       <div class="bg-word" data-bg="-1" aria-hidden="true" data-i18n="bg-process">QUY TRÌNH</div>
       <div class="wrap">
-        <div class="scene reveal"><span><span data-i18n="scene">CẢNH</span> 03</span><i></i><span data-i18n="sc3">Cách mình làm</span></div>
         <h2 class="reveal split" data-i18n="s-process">Mình làm việc thế nào</h2>
         <div class="steps" id="steps">
           <div class="step reveal">
@@ -623,7 +615,6 @@
     <section class="contact" id="contact">
       <div class="wrap contact-grid">
         <div class="reveal">
-          <div class="scene reveal"><span><span data-i18n="scene">CẢNH</span> 04</span><i></i><span data-i18n="sc4">Hẹn gặp</span></div>
           <h2 class="split"><span data-i18n="c-h">Cùng làm việc nào</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/></svg></h2>
           <p class="contact-p" data-i18n="c-p">Mình đang nhận thêm dự án mới và cả hợp tác lâu dài. Bạn cứ kể bài toán của mình, mình sẽ trả lời trong vòng 24 giờ.</p>
           <div class="avail-pill"><i>→</i><span data-i18n="c-avail">Đang nhận dự án</span></div>
@@ -704,7 +695,6 @@
     // ── TRANSLATIONS ([data-i18n] sets textContent)
     const translations = {
       vi: {
-        'scene':'CẢNH','sc1':'Những thứ đã làm','sc2':'Người đứng sau','sc3':'Cách mình làm','sc4':'Hẹn gặp',
         'brand-sub':'Coder dạo · Freelance','avail':"Đang nhận dự án",
         'nav-proj':'Dự án','nav-skills':'Kỹ năng','nav-process':'Quy trình','nav-contact':'Liên hệ',
         'hello':'Xin chào, mình là','founder':'Người sáng lập SimpleSoft','bg-proj':'DỰ ÁN','bg-about':'VỀ MÌNH','bg-process':'QUY TRÌNH','fc-small':'Người sáng lập','fc-p':"Công ty làm phần mềm theo yêu cầu do mình sáng lập, nơi ra đời simpleRMS, simpleDMS và simpleWork.",'fc-cta':"Ghé thăm simplesoft.com.vn",'role':'Coder dạo & Web developer',
@@ -732,7 +722,6 @@
         'foot-made':'Làm tại Việt Nam'
       },
       en: {
-        'scene':'SCENE','sc1':'Selected work','sc2':'The person behind','sc3':'How I work','sc4':"Let's meet",
         'brand-sub':'Freelance developer','avail':'Open for projects',
         'nav-proj':'Projects','nav-skills':'Skills','nav-process':'Process','nav-contact':'Contact',
         'hello':"Hello, I'm",'founder':'Founder of SimpleSoft','bg-proj':'PROJECTS','bg-about':'ABOUT','bg-process':'PROCESS','fc-small':'Founder','fc-p':'A custom software and system integration company, where simpleRMS, simpleDMS and simpleWork were born.','fc-cta':'Visit simplesoft.com.vn','role':'Freelance coder & Web developer',
