@@ -110,7 +110,7 @@
     }
     .hero-photo img { width: 100%; height: 100%; object-fit: contain; object-position: bottom; -webkit-mask-image: linear-gradient(180deg, #000 86%, transparent); mask-image: linear-gradient(180deg, #000 86%, transparent); filter: drop-shadow(0 0 2px rgba(255,70,70,.55)) drop-shadow(0 0 18px rgba(212,21,27,.38));
       transform: translate3d(calc(var(--mx, 0) * 14px), calc(var(--my, 0) * 6px - var(--sy, 0) * .04px), 0); transition: transform .35s ease-out; will-change: transform;
-      animation: photoIn 1.2s cubic-bezier(.2,.8,.2,1) .55s backwards, glow 4.8s ease-in-out 2s infinite; }
+      animation: photoIn 1.2s cubic-bezier(.2,.8,.2,1) .55s backwards, glow 4.8s ease-in-out 2s infinite, dolly 26s ease-in-out 1.8s infinite alternate; }
     @keyframes photoIn { from { opacity: 0; transform: translate3d(0, 7%, 0); } }
     @keyframes glow {
       0%, 100% { filter: drop-shadow(0 0 2px rgba(255,70,70,.55)) drop-shadow(0 0 18px rgba(212,21,27,.38)); }
@@ -360,6 +360,41 @@
     .sig-line path { fill: none; stroke: var(--red-hi); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.3s ease 1.9s; filter: drop-shadow(0 0 6px rgba(255,59,59,.7)); }
     .sig.in .sig-line path { stroke-dashoffset: 0; }
 
+
+    /* ══════════ CINEMA LAYER ══════════ */
+    /* vignette + colour grade */
+    .vignette { position: fixed; inset: 0; z-index: 44; pointer-events: none; background: radial-gradient(ellipse 75% 70% at 50% 46%, rgba(0,0,0,0) 56%, rgba(0,0,0,.4) 100%); }
+    .grade { position: fixed; inset: 0; z-index: 43; pointer-events: none; mix-blend-mode: soft-light; opacity: .32; background: linear-gradient(175deg, rgba(10,28,64,.85) 0%, rgba(20,20,40,.4) 45%, rgba(120,24,10,.65) 100%); }
+
+    /* letterbox bars: widescreen frame at the start, then they slide away */
+    .lbx { display: none; position: fixed; inset: 0; z-index: 10000; pointer-events: none; }
+    html.intro-on .lbx, html.lb-run .lbx { display: block; }
+    .lbx i { position: absolute; left: 0; right: 0; height: 13vh; background: #000; }
+    .lbx i::after { content: ''; position: absolute; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--red-hi), transparent); opacity: .8; }
+    .lbx .t { top: 0; } .lbx .t::after { bottom: 0; }
+    .lbx .b { bottom: 0; } .lbx .b::after { top: 0; }
+    html.intro-out .lbx .t { animation: lbT 1.3s cubic-bezier(.7,0,.2,1) .55s forwards; }
+    html.intro-out .lbx .b { animation: lbB 1.3s cubic-bezier(.7,0,.2,1) .55s forwards; }
+    @keyframes lbT { to { transform: translateY(-101%); } }
+    @keyframes lbB { to { transform: translateY(101%); } }
+
+    /* light rays behind the head */
+    .hero-rays { position: absolute; z-index: 1; left: 53%; top: calc(4.4rem + var(--word) * .72); width: 96vmin; height: 96vmin; margin: -48vmin 0 0 -48vmin; pointer-events: none; mix-blend-mode: screen;
+      -webkit-mask-image: radial-gradient(circle, #000 0, rgba(0,0,0,.55) 38%, transparent 68%); mask-image: radial-gradient(circle, #000 0, rgba(0,0,0,.55) 38%, transparent 68%);
+      transform: translate3d(calc(var(--mx, 0) * 22px), calc(var(--my, 0) * 10px), 0); transition: transform .45s ease-out; }
+    .hero-rays::before { content: ''; position: absolute; inset: 0; background: conic-gradient(from 0deg, transparent 0 8deg, rgba(255,70,70,.20) 13deg, transparent 20deg 46deg, rgba(255,70,70,.14) 52deg, transparent 60deg 112deg, rgba(255,70,70,.18) 120deg, transparent 130deg 182deg, rgba(255,70,70,.12) 190deg, transparent 200deg 244deg, rgba(255,70,70,.19) 252deg, transparent 262deg 316deg, rgba(255,70,70,.13) 324deg, transparent 334deg); animation: raySpin 70s linear infinite; }
+    @keyframes raySpin { to { transform: rotate(360deg); } }
+
+    /* slow camera dolly on the portrait + pull back and defocus on scroll */
+    .hero-photo { scale: calc(1 - var(--sy, 0) * .00011); transform-origin: 50% 85%; }
+    @keyframes dolly { to { scale: 1.05; } }
+    .hero-word { filter: blur(calc(var(--sy, 0) * .011px)); opacity: calc(1 - var(--sy, 0) * .00055); }
+
+    /* scene labels */
+    .scene { display: flex; align-items: center; gap: .85rem; margin-bottom: 1rem; font-family: var(--display); font-weight: 500; font-size: .72rem; letter-spacing: .3em; text-transform: uppercase; color: var(--red-hi); }
+    .scene > i { width: 38px; height: 1px; background: var(--red-hi); box-shadow: 0 0 8px rgba(255,59,59,.7); }
+    .scene > span:last-child { color: var(--muted); }
+
     /* ── RESPONSIVE ── */
     /* desktop: hero fills the first screen; the big word is a background layer behind everything */
     @media (min-width: 981px) {
@@ -398,6 +433,7 @@
       .marquee.big span { padding: 0 1.2rem; }
     }
     @media (hover: none) { .grain { animation: none; } }
+    @media (max-width: 980px) { .hero-rays { left: 50%; top: calc(4rem + var(--word) * 1.45); width: 120vw; height: 120vw; margin: -60vw 0 0 -60vw; } }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .reveal { opacity: 1; transform: none; transition: none; }
@@ -406,6 +442,10 @@
       .hero-word, .hero-photo img, .proj { transform: none !important; transition: none; }
       .steps::before { transform: none; transition: none; }
       .grain, .orb { animation: none; }
+      .hero-rays::before, .hero-photo img { animation: none; }
+      .hero-rays { transform: none; }
+      .hero-word { filter: none; opacity: 1; }
+      .hero-photo { scale: none; }
       .split .ch { opacity: 1; transform: none; transition: none; }
       .sig-text { clip-path: none; transition: none; }
       .sig-line path { stroke-dashoffset: 0; transition: none; }
@@ -427,8 +467,11 @@
     <div class="intro-sub">Coder dạo · Freelance</div>
     <button type="button" class="intro-skip" id="introSkip">Bỏ qua</button>
   </div>
+  <div class="lbx" aria-hidden="true"><i class="t"></i><i class="b"></i></div>
   <div class="progress" id="progress" aria-hidden="true"></div>
   <div class="ambient" aria-hidden="true"><i class="orb o1"></i><i class="orb o2"></i></div>
+  <div class="grade" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
 
   <header class="top">
@@ -457,6 +500,7 @@
     <!-- HERO -->
     <section class="hero">
       <div class="hero-word" aria-hidden="true"><span><i style="--i:0">P</i><i style="--i:1">O</i><i style="--i:2">R</i><i style="--i:3">T</i><i style="--i:4">F</i><i style="--i:5">O</i><i style="--i:6">L</i><i style="--i:7">I</i><i style="--i:8">O</i></span></div>
+      <div class="hero-rays" aria-hidden="true"></div>
       <div class="hero-photo"><img src="avatar-cutout.png" alt="Raymond Tran" width="864" height="1083" fetchpriority="high" onerror="this.remove()" /></div>
 
       <div class="wrap hero-grid">
@@ -490,6 +534,7 @@
     <section class="projects" id="projects">
       <div class="bg-word" data-bg="-1" aria-hidden="true" data-i18n="bg-proj">DỰ ÁN</div>
       <div class="wrap">
+        <div class="scene reveal"><span><span data-i18n="scene">CẢNH</span> 01</span><i></i><span data-i18n="sc1">Những thứ đã làm</span></div>
         <div class="sec-head reveal">
           <h2 class="split" data-i18n="s-proj">Dự án đã làm</h2>
           <span class="rule"></span>
@@ -504,6 +549,7 @@
       <div class="bg-word" data-bg="1" aria-hidden="true" data-i18n="bg-about">VỀ MÌNH</div>
       <div class="wrap about-grid">
         <div class="reveal about-left">
+          <div class="scene reveal"><span><span data-i18n="scene">CẢNH</span> 02</span><i></i><span data-i18n="sc2">Người đứng sau</span></div>
           <h2 class="split" data-i18n="s-about">Về mình</h2>
           <p class="about-p" data-i18n="ab-p1">Mình là Raymond, làm freelance ở TP. Hồ Chí Minh. Hồi đầu mình chỉ làm mấy trang web nhỏ, sau đó dần dần làm cả phần phía sau: viết API, thiết kế cơ sở dữ liệu, rồi đưa sản phẩm lên chạy thật.</p>
           <p class="about-p" data-i18n="ab-p2">Theo mình, phần mềm tốt là khi hiểu được cả hai đầu: cái người dùng nhìn thấy và cái chạy âm thầm đằng sau.</p>
@@ -538,6 +584,7 @@
     <section class="process" id="process">
       <div class="bg-word" data-bg="-1" aria-hidden="true" data-i18n="bg-process">QUY TRÌNH</div>
       <div class="wrap">
+        <div class="scene reveal"><span><span data-i18n="scene">CẢNH</span> 03</span><i></i><span data-i18n="sc3">Cách mình làm</span></div>
         <h2 class="reveal split" data-i18n="s-process">Mình làm việc thế nào</h2>
         <div class="steps" id="steps">
           <div class="step reveal">
@@ -579,6 +626,7 @@
     <section class="contact" id="contact">
       <div class="wrap contact-grid">
         <div class="reveal">
+          <div class="scene reveal"><span><span data-i18n="scene">CẢNH</span> 04</span><i></i><span data-i18n="sc4">Hẹn gặp</span></div>
           <h2 class="split"><span data-i18n="c-h">Cùng làm việc nào</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/></svg></h2>
           <p class="contact-p" data-i18n="c-p">Mình đang nhận thêm dự án mới và cả hợp tác lâu dài. Bạn cứ kể bài toán của mình, mình sẽ trả lời trong vòng 24 giờ.</p>
           <div class="avail-pill"><i>→</i><span data-i18n="c-avail">Đang nhận dự án</span></div>
@@ -645,7 +693,8 @@
       const end = () => {
         if (ended) return; ended = true;
         toStart();
-        html.classList.add('intro-out');
+        html.classList.add('intro-out', 'lb-run');
+        setTimeout(() => html.classList.remove('lb-run'), 2300);
         el.classList.add('out');
         introResolve();
         setTimeout(() => { toStart(); html.classList.remove('intro-on'); }, 950);
@@ -658,6 +707,7 @@
     // ── TRANSLATIONS ([data-i18n] sets textContent)
     const translations = {
       vi: {
+        'scene':'CẢNH','sc1':'Những thứ đã làm','sc2':'Người đứng sau','sc3':'Cách mình làm','sc4':'Hẹn gặp',
         'brand-sub':'Coder dạo · Freelance','avail':"Đang nhận dự án",
         'nav-proj':'Dự án','nav-skills':'Kỹ năng','nav-process':'Quy trình','nav-contact':'Liên hệ',
         'hello':'Xin chào, mình là','founder':'Người sáng lập SimpleSoft','bg-proj':'DỰ ÁN','bg-about':'VỀ MÌNH','bg-process':'QUY TRÌNH','fc-small':'Người sáng lập','fc-p':"Công ty làm phần mềm theo yêu cầu do mình sáng lập, nơi ra đời simpleRMS, simpleDMS và simpleWork.",'fc-cta':"Ghé thăm simplesoft.com.vn",'role':'Coder dạo & Web developer',
@@ -685,6 +735,7 @@
         'foot-made':'Làm tại Việt Nam'
       },
       en: {
+        'scene':'SCENE','sc1':'Selected work','sc2':'The person behind','sc3':'How I work','sc4':"Let's meet",
         'brand-sub':'Freelance developer','avail':'Open for projects',
         'nav-proj':'Projects','nav-skills':'Skills','nav-process':'Process','nav-contact':'Contact',
         'hello':"Hello, I'm",'founder':'Founder of SimpleSoft','bg-proj':'PROJECTS','bg-about':'ABOUT','bg-process':'PROCESS','fc-small':'Founder','fc-p':'A custom software and system integration company, where simpleRMS, simpleDMS and simpleWork were born.','fc-cta':'Visit simplesoft.com.vn','role':'Freelance coder & Web developer',
