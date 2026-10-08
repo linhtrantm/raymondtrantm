@@ -263,7 +263,7 @@
     .sprint-tag { font-family: var(--display); font-weight: 500; font-size: .72rem; letter-spacing: .3em; text-transform: uppercase; color: var(--red-hi); margin-bottom: .6rem; }
     .sprint h3 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; letter-spacing: .03em; text-transform: uppercase; margin-bottom: .7rem; }
     .sprint-p { max-width: 760px; font-size: .92rem; color: #c4c4c4; font-weight: 300; line-height: 1.8; }
-    .sp-track { position: relative; display: grid; grid-template-columns: 1.15fr 1fr 1fr 1.15fr 1fr 1fr 1.15fr; margin: 2.6rem 0 1.4rem; }
+    .sp-track { position: relative; display: grid; grid-template-columns: 1.15fr 1fr 1fr 1fr 1fr 1.15fr 1.15fr; margin: 2.6rem 0 1.4rem; }
     .sp-track::before { content: ''; position: absolute; left: 0; right: 0; top: 52px; height: 1px; background: var(--red-hi); box-shadow: 0 0 8px rgba(255,59,59,.6); transform: scaleX(0); transform-origin: left; transition: transform 1.8s cubic-bezier(.4,0,.2,1) .3s; }
     .sprint.visible .sp-track::before { transform: scaleX(1); }
     .sp-cell { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 .4rem; }
@@ -291,6 +291,46 @@
     .kb-card { padding: .55rem .65rem; margin-top: .45rem; font-size: .78rem; line-height: 1.4; color: #d2d2d2; background: #101010; border: 1px solid var(--line); border-left: 2px solid var(--c); border-radius: 3px;
       opacity: 0; transform: translateY(8px); transition: opacity .5s ease, transform .5s ease; transition-delay: calc(var(--k, 0) * 90ms + 1.2s); }
     .sprint.visible .kb-card { opacity: 1; transform: none; }
+
+
+    /* ── SPRINT EXTRAS ── */
+    .sp-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; margin: 1.8rem 0 0; padding: 1.2rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .sp-stat b { display: block; font-family: var(--display); font-weight: 500; font-size: 2.1rem; line-height: 1; color: var(--red-hi); }
+    .sp-stat span { display: block; margin-top: .45rem; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); line-height: 1.45; }
+    .sp-tags { display: flex; flex-direction: column; align-items: center; gap: .4rem; margin-top: .8rem; }
+    .sp-tags .sp-rel { margin-top: 0; }
+    .sp-uat { color: #f59e0b; border-color: rgba(245,158,11,.4); }
+    .sp-uat::before { background: #f59e0b; }
+    .sp-pay { margin-top: .6rem; font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: #22c55e; border: 1px solid rgba(34,197,94,.35); border-radius: 999px; padding: .12rem .6rem; }
+    .sp-panel { padding: 1.8rem 1.6rem; border: 1px solid var(--line); border-radius: 4px; background: var(--bg-2); }
+    .sp-panel h4 { font-family: var(--display); font-weight: 600; font-size: 1.15rem; letter-spacing: .06em; text-transform: uppercase; margin-bottom: .35rem; }
+    .sp-panel .sub { font-size: .8rem; color: var(--muted); font-weight: 300; margin-bottom: 1.1rem; }
+    .cr-panel { margin-top: 1.25rem; }
+    .flow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .9rem; margin-top: 1.3rem; }
+    .fl-step { position: relative; padding: 1rem .9rem; border: 1px solid var(--line); border-radius: 4px; background: #101010; }
+    .fl-step:not(:last-child)::after { content: '→'; position: absolute; right: -.78rem; top: 50%; transform: translateY(-50%); z-index: 1; color: var(--red-hi); font-size: .95rem; background: var(--bg-2); line-height: 1; padding: .1rem 0; }
+    .fl-step i { font-style: normal; display: block; font-family: var(--display); font-size: .72rem; letter-spacing: .14em; color: var(--red-hi); margin-bottom: .35rem; }
+    .fl-step b { display: block; font-family: var(--display); font-weight: 500; font-size: .92rem; letter-spacing: .05em; text-transform: uppercase; margin-bottom: .35rem; }
+    .fl-step span { font-size: .78rem; color: #b5b5b5; font-weight: 300; line-height: 1.55; }
+    .sp-trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; margin-top: 1.25rem; }
+    .tr-list { list-style: none; display: grid; gap: .95rem; }
+    .tr-list li { display: grid; grid-template-columns: 1.6rem 1fr; gap: .6rem; }
+    .tr-list li::before { content: attr(data-n); font-family: var(--display); font-size: .85rem; color: var(--red-hi); padding-top: .12rem; }
+    .tr-list b { display: block; font-family: var(--display); font-weight: 500; font-size: .92rem; letter-spacing: .05em; text-transform: uppercase; }
+    .tr-list span { font-size: .8rem; color: #b5b5b5; font-weight: 300; line-height: 1.55; }
+    .pay-bar { display: flex; height: 46px; border-radius: 4px; overflow: hidden; margin: .4rem 0 .7rem; transform: scaleX(0); transform-origin: left; transition: transform 1.1s cubic-bezier(.2,.8,.2,1) .3s; }
+    .sp-panel.visible .pay-bar { transform: scaleX(1); }
+    .pay-bar span { display: flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 500; font-size: 1rem; letter-spacing: .06em; color: #fff; }
+    .pay-bar .p1 { flex: 40; background: linear-gradient(90deg, #a30c12, #c9141a); }
+    .pay-bar .p2 { flex: 40; background: linear-gradient(90deg, #c9141a, #e0161d); }
+    .pay-bar .p3 { flex: 20; background: linear-gradient(90deg, #e0161d, #ff3b3b); }
+    .pay-labels { display: flex; gap: .4rem; }
+    .pay-labels span { font-size: .74rem; color: #b5b5b5; line-height: 1.4; }
+    .pay-labels .l1, .pay-labels .l2 { flex: 40; } .pay-labels .l3 { flex: 20; }
+    .ho-list { list-style: none; display: grid; gap: .7rem; }
+    .ho-list li { display: flex; align-items: baseline; gap: .6rem; font-size: .86rem; color: #d2d2d2; }
+    .ho-list li::before { content: ''; flex-shrink: 0; width: 7px; height: 7px; background: var(--red-hi); transform: rotate(45deg) translateY(-1px); }
+    .ho-list em { font-style: normal; font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: .08rem .5rem; white-space: nowrap; }
 
     /* ── QUOTE ── */
     .quote-band { position: relative; overflow: hidden; padding: 5rem 0; text-align: center; background: linear-gradient(160deg, #a50f15 0%, #5b0508 65%, #2c0204 100%); }
@@ -469,6 +509,12 @@
       .sp-desc { margin: 0; max-width: none; flex-basis: 100%; padding-left: calc(28px + .9rem); }
       .sp-rel { margin: 0; }
       .kanban { grid-template-columns: 1fr 1fr; }
+      .sp-stats { grid-template-columns: 1fr 1fr; }
+      .sp-tags { flex-direction: row; margin-top: 0; }
+      .sp-pay { margin: 0 0 0 calc(28px + .9rem); }
+      .flow { grid-template-columns: 1fr; }
+      .fl-step:not(:last-child)::after { content: '↓'; right: auto; left: 1.2rem; top: auto; bottom: -.95rem; transform: none; }
+      .sp-trio { grid-template-columns: 1fr; }
       .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
       .sec-head h2 { font-size: 1.25rem; }
       .proj::after { font-size: 6rem; }
@@ -487,6 +533,7 @@
       .sp-track::before, .sp-dia, .sp-bar { transform: none; transition: none; }
       .sp-dia { transform: rotate(45deg); }
       .kb-card { opacity: 1; transform: none; transition: none; }
+      .pay-bar { transform: none; transition: none; }
       .hero-word { filter: none; opacity: 1; }
       .hero-photo { scale: none; }
       .split .ch { opacity: 1; transform: none; transition: none; }
@@ -615,7 +662,7 @@
           <div class="skill-box"><h3 data-i18n="sk5">Mobile</h3><ul class="chips"><li>Flutter / Dart</li><li>React Native</li><li>Kotlin</li><li>Swift</li><li>PWA</li></ul></div>
           <div class="skill-box"><h3 data-i18n="sk3">Cơ sở dữ liệu</h3><ul class="chips"><li>MySQL</li><li>PostgreSQL</li><li>MongoDB</li><li>SQLite</li><li>Redis</li><li>Firebase</li><li>Supabase</li></ul></div>
           <div class="skill-box"><h3 data-i18n="sk4">Triển khai &amp; vận hành</h3><ul class="chips"><li>Git</li><li>GitHub Actions</li><li>Docker</li><li>Linux</li><li>Nginx</li><li>Cloudflare</li><li>Vercel</li><li>Hosting & Domain</li></ul></div>
-          <div class="skill-box"><h3 data-i18n="sk6">Công cụ</h3><ul class="chips"><li>Claude Code</li><li>VS Code</li><li>GitHub</li></ul></div>
+          <div class="skill-box"><h3 data-i18n="sk6">Công cụ</h3><ul class="chips"><li>Claude Code</li><li>VS Code</li><li>GitHub</li><li>Trello</li><li>Jira</li><li>MS Project</li></ul></div>
           <div class="skill-box"><h3 data-i18n="sk7">Phương pháp luận</h3><ul class="chips"><li>Agile</li><li>Scrum</li><li data-i18n="sk7c">Release theo Sprint</li></ul></div>
           <div class="skill-box"><h3 data-i18n="sk8">Quản lý dự án</h3><ul class="chips"><li>Sprint</li><li>Backlog</li><li>Timeline</li><li>Milestones</li></ul></div>
         </div>
@@ -654,14 +701,20 @@
         <div class="sprint-tag" data-i18n="sp-tag">Quản lý theo Sprint</div>
         <h3 data-i18n="sp-h">Một dự án chạy theo Sprint</h3>
         <p class="sprint-p" data-i18n="sp-p">Mình làm theo Agile và Scrum: chia công việc thành các Sprint, cuối mỗi Sprint có một bản chạy được để bạn xem và góp ý. Mọi mốc quan trọng nằm trên một timeline rõ ràng.</p>
+        <div class="sp-stats">
+          <div class="sp-stat"><b id="stSprints" data-count="0">0</b><span data-i18n="st1">Sprint đã thực hiện</span></div>
+          <div class="sp-stat"><b id="stInUse" data-count="0">0</b><span data-i18n="st2">Dự án khách đang sử dụng</span></div>
+          <div class="sp-stat"><b>1–2</b><span data-i18n="st3">Tuần mỗi Sprint</span></div>
+          <div class="sp-stat"><b>≈4</b><span data-i18n="st4">Sprint để Go-live dự án nhỏ, gồm cả UAT</span></div>
+        </div>
         <div class="sp-track">
-          <div class="sp-cell"><div class="sp-name" data-i18n="sp-m1">Khởi động</div><div class="sp-axis"><span class="sp-dia" style="--d:0.4s"></span></div><div class="sp-desc" data-i18n="sp-m1d">Chốt phạm vi và backlog</div></div>
-          <div class="sp-cell"><div class="sp-name"><span data-i18n="sp-s">Sprint</span>&nbsp;1</div><div class="sp-axis"><span class="sp-bar" style="--d:0.7s"></span></div><span class="sp-rel">Release</span></div>
-          <div class="sp-cell"><div class="sp-name"><span data-i18n="sp-s">Sprint</span>&nbsp;2</div><div class="sp-axis"><span class="sp-bar" style="--d:0.95s"></span></div><span class="sp-rel">Release</span></div>
-          <div class="sp-cell"><div class="sp-name" data-i18n="sp-m2">Bản dùng thử</div><div class="sp-axis"><span class="sp-dia" style="--d:1.3s"></span></div><div class="sp-desc" data-i18n="sp-m2d">Người dùng thật bắt đầu dùng thử</div></div>
-          <div class="sp-cell"><div class="sp-name"><span data-i18n="sp-s">Sprint</span>&nbsp;3</div><div class="sp-axis"><span class="sp-bar" style="--d:1.55s"></span></div><span class="sp-rel">Release</span></div>
-          <div class="sp-cell"><div class="sp-name"><span data-i18n="sp-s">Sprint</span>&nbsp;4</div><div class="sp-axis"><span class="sp-bar" style="--d:1.8s"></span></div><span class="sp-rel">Release</span></div>
-          <div class="sp-cell"><div class="sp-name" data-i18n="sp-m3">Go-live</div><div class="sp-axis"><span class="sp-dia" style="--d:2.2s"></span></div><div class="sp-desc" data-i18n="sp-m3d">Chính thức vận hành, tiếp tục hỗ trợ</div></div>
+          <div class="sp-cell"><div class="sp-name" data-i18n="sp-m1">Khởi động</div><div class="sp-axis"><span class="sp-dia" style="--d:0.4s"></span></div><div class="sp-desc" data-i18n="sp-m1d">Ký hợp đồng, chốt phạm vi và backlog</div><span class="sp-pay"><span data-i18n="sp-pay">Thanh toán</span> 40%</span></div>
+          <div class="sp-cell"><div class="sp-name"><span data-i18n="sp-s">Sprint</span>&nbsp;1</div><div class="sp-axis"><span class="sp-bar" style="--d:0.7s"></span></div><div class="sp-tags"><span class="sp-rel">Release</span></div></div>
+          <div class="sp-cell"><div class="sp-name"><span data-i18n="sp-s">Sprint</span>&nbsp;2</div><div class="sp-axis"><span class="sp-bar" style="--d:0.95s"></span></div><div class="sp-tags"><span class="sp-rel">Release</span></div></div>
+          <div class="sp-cell"><div class="sp-name"><span data-i18n="sp-s">Sprint</span>&nbsp;3</div><div class="sp-axis"><span class="sp-bar" style="--d:1.2s"></span></div><div class="sp-tags"><span class="sp-rel">Release</span></div></div>
+          <div class="sp-cell"><div class="sp-name"><span data-i18n="sp-s">Sprint</span>&nbsp;4</div><div class="sp-axis"><span class="sp-bar" style="--d:1.45s"></span></div><div class="sp-tags"><span class="sp-rel">Release</span><span class="sp-rel sp-uat" data-i18n="sp-uat">UAT</span></div></div>
+          <div class="sp-cell"><div class="sp-name" data-i18n="sp-m2">Xong UAT</div><div class="sp-axis"><span class="sp-dia" style="--d:1.8s"></span></div><div class="sp-desc" data-i18n="sp-m2d">Khách nghiệm thu bản chạy thử</div><span class="sp-pay"><span data-i18n="sp-pay">Thanh toán</span> 40%</span></div>
+          <div class="sp-cell"><div class="sp-name" data-i18n="sp-m3">Go-live</div><div class="sp-axis"><span class="sp-dia" style="--d:2.2s"></span></div><div class="sp-desc" data-i18n="sp-m3d">Chính thức vận hành, tiếp tục hỗ trợ</div><span class="sp-pay"><span data-i18n="sp-pay">Thanh toán</span> 20%</span></div>
         </div>
         <div class="kb-label" data-i18n="kb-h">Bảng công việc của một Sprint (minh hoạ)</div>
         <div class="kanban">
@@ -672,6 +725,48 @@
         </div>
         <div class="sp-foot"><span class="lab" data-i18n="sp-cer">Nhịp làm việc trong mỗi Sprint</span><ul class="chips"><li>Sprint Planning</li><li>Daily Scrum</li><li>Sprint Review</li><li>Retrospective</li></ul></div>
         <div class="sp-note" data-i18n="sp-ex">Ví dụ một lộ trình. Số Sprint thay đổi theo quy mô dự án.</div>
+      </div>
+
+      <div class="sp-panel cr-panel reveal">
+        <div class="sprint-tag" data-i18n="cr-tag">Khi có thay đổi</div>
+        <h4 data-i18n="cr-h">Bạn muốn thêm hoặc đổi yêu cầu giữa chừng?</h4>
+        <p class="sub" data-i18n="cr-p">Mọi thay đổi đều đi qua một đường rõ ràng, để Sprint đang chạy không bị rối và bạn luôn biết trước chi phí.</p>
+        <div class="flow">
+          <div class="fl-step"><i>01</i><b data-i18n="cr1-h">Đưa vào Backlog</b><span data-i18n="cr1-t">Mọi yêu cầu mới đều được ghi lại.</span></div>
+          <div class="fl-step"><i>02</i><b data-i18n="cr2-h">Đánh giá</b><span data-i18n="cr2-t">Phân loại là Cải tiến hay CR (Change Request).</span></div>
+          <div class="fl-step"><i>03</i><b data-i18n="cr3-h">Báo giá nếu là CR</b><span data-i18n="cr3-t">Báo chi phí và thời gian thực hiện cho bạn.</span></div>
+          <div class="fl-step"><i>04</i><b data-i18n="cr4-h">Chốt và đưa vào Sprint</b><span data-i18n="cr4-t">Chốt giá xong, mình cập nhật vào Sprint.</span></div>
+          <div class="fl-step"><i>05</i><b data-i18n="cr5-h">Thực hiện và release</b><span data-i18n="cr5-t">Làm và release theo kế hoạch của Sprint.</span></div>
+        </div>
+      </div>
+
+      <div class="sp-trio">
+        <div class="sp-panel reveal">
+          <h4 data-i18n="tr-h">Theo dõi tiến độ</h4>
+          <p class="sub">&nbsp;</p>
+          <ul class="tr-list">
+            <li data-n="01"><div><b data-i18n="tr1-h">Họp review cuối mỗi Sprint</b><span data-i18n="tr1-t">Xem bản chạy được và góp ý trực tiếp.</span></div></li>
+            <li data-n="02"><div><b data-i18n="tr2-h">Báo cáo tuần và tháng</b><span data-i18n="tr2-t">Cập nhật tiến độ theo timeline và các mốc.</span></div></li>
+            <li data-n="03"><div><b data-i18n="tr3-h">Họp online hoặc offline</b><span data-i18n="tr3-t">Tuỳ khách thuận tiện.</span></div></li>
+          </ul>
+        </div>
+        <div class="sp-panel reveal">
+          <h4 data-i18n="py-h">Thanh toán theo hợp đồng</h4>
+          <p class="sub" data-i18n="py-p">Chia làm ba lần, gắn với các mốc trên timeline.</p>
+          <div class="pay-bar"><span class="p1">40%</span><span class="p2">40%</span><span class="p3">20%</span></div>
+          <div class="pay-labels"><span class="l1" data-i18n="py1">Khi ký hợp đồng</span><span class="l2" data-i18n="py2">Khi xong UAT</span><span class="l3" data-i18n="py3">Sau Go-live</span></div>
+        </div>
+        <div class="sp-panel reveal">
+          <h4 data-i18n="ho-h">Bàn giao</h4>
+          <p class="sub" data-i18n="ho-p">Tuỳ loại hợp đồng.</p>
+          <ul class="ho-list">
+            <li><span data-i18n="ho1">Mã nguồn</span><em data-i18n="ho1b">Mua đứt</em></li>
+            <li><span data-i18n="ho2">Link ứng dụng</span><em data-i18n="ho2b">SaaS</em></li>
+            <li data-i18n="ho3">Tài khoản admin</li>
+            <li data-i18n="ho4">Tài liệu hướng dẫn sử dụng</li>
+            <li data-i18n="ho5">Biên bản nghiệm thu tổng thể</li>
+          </ul>
+        </div>
       </div>
       </div>
     </section>
@@ -771,11 +866,22 @@
     // ── TRANSLATIONS ([data-i18n] sets textContent)
     const translations = {
       vi: {
+        'sp-pay':'Thanh toán','sp-uat':'UAT',
+        'st1':'Sprint đã thực hiện','st2':'Dự án khách đang sử dụng','st3':'Tuần mỗi Sprint','st4':'Sprint để Go-live dự án nhỏ, gồm cả UAT',
+        'cr-tag':'Khi có thay đổi','cr-h':'Bạn muốn thêm hoặc đổi yêu cầu giữa chừng?','cr-p':'Mọi thay đổi đều đi qua một đường rõ ràng, để Sprint đang chạy không bị rối và bạn luôn biết trước chi phí.',
+        'cr1-h':'Đưa vào Backlog','cr1-t':'Mọi yêu cầu mới đều được ghi lại.',
+        'cr2-h':'Đánh giá','cr2-t':'Phân loại là Cải tiến hay CR (Change Request).',
+        'cr3-h':'Báo giá nếu là CR','cr3-t':'Báo chi phí và thời gian thực hiện cho bạn.',
+        'cr4-h':'Chốt và đưa vào Sprint','cr4-t':'Chốt giá xong, mình cập nhật vào Sprint.',
+        'cr5-h':'Thực hiện và release','cr5-t':'Làm và release theo kế hoạch của Sprint.',
+        'tr-h':'Theo dõi tiến độ','tr1-h':'Họp review cuối mỗi Sprint','tr1-t':'Xem bản chạy được và góp ý trực tiếp.','tr2-h':'Báo cáo tuần và tháng','tr2-t':'Cập nhật tiến độ theo timeline và các mốc.','tr3-h':'Họp online hoặc offline','tr3-t':'Tuỳ khách thuận tiện.',
+        'py-h':'Thanh toán theo hợp đồng','py-p':'Chia làm ba lần, gắn với các mốc trên timeline.','py1':'Khi ký hợp đồng','py2':'Khi xong UAT','py3':'Sau Go-live',
+        'ho-h':'Bàn giao','ho-p':'Tuỳ loại hợp đồng.','ho1':'Mã nguồn','ho1b':'Mua đứt','ho2':'Link ứng dụng','ho2b':'SaaS','ho3':'Tài khoản admin','ho4':'Tài liệu hướng dẫn sử dụng','ho5':'Biên bản nghiệm thu tổng thể',
         'kb-h':'Bảng công việc của một Sprint (minh hoạ)','kb-c1':'Backlog','kb-c2':'Đang làm','kb-c3':'Review','kb-c4':'Xong','kb-t1':'Phân quyền người dùng','kb-t2':'Xuất báo cáo ra Excel','kb-t3':'Màn hình công nợ','kb-t4':'Nhập kho theo lô','kb-t5':'Đăng nhập','kb-t6':'Danh mục sản phẩm',
         'sk7':'Phương pháp luận','sk7c':'Release theo Sprint','sk8':'Quản lý dự án',
-        'sp-tag':'Quản lý theo Sprint','sp-h':'Một dự án chạy theo Sprint','sp-p':'Mình làm theo Agile và Scrum: chia công việc thành các Sprint, cuối mỗi Sprint có một bản chạy được để bạn xem và góp ý. Mọi mốc quan trọng nằm trên một timeline rõ ràng.',
-        'sp-m1':'Khởi động','sp-m1d':'Chốt phạm vi và backlog','sp-m2':'Bản dùng thử','sp-m2d':'Người dùng thật bắt đầu dùng thử','sp-m3':'Go-live','sp-m3d':'Chính thức vận hành, tiếp tục hỗ trợ',
-        'sp-ex':'Ví dụ một lộ trình. Số Sprint thay đổi theo quy mô dự án.','sp-cer':'Nhịp làm việc trong mỗi Sprint','sp-s':'Sprint',
+        'sp-tag':'Quản lý theo Sprint','sp-h':'Một dự án chạy theo Sprint','sp-p':"Mình làm theo Agile và Scrum: chia công việc thành các Sprint dài 1 đến 2 tuần, tuỳ dự án và nhịp release mà khách cần. Cuối mỗi Sprint có một bản chạy được để bạn xem và góp ý, mọi mốc quan trọng nằm trên một timeline rõ ràng.",
+        'sp-m1':"Khởi động",'sp-m1d':"Ký hợp đồng, chốt phạm vi và backlog",'sp-m2':"Xong UAT",'sp-m2d':"Khách nghiệm thu bản chạy thử",'sp-m3':'Go-live','sp-m3d':"Chính thức vận hành, tiếp tục hỗ trợ",
+        'sp-ex':"Lộ trình của một dự án nhỏ. Dự án lớn hơn sẽ có nhiều Sprint hơn.",'sp-cer':'Nhịp làm việc trong mỗi Sprint','sp-s':'Sprint',
         'brand-sub':'Coder dạo · Freelance','avail':"Đang nhận dự án",
         'nav-proj':'Dự án','nav-skills':'Kỹ năng','nav-process':'Quy trình','nav-contact':'Liên hệ',
         'hello':'Xin chào, mình là','founder':'Người sáng lập SimpleSoft','bg-proj':'DỰ ÁN','bg-about':'VỀ MÌNH','bg-process':'QUY TRÌNH','fc-small':'Người sáng lập','fc-p':"Công ty làm phần mềm theo yêu cầu do mình sáng lập, nơi ra đời simpleRMS, simpleDMS và simpleWork.",'fc-cta':"Ghé thăm simplesoft.com.vn",'role':'Coder dạo & Web developer',
@@ -803,11 +909,22 @@
         'foot-made':'Làm tại Việt Nam'
       },
       en: {
+        'sp-pay':'Payment','sp-uat':'UAT',
+        'st1':'Sprints delivered','st2':'Projects clients still use','st3':'Weeks per Sprint','st4':'Sprints to go live on a small project, UAT included',
+        'cr-tag':'When things change','cr-h':'Want to add or change a requirement midway?','cr-p':'Every change goes through one clear path, so the running Sprint stays calm and you always know the cost up front.',
+        'cr1-h':'Added to the Backlog','cr1-t':'Every new request is written down.',
+        'cr2-h':'Assessed','cr2-t':'Sorted into an Improvement or a CR (Change Request).',
+        'cr3-h':'Quoted, if it is a CR','cr3-t':'You get the cost and the time it will take.',
+        'cr4-h':'Agreed and planned into a Sprint','cr4-t':'Once the price is agreed, I update the Sprint.',
+        'cr5-h':'Built and released','cr5-t':"Done and released on the Sprint's plan.",
+        'tr-h':'Following progress','tr1-h':'Review meeting after every Sprint','tr1-t':'See the working release and give feedback in person.','tr2-h':'Weekly and monthly reports','tr2-t':'Progress against the timeline and milestones.','tr3-h':'Online or offline meetings','tr3-t':'Whichever suits you.',
+        'py-h':'Payment under the contract','py-p':'Split into three, tied to the milestones on the timeline.','py1':'When the contract is signed','py2':'When UAT is done','py3':'After Go-live',
+        'ho-h':'Handover','ho-p':'Depends on the type of contract.','ho1':'Source code','ho1b':'Buy-out','ho2':'Application link','ho2b':'SaaS','ho3':'Admin account','ho4':'User guide','ho5':'Overall acceptance record',
         'kb-h':'The work board of one Sprint (illustration)','kb-c1':'Backlog','kb-c2':'In progress','kb-c3':'Review','kb-c4':'Done','kb-t1':'User permissions','kb-t2':'Export reports to Excel','kb-t3':'Debt screen','kb-t4':'Receive stock by batch','kb-t5':'Login','kb-t6':'Product catalog',
         'sk7':'Methodology','sk7c':'Sprint releases','sk8':'Project management',
-        'sp-tag':'Managed in Sprints','sp-h':'A project, run in Sprints','sp-p':'I work Agile with Scrum: the work is cut into Sprints, and every Sprint ends with a working release for you to review. Every key date sits on one clear timeline.',
-        'sp-m1':'Kick-off','sp-m1d':'Scope and backlog agreed','sp-m2':'Trial version','sp-m2d':'Real users start trying it','sp-m3':'Go-live','sp-m3d':'Live in production, support continues',
-        'sp-ex':'An example roadmap. The number of Sprints depends on the size of the project.','sp-cer':'The rhythm inside each Sprint','sp-s':'Sprint',
+        'sp-tag':'Managed in Sprints','sp-h':'A project, run in Sprints','sp-p':"I work Agile with Scrum: the work is cut into Sprints of one to two weeks, depending on the project and how fast you need releases. Every Sprint ends with a working release for you to review, and every key date sits on one clear timeline.",
+        'sp-m1':"Kick-off",'sp-m1d':"Contract signed, scope and backlog agreed",'sp-m2':"UAT passed",'sp-m2d':"You accept the trial release",'sp-m3':'Go-live','sp-m3d':"Live in production, support continues",
+        'sp-ex':"The roadmap of a small project. Larger projects have more Sprints.",'sp-cer':'The rhythm inside each Sprint','sp-s':'Sprint',
         'brand-sub':'Freelance developer','avail':'Open for projects',
         'nav-proj':'Projects','nav-skills':'Skills','nav-process':'Process','nav-contact':'Contact',
         'hello':"Hello, I'm",'founder':'Founder of SimpleSoft','bg-proj':'PROJECTS','bg-about':'ABOUT','bg-process':'PROCESS','fc-small':'Founder','fc-p':'A custom software and system integration company, where simpleRMS, simpleDMS and simpleWork were born.','fc-cta':'Visit simplesoft.com.vn','role':'Freelance coder & Web developer',
@@ -886,7 +1003,8 @@
         desc:  c.desc  || (r && r.description) || '',
         tags:  c.tags  || (r ? [r.language, ...(r.topics || []).filter(t => t !== GH_TOPIC)].filter(Boolean).slice(0, 5) : []),
         image: safeUrl(c.image || ''),
-        demo:  safeUrl(c.demo || (r && r.homepage) || '')
+        demo:  safeUrl(c.demo || (r && r.homepage) || ''),
+        clientUse: !!c.clientUse
       };
     }
 
@@ -973,6 +1091,7 @@
       document.getElementById('projCount').textContent = n ? String(n).padStart(2, '0') : '';
       const sp = document.getElementById('statProjects');
       if (n && String(n) !== sp.dataset.count) { sp.dataset.count = n; runCount(sp); }
+      updateSprintStats();
       observeReveals();
     }
 
@@ -1207,6 +1326,27 @@
         mx = e.clientX; my = e.clientY;
         if (!mbusy) { mbusy = true; requestAnimationFrame(pull); }
       });
+    }
+
+    // ── Sprint numbers come from the project list (projects x 4 Sprints; clients still using = clientUse)
+    let sprintStatsShown = false;
+    function updateSprintStats() {
+      const a = document.getElementById('stSprints'), b = document.getElementById('stInUse');
+      if (!a || !b) return;
+      const n = projectList.length * 4, u = projectList.filter(p => p.clientUse).length;
+      a.dataset.count = n; b.dataset.count = u;
+      if (sprintStatsShown) { a.textContent = n; b.textContent = u; }
+    }
+    {
+      const box = document.querySelector('.sp-stats');
+      if (box && 'IntersectionObserver' in window) {
+        const sio2 = new IntersectionObserver(es => es.forEach(e => {
+          if (!e.isIntersecting) return;
+          sprintStatsShown = true; sio2.disconnect();
+          runCount(document.getElementById('stSprints')); runCount(document.getElementById('stInUse'));
+        }), { threshold: 0.5 });
+        sio2.observe(box);
+      } else { sprintStatsShown = true; }
     }
 
     // ── INIT
