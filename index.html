@@ -280,6 +280,18 @@
     .sp-foot .lab { font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
     .sp-note { margin-top: .9rem; font-size: .72rem; color: var(--muted); }
 
+
+    /* ── SPRINT BOARD (illustration) ── */
+    .kb-label { margin-top: 1.9rem; font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+    .kanban { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .8rem; margin: .8rem 0 1.5rem; }
+    .kb-col { --c: var(--muted); padding: .7rem .7rem .8rem; border-top: 2px solid var(--c); background: rgba(255,255,255,.02); border-radius: 0 0 4px 4px; }
+    .kb-col.doing { --c: var(--red-hi); } .kb-col.review { --c: #f59e0b; } .kb-col.done { --c: #22c55e; }
+    .kb-col h4 { display: flex; justify-content: space-between; align-items: center; font-family: var(--display); font-weight: 500; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--c); margin-bottom: .6rem; }
+    .kb-col h4 b { font-weight: 500; color: var(--muted); }
+    .kb-card { padding: .55rem .65rem; margin-top: .45rem; font-size: .78rem; line-height: 1.4; color: #d2d2d2; background: #101010; border: 1px solid var(--line); border-left: 2px solid var(--c); border-radius: 3px;
+      opacity: 0; transform: translateY(8px); transition: opacity .5s ease, transform .5s ease; transition-delay: calc(var(--k, 0) * 90ms + 1.2s); }
+    .sprint.visible .kb-card { opacity: 1; transform: none; }
+
     /* ── QUOTE ── */
     .quote-band { position: relative; overflow: hidden; padding: 5rem 0; text-align: center; background: linear-gradient(160deg, #a50f15 0%, #5b0508 65%, #2c0204 100%); }
     .quote-band svg.qm { width: 44px; height: 44px; color: #ff7b7b; margin: 0 auto 1.2rem; }
@@ -456,6 +468,7 @@
       .sp-name { min-height: 0; }
       .sp-desc { margin: 0; max-width: none; flex-basis: 100%; padding-left: calc(28px + .9rem); }
       .sp-rel { margin: 0; }
+      .kanban { grid-template-columns: 1fr 1fr; }
       .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
       .sec-head h2 { font-size: 1.25rem; }
       .proj::after { font-size: 6rem; }
@@ -473,6 +486,7 @@
       .hero-photo img, .hero-word i::before, .hero-word i::after { animation: none; }
       .sp-track::before, .sp-dia, .sp-bar { transform: none; transition: none; }
       .sp-dia { transform: rotate(45deg); }
+      .kb-card { opacity: 1; transform: none; transition: none; }
       .hero-word { filter: none; opacity: 1; }
       .hero-photo { scale: none; }
       .split .ch { opacity: 1; transform: none; transition: none; }
@@ -603,7 +617,7 @@
           <div class="skill-box"><h3 data-i18n="sk4">Triển khai &amp; vận hành</h3><ul class="chips"><li>Git</li><li>GitHub Actions</li><li>Docker</li><li>Linux</li><li>Nginx</li><li>Cloudflare</li><li>Vercel</li><li>Hosting & Domain</li></ul></div>
           <div class="skill-box"><h3 data-i18n="sk6">Công cụ</h3><ul class="chips"><li>Claude Code</li><li>VS Code</li><li>GitHub</li></ul></div>
           <div class="skill-box"><h3 data-i18n="sk7">Phương pháp luận</h3><ul class="chips"><li>Agile</li><li>Scrum</li><li data-i18n="sk7c">Release theo Sprint</li></ul></div>
-          <div class="skill-box"><h3 data-i18n="sk8">Quản lý dự án</h3><ul class="chips"><li>Sprint</li><li>Timeline</li><li>Milestones</li></ul></div>
+          <div class="skill-box"><h3 data-i18n="sk8">Quản lý dự án</h3><ul class="chips"><li>Sprint</li><li>Backlog</li><li>Timeline</li><li>Milestones</li></ul></div>
         </div>
       </div>
     </section>
@@ -648,6 +662,13 @@
           <div class="sp-cell"><div class="sp-name"><span data-i18n="sp-s">Sprint</span>&nbsp;3</div><div class="sp-axis"><span class="sp-bar" style="--d:1.55s"></span></div><span class="sp-rel">Release</span></div>
           <div class="sp-cell"><div class="sp-name"><span data-i18n="sp-s">Sprint</span>&nbsp;4</div><div class="sp-axis"><span class="sp-bar" style="--d:1.8s"></span></div><span class="sp-rel">Release</span></div>
           <div class="sp-cell"><div class="sp-name" data-i18n="sp-m3">Go-live</div><div class="sp-axis"><span class="sp-dia" style="--d:2.2s"></span></div><div class="sp-desc" data-i18n="sp-m3d">Chính thức vận hành, tiếp tục hỗ trợ</div></div>
+        </div>
+        <div class="kb-label" data-i18n="kb-h">Bảng công việc của một Sprint (minh hoạ)</div>
+        <div class="kanban">
+          <div class="kb-col"><h4><span data-i18n="kb-c1">Backlog</span><b>2</b></h4><div class="kb-card" style="--k:0" data-i18n="kb-t1">Phân quyền người dùng</div><div class="kb-card" style="--k:1" data-i18n="kb-t2">Xuất báo cáo ra Excel</div></div>
+          <div class="kb-col doing"><h4><span data-i18n="kb-c2">Đang làm</span><b>1</b></h4><div class="kb-card" style="--k:2" data-i18n="kb-t3">Màn hình công nợ</div></div>
+          <div class="kb-col review"><h4><span data-i18n="kb-c3">Review</span><b>1</b></h4><div class="kb-card" style="--k:3" data-i18n="kb-t4">Nhập kho theo lô</div></div>
+          <div class="kb-col done"><h4><span data-i18n="kb-c4">Xong</span><b>2</b></h4><div class="kb-card" style="--k:4" data-i18n="kb-t5">Đăng nhập</div><div class="kb-card" style="--k:5" data-i18n="kb-t6">Danh mục sản phẩm</div></div>
         </div>
         <div class="sp-foot"><span class="lab" data-i18n="sp-cer">Nhịp làm việc trong mỗi Sprint</span><ul class="chips"><li>Sprint Planning</li><li>Daily Scrum</li><li>Sprint Review</li><li>Retrospective</li></ul></div>
         <div class="sp-note" data-i18n="sp-ex">Ví dụ một lộ trình. Số Sprint thay đổi theo quy mô dự án.</div>
@@ -750,6 +771,7 @@
     // ── TRANSLATIONS ([data-i18n] sets textContent)
     const translations = {
       vi: {
+        'kb-h':'Bảng công việc của một Sprint (minh hoạ)','kb-c1':'Backlog','kb-c2':'Đang làm','kb-c3':'Review','kb-c4':'Xong','kb-t1':'Phân quyền người dùng','kb-t2':'Xuất báo cáo ra Excel','kb-t3':'Màn hình công nợ','kb-t4':'Nhập kho theo lô','kb-t5':'Đăng nhập','kb-t6':'Danh mục sản phẩm',
         'sk7':'Phương pháp luận','sk7c':'Release theo Sprint','sk8':'Quản lý dự án',
         'sp-tag':'Quản lý theo Sprint','sp-h':'Một dự án chạy theo Sprint','sp-p':'Mình làm theo Agile và Scrum: chia công việc thành các Sprint, cuối mỗi Sprint có một bản chạy được để bạn xem và góp ý. Mọi mốc quan trọng nằm trên một timeline rõ ràng.',
         'sp-m1':'Khởi động','sp-m1d':'Chốt phạm vi và backlog','sp-m2':'Bản dùng thử','sp-m2d':'Người dùng thật bắt đầu dùng thử','sp-m3':'Go-live','sp-m3d':'Chính thức vận hành, tiếp tục hỗ trợ',
@@ -781,6 +803,7 @@
         'foot-made':'Làm tại Việt Nam'
       },
       en: {
+        'kb-h':'The work board of one Sprint (illustration)','kb-c1':'Backlog','kb-c2':'In progress','kb-c3':'Review','kb-c4':'Done','kb-t1':'User permissions','kb-t2':'Export reports to Excel','kb-t3':'Debt screen','kb-t4':'Receive stock by batch','kb-t5':'Login','kb-t6':'Product catalog',
         'sk7':'Methodology','sk7c':'Sprint releases','sk8':'Project management',
         'sp-tag':'Managed in Sprints','sp-h':'A project, run in Sprints','sp-p':'I work Agile with Scrum: the work is cut into Sprints, and every Sprint ends with a working release for you to review. Every key date sits on one clear timeline.',
         'sp-m1':'Kick-off','sp-m1d':'Scope and backlog agreed','sp-m2':'Trial version','sp-m2d':'Real users start trying it','sp-m3':'Go-live','sp-m3d':'Live in production, support continues',
