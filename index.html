@@ -1018,13 +1018,16 @@
     const safeUrl = u => { try { if (u && !/^[a-z][a-z0-9+.-]*:/i.test(u) && !u.startsWith('/') && !u.startsWith('.')) u = 'https://' + u; const x = new URL(u, location.href); return /^https?:$/.test(x.protocol) ? x.href : ''; } catch (e) { return ''; } };
     const pick = (v, lang) => (v && typeof v === 'object') ? (v[lang] || v.en || '') : (v || '');
 
+    // Files of this site (repos.json, projects.json) are always fetched fresh so edits show up on the next reload.
+    // Only the rate-limited GitHub API fallback is remembered for the tab.
     async function loadJson(url, cacheKey) {
-      try { const c = sessionStorage.getItem(cacheKey); if (c) return JSON.parse(c); } catch (e) {}
+      const own = !/^https?:\/\//i.test(url);
+      if (!own) { try { const c = sessionStorage.getItem(cacheKey); if (c) return JSON.parse(c); } catch (e) {} }
       try {
-        const r = await fetch(url, { headers: { 'Accept': 'application/vnd.github+json' } });
+        const r = await fetch(url, own ? { cache: 'no-cache' } : { headers: { 'Accept': 'application/vnd.github+json' } });
         if (!r.ok) return null;
         const j = await r.json();
-        try { sessionStorage.setItem(cacheKey, JSON.stringify(j)); } catch (e) {}
+        if (!own) { try { sessionStorage.setItem(cacheKey, JSON.stringify(j)); } catch (e) {} }
         return j;
       } catch (e) { return null; }
     }
@@ -1384,6 +1387,8 @@
         sio2.observe(box);
       } else { sprintStatsShown = true; }
     }
+
+    try { sessionStorage.removeItem('ss-projects-json'); sessionStorage.removeItem('ss-repos-json'); } catch (e) {}
 
     // ── INIT
     let savedLang = null;
