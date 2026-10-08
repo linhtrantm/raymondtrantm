@@ -332,6 +332,17 @@
     .ho-list li::before { content: ''; flex-shrink: 0; width: 7px; height: 7px; background: var(--red-hi); transform: rotate(45deg) translateY(-1px); }
     .ho-list em { font-style: normal; font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: .08rem .5rem; white-space: nowrap; }
 
+
+    .dod { margin-top: 1.9rem; padding: 1.5rem 1.4rem; border: 1px dashed var(--line-red); border-radius: 4px; background: rgba(212,21,27,.04); }
+    .dod h4 { font-family: var(--display); font-weight: 600; font-size: 1.05rem; letter-spacing: .06em; text-transform: uppercase; }
+    .dod .sub { font-size: .8rem; color: var(--muted); font-weight: 300; margin: .3rem 0 1.1rem; }
+    .dod-flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .9rem; }
+    .dod-step { position: relative; padding: .9rem .9rem .8rem; border: 1px solid var(--line); border-top: 2px solid var(--c, var(--red-hi)); border-radius: 3px; background: #101010; }
+    .dod-step:not(:last-child)::after { content: '→'; position: absolute; right: -.78rem; top: 50%; transform: translateY(-50%); z-index: 1; color: var(--red-hi); font-size: .95rem; background: var(--bg-2); line-height: 1; padding: .1rem 0; }
+    .dod-step.ok { --c: #22c55e; }
+    .dod-step b { display: block; font-family: var(--display); font-weight: 500; font-size: .86rem; letter-spacing: .05em; text-transform: uppercase; margin-bottom: .3rem; }
+    .dod-step span { font-size: .76rem; color: #b5b5b5; font-weight: 300; line-height: 1.5; }
+
     /* ── QUOTE ── */
     .quote-band { position: relative; overflow: hidden; padding: 5rem 0; text-align: center; background: linear-gradient(160deg, #a50f15 0%, #5b0508 65%, #2c0204 100%); }
     .quote-band svg.qm { width: 44px; height: 44px; color: #ff7b7b; margin: 0 auto 1.2rem; }
@@ -512,7 +523,8 @@
       .sp-stats { grid-template-columns: 1fr 1fr; }
       .sp-tags { flex-direction: row; margin-top: 0; }
       .sp-pay { margin: 0 0 0 calc(28px + .9rem); }
-      .flow { grid-template-columns: 1fr; }
+      .flow, .dod-flow { grid-template-columns: 1fr; }
+      .dod-step:not(:last-child)::after { content: '↓'; right: auto; left: 1.2rem; top: auto; bottom: -.95rem; transform: none; }
       .fl-step:not(:last-child)::after { content: '↓'; right: auto; left: 1.2rem; top: auto; bottom: -.95rem; transform: none; }
       .sp-trio { grid-template-columns: 1fr; }
       .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -723,6 +735,16 @@
           <div class="kb-col review"><h4><span data-i18n="kb-c3">Review</span><b>1</b></h4><div class="kb-card" style="--k:3" data-i18n="kb-t4">Nhập kho theo lô</div></div>
           <div class="kb-col done"><h4><span data-i18n="kb-c4">Xong</span><b>2</b></h4><div class="kb-card" style="--k:4" data-i18n="kb-t5">Đăng nhập</div><div class="kb-card" style="--k:5" data-i18n="kb-t6">Danh mục sản phẩm</div></div>
         </div>
+        <div class="dod">
+          <h4 data-i18n="dod-h">Định nghĩa "Xong" (Definition of Done)</h4>
+          <p class="sub" data-i18n="dod-p">Một việc chỉ được tính là xong khi đi hết bốn bước này.</p>
+          <div class="dod-flow">
+            <div class="dod-step"><b data-i18n="dod1-h">Release lên Staging</b><span data-i18n="dod1-t">Tính năng được đưa lên môi trường thử.</span></div>
+            <div class="dod-step"><b data-i18n="dod2-h">User test xác nhận</b><span data-i18n="dod2-t">Người dùng xác nhận đúng yêu cầu.</span></div>
+            <div class="dod-step"><b data-i18n="dod3-h">Deploy lên Production</b><span data-i18n="dod3-t">Đưa lên môi trường chính thức.</span></div>
+            <div class="dod-step ok"><b data-i18n="dod4-h">User xác nhận lần nữa</b><span data-i18n="dod4-t">Không phát sinh lỗi trên Production.</span></div>
+          </div>
+        </div>
         <div class="sp-foot"><span class="lab" data-i18n="sp-cer">Nhịp làm việc trong mỗi Sprint</span><ul class="chips"><li>Sprint Planning</li><li>Daily Scrum</li><li>Sprint Review</li><li>Retrospective</li></ul></div>
         <div class="sp-note" data-i18n="sp-ex">Ví dụ một lộ trình. Số Sprint thay đổi theo quy mô dự án.</div>
       </div>
@@ -748,6 +770,7 @@
             <li data-n="01"><div><b data-i18n="tr1-h">Họp review cuối mỗi Sprint</b><span data-i18n="tr1-t">Xem bản chạy được và góp ý trực tiếp.</span></div></li>
             <li data-n="02"><div><b data-i18n="tr2-h">Báo cáo tuần và tháng</b><span data-i18n="tr2-t">Cập nhật tiến độ theo timeline và các mốc.</span></div></li>
             <li data-n="03"><div><b data-i18n="tr3-h">Họp online hoặc offline</b><span data-i18n="tr3-t">Tuỳ khách thuận tiện.</span></div></li>
+            <li data-n="04"><div><b data-i18n="tr4-h">Xem bảng Trello, Jira thoải mái</b><span data-i18n="tr4-t">Khách được vào xem, ở mức chỉ xem.</span></div></li>
           </ul>
         </div>
         <div class="sp-panel reveal">
@@ -866,6 +889,12 @@
     // ── TRANSLATIONS ([data-i18n] sets textContent)
     const translations = {
       vi: {
+        'dod-h':'Định nghĩa "Xong" (Definition of Done)','dod-p':'Một việc chỉ được tính là xong khi đi hết bốn bước này.',
+        'dod1-h':'Release lên Staging','dod1-t':'Tính năng được đưa lên môi trường thử.',
+        'dod2-h':'User test xác nhận','dod2-t':'Người dùng xác nhận đúng yêu cầu.',
+        'dod3-h':'Deploy lên Production','dod3-t':'Đưa lên môi trường chính thức.',
+        'dod4-h':'User xác nhận lần nữa','dod4-t':'Không phát sinh lỗi trên Production.',
+        'tr4-h':'Xem bảng Trello, Jira thoải mái','tr4-t':'Khách được vào xem, ở mức chỉ xem.',
         'sp-pay':'Thanh toán','sp-uat':'UAT',
         'st1':'Sprint đã thực hiện','st2':'Dự án khách đang sử dụng','st3':'Tuần mỗi Sprint','st4':'Sprint để Go-live dự án nhỏ, gồm cả UAT',
         'cr-tag':'Khi có thay đổi','cr-h':'Bạn muốn thêm hoặc đổi yêu cầu giữa chừng?','cr-p':'Mọi thay đổi đều đi qua một đường rõ ràng, để Sprint đang chạy không bị rối và bạn luôn biết trước chi phí.',
@@ -909,6 +938,12 @@
         'foot-made':'Làm tại Việt Nam'
       },
       en: {
+        'dod-h':'Definition of Done','dod-p':'A task counts as done only after it passes these four steps.',
+        'dod1-h':'Release to Staging','dod1-t':'The feature goes onto the test environment.',
+        'dod2-h':'User test sign-off','dod2-t':'Users confirm it matches the requirement.',
+        'dod3-h':'Deploy to Production','dod3-t':'It goes onto the live environment.',
+        'dod4-h':'Users confirm again','dod4-t':'No new errors on Production.',
+        'tr4-h':'Open view of Trello and Jira','tr4-t':'Clients can browse the boards, view-only.',
         'sp-pay':'Payment','sp-uat':'UAT',
         'st1':'Sprints delivered','st2':'Projects clients still use','st3':'Weeks per Sprint','st4':'Sprints to go live on a small project, UAT included',
         'cr-tag':'When things change','cr-h':'Want to add or change a requirement midway?','cr-p':'Every change goes through one clear path, so the running Sprint stays calm and you always know the cost up front.',
@@ -1004,7 +1039,8 @@
         tags:  c.tags  || (r ? [r.language, ...(r.topics || []).filter(t => t !== GH_TOPIC)].filter(Boolean).slice(0, 5) : []),
         image: safeUrl(c.image || ''),
         demo:  safeUrl(c.demo || (r && r.homepage) || ''),
-        clientUse: !!c.clientUse
+        clientUse: !!c.clientUse,
+        sprints: Number(c.sprints) > 0 ? Number(c.sprints) : 4
       };
     }
 
@@ -1328,12 +1364,12 @@
       });
     }
 
-    // ── Sprint numbers come from the project list (projects x 4 Sprints; clients still using = clientUse)
+    // ── Sprint numbers come from projects.json: sum of each project's `sprints` (default 4); clients still using = clientUse
     let sprintStatsShown = false;
     function updateSprintStats() {
       const a = document.getElementById('stSprints'), b = document.getElementById('stInUse');
       if (!a || !b) return;
-      const n = projectList.length * 4, u = projectList.filter(p => p.clientUse).length;
+      const n = projectList.reduce((t, p) => t + p.sprints, 0), u = projectList.filter(p => p.clientUse).length;
       a.dataset.count = n; b.dataset.count = u;
       if (sprintStatsShown) { a.textContent = n; b.textContent = u; }
     }
