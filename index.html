@@ -103,14 +103,13 @@
       -webkit-background-clip: text; background-clip: text; color: transparent;
       animation: letterUp .95s cubic-bezier(.2,.8,.2,1) backwards; animation-delay: calc(var(--i) * 70ms + 120ms);
     }
-    /* per-letter glow: a bright copy of each letter fades in and out in turn (opacity only, GPU friendly) */
-    .hero-word i { position: relative; }
-    .hero-word i::before, .hero-word i::after { content: attr(data-c); position: absolute; left: 0; top: 0; font-style: normal; color: #ff6b5e; -webkit-text-fill-color: #ff6b5e;
-      text-shadow: 0 0 .1em rgba(255,90,80,.95), 0 0 .38em rgba(255,40,40,.65); opacity: 0; will-change: opacity; pointer-events: none; }
-    /* one 8.9s cycle: pass left to right (::before), pass right to left (::after), then ~3s of rest */
-    .hero-word i::before { animation: letterGlow 8.9s ease-in-out infinite; animation-delay: calc(var(--i) * .28s + 3.6s); }
-    .hero-word i::after { animation: letterGlow 8.9s ease-in-out infinite; animation-delay: calc((8 - var(--i)) * .28s + 6.9s); }
-    @keyframes letterGlow { 0% { opacity: 0; } 5.1% { opacity: 1; } 11.2%, 100% { opacity: 0; } }
+    /* one soft band of light sweeps across the whole word: left to right, straight back right to left, ~3s rest, repeat */
+    .hero-word span { position: relative; }
+    .hero-word span::after { content: attr(data-t); position: absolute; left: 0; right: 0; top: 0; text-align: center; pointer-events: none;
+      background: linear-gradient(100deg, rgba(255,140,120,0) 38%, rgba(255,150,130,.55) 46%, rgba(255,235,225,.98) 50%, rgba(255,150,130,.55) 54%, rgba(255,140,120,0) 62%) 100% 0 / 300% 100% no-repeat;
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      animation: lightSweep 6.2s ease-in-out 3.6s infinite; }
+    @keyframes lightSweep { 0% { background-position: 100% 0; } 26% { background-position: 0% 0; } 52%, 100% { background-position: 100% 0; } }
     @keyframes letterUp { from { opacity: 0; transform: translateY(45%); } }
     .hero-photo {
       position: absolute; z-index: 2; left: 50%; transform: translateX(-46%);
@@ -541,7 +540,7 @@
       .hero-word, .hero-photo img, .proj { transform: none !important; transition: none; }
       .steps::before { transform: none; transition: none; }
       .grain, .orb { animation: none; }
-      .hero-photo img, .hero-word i::before, .hero-word i::after { animation: none; }
+      .hero-photo img, .hero-word span::after { animation: none; }
       .sp-track::before, .sp-dia, .sp-bar { transform: none; transition: none; }
       .sp-dia { transform: rotate(45deg); }
       .kb-card { opacity: 1; transform: none; transition: none; }
@@ -601,7 +600,7 @@
   <main>
     <!-- HERO -->
     <section class="hero">
-      <div class="hero-word" aria-hidden="true"><span><i style="--i:0" data-c="P">P</i><i style="--i:1" data-c="O">O</i><i style="--i:2" data-c="R">R</i><i style="--i:3" data-c="T">T</i><i style="--i:4" data-c="F">F</i><i style="--i:5" data-c="O">O</i><i style="--i:6" data-c="L">L</i><i style="--i:7" data-c="I">I</i><i style="--i:8" data-c="O">O</i></span></div>
+      <div class="hero-word" aria-hidden="true"><span data-t="PORTFOLIO"><i style="--i:0">P</i><i style="--i:1">O</i><i style="--i:2">R</i><i style="--i:3">T</i><i style="--i:4">F</i><i style="--i:5">O</i><i style="--i:6">L</i><i style="--i:7">I</i><i style="--i:8">O</i></span></div>
       <div class="hero-photo"><img src="avatar-cutout.png" alt="Raymond Tran" width="864" height="1083" fetchpriority="high" onerror="this.remove()" /></div>
 
       <div class="wrap hero-grid">
