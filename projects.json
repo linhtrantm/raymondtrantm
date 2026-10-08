@@ -13,7 +13,7 @@
     ],
     "demo": "https://simplesoft.com.vn",
     "category": "website",
-    "sprints": 4
+    "sprints": 0
   },
   {
     "repo": "linhtrantm/simpleRMS",
@@ -27,7 +27,8 @@
       "PHP",
       "MySQL"
     ],
-    "sprints": 5
+    "sprints": 5,
+    "clientUse": true
   },
   {
     "repo": "linhtrantm/simpleWork",
