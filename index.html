@@ -235,7 +235,7 @@
     .founder-card p { font-size: .84rem; color: #c4c4c4; font-weight: 300; line-height: 1.65; margin: 0 0 .7rem; }
     .founder-card span.cta { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text); }
     .founder-card .go { flex-shrink: 0; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--red); border-radius: 50%; color: var(--red-hi); }
-    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 1fr); gap: 1.25rem; }
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(4, 1fr); gap: 1.25rem; }
     .skill-box { padding: 1.4rem; border: 1px solid var(--line); border-radius: 4px; background: var(--bg-2); }
     .skill-box h3 { font-family: var(--display); font-weight: 500; font-size: .86rem; letter-spacing: .12em; text-transform: uppercase; color: var(--red-hi); margin-bottom: .9rem; }
     .chips { display: flex; flex-wrap: wrap; gap: .45rem; }
@@ -256,6 +256,29 @@
     .step-n { font-family: var(--display); font-size: .8rem; letter-spacing: .14em; color: var(--red-hi); }
     .step h4 { font-family: var(--display); font-weight: 500; font-size: 1.1rem; letter-spacing: .06em; text-transform: uppercase; margin: .2rem 0 .5rem; }
     .step p { font-size: .84rem; color: #b5b5b5; font-weight: 300; line-height: 1.7; }
+
+
+    /* ── SPRINT TIMELINE ── */
+    .sprint { margin-top: 3.6rem; padding: 2.2rem 2rem 1.8rem; border: 1px solid var(--line); border-radius: 4px; background: var(--bg-2); }
+    .sprint-tag { font-family: var(--display); font-weight: 500; font-size: .72rem; letter-spacing: .3em; text-transform: uppercase; color: var(--red-hi); margin-bottom: .6rem; }
+    .sprint h3 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; letter-spacing: .03em; text-transform: uppercase; margin-bottom: .7rem; }
+    .sprint-p { max-width: 760px; font-size: .92rem; color: #c4c4c4; font-weight: 300; line-height: 1.8; }
+    .sp-track { position: relative; display: grid; grid-template-columns: 1.15fr 1fr 1fr 1.15fr 1fr 1fr 1.15fr; margin: 2.6rem 0 1.4rem; }
+    .sp-track::before { content: ''; position: absolute; left: 0; right: 0; top: 52px; height: 1px; background: var(--red-hi); box-shadow: 0 0 8px rgba(255,59,59,.6); transform: scaleX(0); transform-origin: left; transition: transform 1.8s cubic-bezier(.4,0,.2,1) .3s; }
+    .sprint.visible .sp-track::before { transform: scaleX(1); }
+    .sp-cell { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 .4rem; }
+    .sp-name { font-family: var(--display); font-weight: 500; font-size: .9rem; letter-spacing: .1em; text-transform: uppercase; min-height: 2.2rem; display: flex; align-items: flex-end; }
+    .sp-axis { height: 28px; margin-top: .8rem; width: 100%; display: flex; align-items: center; justify-content: center; }
+    .sp-dia { width: 18px; height: 18px; background: var(--red-hi); transform: rotate(45deg) scale(0); box-shadow: 0 0 14px rgba(255,59,59,.8); transition: transform .5s cubic-bezier(.2,.8,.2,1); transition-delay: var(--d, 0s); }
+    .sprint.visible .sp-dia { transform: rotate(45deg) scale(1); }
+    .sp-bar { width: calc(100% - .8rem); height: 12px; border-radius: 6px; background: linear-gradient(90deg, #a30c12, var(--red)); transform: scaleX(0); transform-origin: left; transition: transform .7s cubic-bezier(.2,.8,.2,1); transition-delay: var(--d, 0s); }
+    .sprint.visible .sp-bar { transform: scaleX(1); }
+    .sp-desc { margin-top: .8rem; font-size: .76rem; color: #b5b5b5; font-weight: 300; line-height: 1.55; max-width: 15ch; }
+    .sp-rel { margin-top: .8rem; display: inline-flex; align-items: center; gap: .4rem; font-family: var(--display); font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--text); border: 1px solid var(--line-red); border-radius: 999px; padding: .15rem .6rem; }
+    .sp-rel::before { content: ''; width: 6px; height: 6px; background: var(--red-hi); border-radius: 50%; }
+    .sp-foot { display: flex; align-items: center; flex-wrap: wrap; gap: .6rem 1rem; padding-top: 1.1rem; border-top: 1px solid var(--line); }
+    .sp-foot .lab { font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+    .sp-note { margin-top: .9rem; font-size: .72rem; color: var(--muted); }
 
     /* ── QUOTE ── */
     .quote-band { position: relative; overflow: hidden; padding: 5rem 0; text-align: center; background: linear-gradient(160deg, #a50f15 0%, #5b0508 65%, #2c0204 100%); }
@@ -422,6 +445,17 @@
       .wrap { width: calc(100% - 2rem); }
       .skills-grid, .steps { grid-template-columns: 1fr; }
       .proj-grid { --per: 1.12; }
+      .sprint { padding: 1.6rem 1.2rem 1.4rem; }
+      .sp-track { grid-template-columns: 1fr; row-gap: 1.1rem; margin-left: .4rem; }
+      .sp-track::before { left: 13px; right: auto; top: 0; bottom: 0; width: 1px; height: auto; transform: scaleY(0); transform-origin: top; }
+      .sprint.visible .sp-track::before { transform: scaleY(1); }
+      .sp-cell { flex-direction: row; flex-wrap: wrap; align-items: center; text-align: left; justify-content: flex-start; padding: 0; gap: .3rem .9rem; }
+      .sp-axis { order: -1; width: 28px; margin: 0; justify-content: center; flex: 0 0 28px; }
+      .sp-bar { width: 12px; height: 28px; border-radius: 6px; transform-origin: top; transform: scaleY(0); }
+      .sprint.visible .sp-bar { transform: scaleY(1); }
+      .sp-name { min-height: 0; }
+      .sp-desc { margin: 0; max-width: none; flex-basis: 100%; padding-left: calc(28px + .9rem); }
+      .sp-rel { margin: 0; }
       .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
       .sec-head h2 { font-size: 1.25rem; }
       .proj::after { font-size: 6rem; }
@@ -437,6 +471,8 @@
       .steps::before { transform: none; transition: none; }
       .grain, .orb { animation: none; }
       .hero-photo img, .hero-word i::before, .hero-word i::after { animation: none; }
+      .sp-track::before, .sp-dia, .sp-bar { transform: none; transition: none; }
+      .sp-dia { transform: rotate(45deg); }
       .hero-word { filter: none; opacity: 1; }
       .hero-photo { scale: none; }
       .split .ch { opacity: 1; transform: none; transition: none; }
@@ -541,7 +577,7 @@
       <div class="wrap about-grid">
         <div class="reveal about-left">
           <h2 class="split" data-i18n="s-about">Về mình</h2>
-          <p class="about-p" data-i18n="ab-p1">Mình là Raymond, là một coder dạo ở TP. Hồ Chí Minh. Khởi nguồn từ việc làm các website WordPress, vì gặp nhiều hạn chế bởi kiến thức, mình quyết tâm học và hiện tại đã có thể đảm đương full stack cho các dự án vừa và nhỏ với user &lt;100. Thế mạnh của mình là các phần mềm quản lý, các hệ thống có tích hợp và hệ thống eCommerce.</p>
+          <p class="about-p" data-i18n="ab-p1">Mình là Raymond, là một coder dạo ở TP. Hồ Chí Minh. Khởi nguồn từ việc làm các website WordPress, vì gặp nhiều hạn chế bởi kiến thức, mình quyết tâm học và hiện tại đã có thể đảm đương full stack cho các dự án vừa và nhỏ. Thế mạnh của mình là các phần mềm quản lý, các hệ thống có tích hợp và hệ thống eCommerce.</p>
           <p class="about-p" data-i18n="ab-p2">Theo mình, phần mềm tốt là khi đáp ứng được nhu cầu vận hành thực tế của người dùng, không đưa họ vào một giải pháp cồng kềnh, phức tạp hơn.</p>
           <p class="about-p" data-i18n="ab-p3">Mình thích mấy bài toán có số liệu thật như kho, công nợ, đơn hàng, lộ trình giao hàng. Mục tiêu của mình là đưa người dùng vào cùng một hệ thống, tiến đến loại bỏ các phần mềm khác bên ngoài.</p>
           <ul class="principles">
@@ -566,6 +602,8 @@
           <div class="skill-box"><h3 data-i18n="sk3">Cơ sở dữ liệu</h3><ul class="chips"><li>MySQL</li><li>PostgreSQL</li><li>MongoDB</li><li>SQLite</li><li>Redis</li><li>Firebase</li><li>Supabase</li></ul></div>
           <div class="skill-box"><h3 data-i18n="sk4">Triển khai &amp; vận hành</h3><ul class="chips"><li>Git</li><li>GitHub Actions</li><li>Docker</li><li>Linux</li><li>Nginx</li><li>Cloudflare</li><li>Vercel</li><li>Hosting & Domain</li></ul></div>
           <div class="skill-box"><h3 data-i18n="sk6">Công cụ</h3><ul class="chips"><li>Claude Code</li><li>VS Code</li><li>GitHub</li></ul></div>
+          <div class="skill-box"><h3 data-i18n="sk7">Phương pháp luận</h3><ul class="chips"><li>Agile</li><li>Scrum</li><li data-i18n="sk7c">Release theo Sprint</li></ul></div>
+          <div class="skill-box"><h3 data-i18n="sk8">Quản lý dự án</h3><ul class="chips"><li>Sprint</li><li>Timeline</li><li>Milestones</li></ul></div>
         </div>
       </div>
     </section>
@@ -597,6 +635,23 @@
             <p data-i18n="p4-p">Mình triển khai, hướng dẫn đội ngũ của bạn cách dùng, và vẫn ở đó khi bạn cần sửa hoặc mở rộng.</p>
           </div>
         </div>
+
+      <div class="sprint reveal">
+        <div class="sprint-tag" data-i18n="sp-tag">Quản lý theo Sprint</div>
+        <h3 data-i18n="sp-h">Một dự án chạy theo Sprint</h3>
+        <p class="sprint-p" data-i18n="sp-p">Mình làm theo Agile và Scrum: chia công việc thành các Sprint, cuối mỗi Sprint có một bản chạy được để bạn xem và góp ý. Mọi mốc quan trọng nằm trên một timeline rõ ràng.</p>
+        <div class="sp-track">
+          <div class="sp-cell"><div class="sp-name" data-i18n="sp-m1">Khởi động</div><div class="sp-axis"><span class="sp-dia" style="--d:0.4s"></span></div><div class="sp-desc" data-i18n="sp-m1d">Chốt phạm vi và backlog</div></div>
+          <div class="sp-cell"><div class="sp-name"><span data-i18n="sp-s">Sprint</span>&nbsp;1</div><div class="sp-axis"><span class="sp-bar" style="--d:0.7s"></span></div><span class="sp-rel">Release</span></div>
+          <div class="sp-cell"><div class="sp-name"><span data-i18n="sp-s">Sprint</span>&nbsp;2</div><div class="sp-axis"><span class="sp-bar" style="--d:0.95s"></span></div><span class="sp-rel">Release</span></div>
+          <div class="sp-cell"><div class="sp-name" data-i18n="sp-m2">Bản dùng thử</div><div class="sp-axis"><span class="sp-dia" style="--d:1.3s"></span></div><div class="sp-desc" data-i18n="sp-m2d">Người dùng thật bắt đầu dùng thử</div></div>
+          <div class="sp-cell"><div class="sp-name"><span data-i18n="sp-s">Sprint</span>&nbsp;3</div><div class="sp-axis"><span class="sp-bar" style="--d:1.55s"></span></div><span class="sp-rel">Release</span></div>
+          <div class="sp-cell"><div class="sp-name"><span data-i18n="sp-s">Sprint</span>&nbsp;4</div><div class="sp-axis"><span class="sp-bar" style="--d:1.8s"></span></div><span class="sp-rel">Release</span></div>
+          <div class="sp-cell"><div class="sp-name" data-i18n="sp-m3">Go-live</div><div class="sp-axis"><span class="sp-dia" style="--d:2.2s"></span></div><div class="sp-desc" data-i18n="sp-m3d">Chính thức vận hành, tiếp tục hỗ trợ</div></div>
+        </div>
+        <div class="sp-foot"><span class="lab" data-i18n="sp-cer">Nhịp làm việc trong mỗi Sprint</span><ul class="chips"><li>Sprint Planning</li><li>Daily Scrum</li><li>Sprint Review</li><li>Retrospective</li></ul></div>
+        <div class="sp-note" data-i18n="sp-ex">Ví dụ một lộ trình. Số Sprint thay đổi theo quy mô dự án.</div>
+      </div>
       </div>
     </section>
 
@@ -695,6 +750,10 @@
     // ── TRANSLATIONS ([data-i18n] sets textContent)
     const translations = {
       vi: {
+        'sk7':'Phương pháp luận','sk7c':'Release theo Sprint','sk8':'Quản lý dự án',
+        'sp-tag':'Quản lý theo Sprint','sp-h':'Một dự án chạy theo Sprint','sp-p':'Mình làm theo Agile và Scrum: chia công việc thành các Sprint, cuối mỗi Sprint có một bản chạy được để bạn xem và góp ý. Mọi mốc quan trọng nằm trên một timeline rõ ràng.',
+        'sp-m1':'Khởi động','sp-m1d':'Chốt phạm vi và backlog','sp-m2':'Bản dùng thử','sp-m2d':'Người dùng thật bắt đầu dùng thử','sp-m3':'Go-live','sp-m3d':'Chính thức vận hành, tiếp tục hỗ trợ',
+        'sp-ex':'Ví dụ một lộ trình. Số Sprint thay đổi theo quy mô dự án.','sp-cer':'Nhịp làm việc trong mỗi Sprint','sp-s':'Sprint',
         'brand-sub':'Coder dạo · Freelance','avail':"Đang nhận dự án",
         'nav-proj':'Dự án','nav-skills':'Kỹ năng','nav-process':'Quy trình','nav-contact':'Liên hệ',
         'hello':'Xin chào, mình là','founder':'Người sáng lập SimpleSoft','bg-proj':'DỰ ÁN','bg-about':'VỀ MÌNH','bg-process':'QUY TRÌNH','fc-small':'Người sáng lập','fc-p':"Công ty làm phần mềm theo yêu cầu do mình sáng lập, nơi ra đời simpleRMS, simpleDMS và simpleWork.",'fc-cta':"Ghé thăm simplesoft.com.vn",'role':'Coder dạo & Web developer',
@@ -704,7 +763,7 @@
         'st-proj':'Dự án đã làm','st-resp':"Phản hồi tin nhắn",'st-custom':'Làm theo yêu cầu',
         's-proj':'Dự án đã làm','cat-product':"Sản phẩm của mình",'cat-business':"Làm cho doanh nghiệp",'cat-app':"App & công cụ",'cat-website':'Website','cat-other':'Khác','pj-demo':'Xem demo',
         's-about':'Về mình',
-        'ab-p1':"Mình là Raymond, là một coder dạo ở TP. Hồ Chí Minh. Khởi nguồn từ việc làm các website WordPress, vì gặp nhiều hạn chế bởi kiến thức, mình quyết tâm học và hiện tại đã có thể đảm đương full stack cho các dự án vừa và nhỏ với user <100. Thế mạnh của mình là các phần mềm quản lý, các hệ thống có tích hợp và hệ thống eCommerce.",
+        'ab-p1':"Mình là Raymond, là một coder dạo ở TP. Hồ Chí Minh. Khởi nguồn từ việc làm các website WordPress, vì gặp nhiều hạn chế bởi kiến thức, mình quyết tâm học và hiện tại đã có thể đảm đương full stack cho các dự án vừa và nhỏ. Thế mạnh của mình là các phần mềm quản lý, các hệ thống có tích hợp và hệ thống eCommerce.",
         'ab-p2':"Theo mình, phần mềm tốt là khi đáp ứng được nhu cầu vận hành thực tế của người dùng, không đưa họ vào một giải pháp cồng kềnh, phức tạp hơn.",
         'ab-p3':"Mình thích mấy bài toán có số liệu thật như kho, công nợ, đơn hàng, lộ trình giao hàng. Mục tiêu của mình là đưa người dùng vào cùng một hệ thống, tiến đến loại bỏ các phần mềm khác bên ngoài.",
         'pr1-h':"Đơn giản trước",'pr1-t':"Làm bản đơn giản nhất mà chạy được, cần gì thêm thì tính sau.",'pr2-h':"Chạy thật sớm",'pr2-t':"Đưa bản dùng được cho người dùng thật sớm nhất có thể, rồi chỉnh theo góp ý.",'pr3-h':"Nói rõ từ đầu",'pr3-t':"Làm những gì, bao giờ xong, tốn bao nhiêu: thống nhất rõ ngay từ đầu.",
@@ -722,6 +781,10 @@
         'foot-made':'Làm tại Việt Nam'
       },
       en: {
+        'sk7':'Methodology','sk7c':'Sprint releases','sk8':'Project management',
+        'sp-tag':'Managed in Sprints','sp-h':'A project, run in Sprints','sp-p':'I work Agile with Scrum: the work is cut into Sprints, and every Sprint ends with a working release for you to review. Every key date sits on one clear timeline.',
+        'sp-m1':'Kick-off','sp-m1d':'Scope and backlog agreed','sp-m2':'Trial version','sp-m2d':'Real users start trying it','sp-m3':'Go-live','sp-m3d':'Live in production, support continues',
+        'sp-ex':'An example roadmap. The number of Sprints depends on the size of the project.','sp-cer':'The rhythm inside each Sprint','sp-s':'Sprint',
         'brand-sub':'Freelance developer','avail':'Open for projects',
         'nav-proj':'Projects','nav-skills':'Skills','nav-process':'Process','nav-contact':'Contact',
         'hello':"Hello, I'm",'founder':'Founder of SimpleSoft','bg-proj':'PROJECTS','bg-about':'ABOUT','bg-process':'PROCESS','fc-small':'Founder','fc-p':'A custom software and system integration company, where simpleRMS, simpleDMS and simpleWork were born.','fc-cta':'Visit simplesoft.com.vn','role':'Freelance coder & Web developer',
@@ -731,7 +794,7 @@
         'st-proj':'Projects done','st-resp':'Response time','st-custom':'Custom built',
         's-proj':'Selected projects','cat-product':"My products",'cat-business':"Built for businesses",'cat-app':"Apps & tools",'cat-website':'Websites','cat-other':'Other','pj-demo':'Live demo',
         's-about':'About me',
-        'ab-p1':"I'm Raymond, a wandering coder in Ho Chi Minh City. I started out building WordPress websites, and the limits of what I knew pushed me to learn properly. Today I can handle full-stack work on small and mid-sized projects with fewer than 100 users. My strengths are management software, integrated systems and eCommerce.",
+        'ab-p1':"I'm Raymond, a wandering coder in Ho Chi Minh City. I started out building WordPress websites, and the limits of what I knew pushed me to learn properly. Today I can handle full-stack work on small and mid-sized projects. My strengths are management software, integrated systems and eCommerce.",
         'ab-p2':"To me, good software meets the real day-to-day needs of its users, without pushing them into a solution that is heavier and more complicated than it needs to be.",
         'ab-p3':"I like problems with real numbers: stock, debts, orders, delivery routes. My goal is to bring users into a single system and, over time, do away with the other software around it.",
         'pr1-h':'Simple first','pr1-t':'Ship the leanest version that works, then add.','pr2-h':'Go live early','pr2-t':'Put a usable version in front of real users as soon as possible, then adjust to feedback.','pr3-h':'Clear scope, clear work','pr3-t':'Scope, progress and cost made transparent from day one.',
