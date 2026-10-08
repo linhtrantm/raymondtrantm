@@ -12,7 +12,8 @@
       "JavaScript"
     ],
     "demo": "https://simplesoft.com.vn",
-    "category": "website"
+    "category": "website",
+    "sprints": 4
   },
   {
     "repo": "linhtrantm/simpleRMS",
@@ -25,7 +26,8 @@
     "tags": [
       "PHP",
       "MySQL"
-    ]
+    ],
+    "sprints": 5
   },
   {
     "repo": "linhtrantm/simpleWork",
@@ -38,7 +40,8 @@
     "tags": [
       "PHP",
       "MySQL"
-    ]
+    ],
+    "sprints": 0
   },
   {
     "repo": "linhtrantm/simpleDMS",
@@ -51,7 +54,8 @@
     "tags": [
       "PHP",
       "MySQL"
-    ]
+    ],
+    "sprints": 0
   },
   {
     "repo": "linhtrantm/brezelgerman",
@@ -66,7 +70,8 @@
       "React",
       "Firebase"
     ],
-    "clientUse": true
+    "clientUse": true,
+    "sprints": 6
   },
   {
     "repo": "linhtrantm/pos",
@@ -81,7 +86,8 @@
       "Firebase",
       "Dart"
     ],
-    "clientUse": true
+    "clientUse": true,
+    "sprints": 6
   },
   {
     "repo": "linhtrantm/hanvet-order",
@@ -95,7 +101,8 @@
       "PHP",
       "MySQL"
     ],
-    "clientUse": true
+    "clientUse": true,
+    "sprints": 6
   },
   {
     "repo": "linhtrantm/water-supply",
@@ -108,7 +115,8 @@
     "tags": [
       "PHP"
     ],
-    "clientUse": true
+    "clientUse": true,
+    "sprints": 6
   },
   {
     "repo": "linhtrantm/loungefinder",
@@ -122,7 +130,8 @@
       "JavaScript",
       "Firebase"
     ],
-    "clientUse": true
+    "clientUse": true,
+    "sprints": 6
   },
   {
     "repo": "linhtrantm/antgroupvn",
@@ -132,7 +141,8 @@
       "vi": "Website mình làm cho Antgroup.",
       "en": "A website I built for Antgroup."
     },
-    "clientUse": true
+    "clientUse": true,
+    "sprints": 4
   },
   {
     "repo": "linhtrantm/askedu",
@@ -142,7 +152,8 @@
       "vi": "Website mình làm cho Askedu.",
       "en": "A website I built for Askedu."
     },
-    "clientUse": true
+    "clientUse": true,
+    "sprints": 4
   },
   {
     "repo": "linhtrantm/shplogistic",
@@ -152,6 +163,7 @@
       "vi": "Website mình làm cho SHP Logistic.",
       "en": "A website I built for SHP Logistic."
     },
-    "clientUse": true
+    "clientUse": true,
+    "sprints": 4
   }
 ]

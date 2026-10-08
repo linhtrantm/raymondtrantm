@@ -717,7 +717,7 @@
           <div class="sp-stat"><b id="stSprints" data-count="0">0</b><span data-i18n="st1">Sprint đã thực hiện</span></div>
           <div class="sp-stat"><b id="stInUse" data-count="0">0</b><span data-i18n="st2">Dự án khách đang sử dụng</span></div>
           <div class="sp-stat"><b>1–2</b><span data-i18n="st3">Tuần mỗi Sprint</span></div>
-          <div class="sp-stat"><b>≈4</b><span data-i18n="st4">Sprint để Go-live dự án nhỏ, gồm cả UAT</span></div>
+          <div class="sp-stat"><b>3–8</b><span data-i18n="st4">Sprint để Go-live: website 3–4, hệ thống 5–8, gồm cả UAT</span></div>
         </div>
         <div class="sp-track">
           <div class="sp-cell"><div class="sp-name" data-i18n="sp-m1">Khởi động</div><div class="sp-axis"><span class="sp-dia" style="--d:0.4s"></span></div><div class="sp-desc" data-i18n="sp-m1d">Ký hợp đồng, chốt phạm vi và backlog</div><span class="sp-pay"><span data-i18n="sp-pay">Thanh toán</span> 40%</span></div>
@@ -896,7 +896,7 @@
         'dod4-h':'User xác nhận lần nữa','dod4-t':'Không phát sinh lỗi trên Production.',
         'tr4-h':'Xem bảng Trello, Jira thoải mái','tr4-t':'Khách được vào xem, ở mức chỉ xem.',
         'sp-pay':'Thanh toán','sp-uat':'UAT',
-        'st1':'Sprint đã thực hiện','st2':'Dự án khách đang sử dụng','st3':'Tuần mỗi Sprint','st4':'Sprint để Go-live dự án nhỏ, gồm cả UAT',
+        'st1':'Sprint đã thực hiện','st2':'Dự án khách đang sử dụng','st3':'Tuần mỗi Sprint','st4':'Sprint để Go-live: website 3–4, hệ thống 5–8, gồm cả UAT',
         'cr-tag':'Khi có thay đổi','cr-h':'Bạn muốn thêm hoặc đổi yêu cầu giữa chừng?','cr-p':'Mọi thay đổi đều đi qua một đường rõ ràng, để Sprint đang chạy không bị rối và bạn luôn biết trước chi phí.',
         'cr1-h':'Đưa vào Backlog','cr1-t':'Mọi yêu cầu mới đều được ghi lại.',
         'cr2-h':'Đánh giá','cr2-t':'Phân loại là Cải tiến hay CR (Change Request).',
@@ -945,7 +945,7 @@
         'dod4-h':'Users confirm again','dod4-t':'No new errors on Production.',
         'tr4-h':'Open view of Trello and Jira','tr4-t':'Clients can browse the boards, view-only.',
         'sp-pay':'Payment','sp-uat':'UAT',
-        'st1':'Sprints delivered','st2':'Projects clients still use','st3':'Weeks per Sprint','st4':'Sprints to go live on a small project, UAT included',
+        'st1':'Sprints delivered','st2':'Projects clients still use','st3':'Weeks per Sprint','st4':'Sprints to go live: websites 3–4, systems 5–8, UAT included',
         'cr-tag':'When things change','cr-h':'Want to add or change a requirement midway?','cr-p':'Every change goes through one clear path, so the running Sprint stays calm and you always know the cost up front.',
         'cr1-h':'Added to the Backlog','cr1-t':'Every new request is written down.',
         'cr2-h':'Assessed','cr2-t':'Sorted into an Improvement or a CR (Change Request).',
@@ -1040,7 +1040,7 @@
         image: safeUrl(c.image || ''),
         demo:  safeUrl(c.demo || (r && r.homepage) || ''),
         clientUse: !!c.clientUse,
-        sprints: Number(c.sprints) > 0 ? Number(c.sprints) : 4
+        sprints: (c.sprints !== undefined && Number(c.sprints) >= 0) ? Number(c.sprints) : 4
       };
     }
 
