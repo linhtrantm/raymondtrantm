@@ -7,14 +7,14 @@
   <title>BẢN MẪU — Raymond Tran · Coder dạo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;500;600;700&family=Dancing+Script:wght@500;600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@500;600;700&family=Dancing+Script:wght@500;600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --bg: #0a0707; --bg2: #120c0c; --red: #d4151b; --red-hi: #ff3b3b; --stamp: #c8141b;
       --text: #f4efe9; --muted: #9a918a; --line: rgba(255,255,255,.09); --line-red: rgba(212,21,27,.4);
       --paper: #efe7da; --paper-2: #e4dac9; --ink: #1c1514; --ink-2: #5b4f49;
-      --display: 'Antonio', 'Arial Narrow', sans-serif; --body: 'Inter', system-ui, sans-serif; --mono: 'IBM Plex Mono', ui-monospace, monospace; --script: 'Dancing Script', cursive;
+      --display: 'Saira Extra Condensed', 'Arial Narrow', sans-serif; --body: 'Inter', system-ui, sans-serif; --mono: 'IBM Plex Mono', ui-monospace, monospace; --script: 'Dancing Script', cursive;
     }
     html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
     body { background: var(--bg); color: var(--text); font: 400 16px/1.65 var(--body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
@@ -51,10 +51,10 @@
     .kicker { position: absolute; z-index: 4; top: 1.1rem; left: 0; right: 0; }
     .kicker .wrap { display: flex; justify-content: space-between; font: 500 .7rem var(--mono); letter-spacing: .12em; color: var(--muted); text-transform: uppercase; }
     .kicker b { color: var(--red-hi); font-weight: 500; }
-    .word { position: absolute; z-index: 1; left: 0; right: 0; top: 2.6rem; text-align: center; white-space: nowrap; user-select: none; pointer-events: none;
-      font: 500 var(--w, 24vw)/.95 var(--display); letter-spacing: .01em; transform: scaleY(1.28); transform-origin: 50% 0; }
+    .word { position: absolute; z-index: 1; left: 0; right: 0; top: 1.5rem; text-align: center; white-space: nowrap; user-select: none; pointer-events: none;
+      font: 600 var(--w, 24vw)/.95 var(--display); letter-spacing: .01em; transform: scaleY(1.28); transform-origin: 50% 0; }
     .word span { background: linear-gradient(180deg, #e0161d 0%, #b30e14 52%, #8f0a10 100%); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; padding: .04em .06em .3em; margin: -.04em -.06em -.3em; }
-    .hero-photo { position: absolute; z-index: 2; left: 50%; transform: translateX(-46%); top: calc(2.6rem + var(--w, 24vw) * .3); bottom: 0; aspect-ratio: 864 / 1083; pointer-events: none; }
+    .hero-photo { position: absolute; z-index: 2; left: 50%; transform: translateX(-46%); top: calc(1.5rem + var(--w, 24vw) * .3); bottom: 0; aspect-ratio: 864 / 1083; pointer-events: none; }
     .hero-photo img { width: 100%; height: 100%; object-fit: contain; object-position: bottom; -webkit-mask-image: linear-gradient(180deg, #000 86%, transparent); mask-image: linear-gradient(180deg, #000 86%, transparent); filter: drop-shadow(0 0 2px rgba(255,70,70,.5)) drop-shadow(0 0 16px rgba(212,21,27,.3)); }
     .hero-grid { position: relative; z-index: 3; display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: end; min-height: max(640px, calc(100svh - 7.5rem)); padding: 6rem 0 1.7rem; }
     .hello { font: 500 clamp(1.6rem, 2.8vw, 2.3rem)/1 var(--script); margin-bottom: .5rem; }
@@ -63,7 +63,7 @@
     .hero-p { margin-top: .8rem; max-width: 340px; font-size: .88rem; color: #cfc7c0; font-weight: 300; }
     .cta { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.3rem; }
     .hero-right { grid-column: 3; justify-self: end; width: min(300px, 100%); }
-    .dict { margin-bottom: .8rem; padding: .85rem 1rem; border-left: 2px solid var(--red-hi); background: rgba(255,255,255,.03); font-size: .76rem; line-height: 1.55; color: #c7beb7; }
+    .dict { max-width: 205px; margin-left: auto; margin-bottom: .8rem; padding: .85rem 1rem; border-left: 2px solid var(--red-hi); background: rgba(255,255,255,.03); font-size: .76rem; line-height: 1.55; color: #c7beb7; }
     .dict b { font: 600 1.05rem var(--display); letter-spacing: .04em; color: var(--text); margin-right: .35rem; }
     .dict em { font-style: normal; color: var(--muted); font-family: var(--mono); font-size: .68rem; }
     .ledger { font: 400 .8rem var(--mono); }
@@ -179,6 +179,7 @@
       .hero { min-height: 0; } .hero-grid { grid-template-columns: 1fr; min-height: 0; padding: 0 0 2rem; margin-top: -9vw; gap: 1.6rem; }
       .hero-photo { position: relative; left: 50%; top: auto; bottom: auto; transform: translateX(-50%); width: min(440px, 88vw); height: auto; margin-top: calc(var(--w, 24vw) * 1.05); }
       .hero-right { grid-column: 1; justify-self: stretch; width: 100%; }
+      .dict { max-width: none; margin-left: 0; }
       .slip { flex-basis: calc((100% - var(--gap)) / 2); }
       .about-grid, .minutes-wrap, .contact-grid { grid-template-columns: 1fr; }
     }
@@ -228,7 +229,7 @@
         </div>
         <div></div>
         <div class="hero-right">
-          <p class="dict"><b>dạo</b><em>/zaːw˧˨ˀ/ đg.</em><br>Đi chơi thong thả, không vội.<br><span style="color:var(--text)">Coder dạo:</span> lập trình viên làm tự do, đi qua nhiều dự án.</p>
+          <p class="dict"><b>dạo</b><em>(động từ)</em><br>Đi chơi thong thả, không vội.<br><span style="color:var(--text)">Coder dạo:</span> lập trình viên làm tự do, đi qua nhiều dự án.</p>
           <ul class="ledger" id="ledger">
             <li><span>Dự án đã làm</span><b id="lgProj">0</b></li>
             <li><span>Sprint đã thực hiện</span><b id="lgSpr">0</b></li>
