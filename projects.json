@@ -166,5 +166,19 @@
     },
     "clientUse": true,
     "sprints": 4
+  },
+  {
+    "title": "Website TD House",
+    "category": "website",
+    "desc": {
+      "vi": "Website giới thiệu TD House, công ty kiến trúc nội thất: dịch vụ thiết kế nhà phố, biệt thự, văn phòng, chung cư, quy trình làm việc và các công trình đã thực hiện. Làm trên WordPress.",
+      "en": "The website of TD House, an interior and architecture design company: design services for townhouses, villas, offices and apartments, their working process and finished projects. Built on WordPress."
+    },
+    "tags": [
+      "WordPress"
+    ],
+    "demo": "https://tdhouse.vn",
+    "sprints": 4,
+    "clientUse": true
   }
 ]
