@@ -444,17 +444,9 @@
     .marquee.big span.r { color: var(--red); -webkit-text-stroke: 0; }
     .marquee.big span.dot { color: var(--red-hi); -webkit-text-stroke: 0; padding: 0; font-size: 1.6rem; align-self: center; }
 
-    /* ── magnetic buttons (10) ── */
-    .mag { translate: var(--tx, 0px) var(--ty, 0px); transition-property: background, border-color, color, transform, translate; transition-duration: .2s, .2s, .2s, .2s, .35s; transition-timing-function: ease, ease, ease, ease, cubic-bezier(.2,.8,.2,1); }
+    /* ── button hover transitions (the old magnetic pull is gone) ── */
+    .mag { transition-property: background, border-color, color, transform; transition-duration: .2s; transition-timing-function: ease; }
 
-    /* ── signature (12) ── */
-    .signature { padding: 4.5rem 0 3rem; text-align: center; border-top: 1px solid var(--line); overflow: hidden; }
-    .sig { position: relative; display: inline-block; padding: 0 1.2rem 1.4rem; }
-    .sig-text { display: block; font-family: var(--script); font-weight: 600; font-size: clamp(5.5rem, 17vw, 13.5rem); line-height: 1.05; color: var(--text); transform: rotate(-4deg); clip-path: inset(-15% 100% -15% -4%); transition: clip-path 2.4s cubic-bezier(.55,0,.25,1); text-shadow: 0 0 40px rgba(212,21,27,.35); }
-    .sig.in .sig-text { clip-path: inset(-15% -6% -15% -4%); }
-    .sig-line { position: absolute; left: 4%; right: 4%; bottom: 0; width: 92%; height: 34px; overflow: visible; }
-    .sig-line path { fill: none; stroke: var(--red-hi); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.3s ease 1.9s; filter: drop-shadow(0 0 6px rgba(255,59,59,.7)); }
-    .sig.in .sig-line path { stroke-dashoffset: 0; }
 
 
     /* ══════════ CINEMA LAYER ══════════ */
@@ -479,10 +471,37 @@
     @keyframes dolly { to { scale: 1.05; } }
     .hero-word { filter: blur(calc(var(--sy, 0) * .011px)); opacity: calc(1 - var(--sy, 0) * .00055); }
 
+
+    /* ── VIETNAM: gold-star bits (flag red and gold, kept low-key so they sit inside the black/red palette) ── */
+    :root { --flag-red: #da251d; --flag-gold: #ffcd00; --star: polygon(50% 0, 61.2% 34.5%, 97.6% 34.5%, 68.2% 55.9%, 79.4% 90.5%, 50% 69.1%, 20.6% 90.5%, 31.8% 55.9%, 2.4% 34.5%, 38.8% 34.5%); }
+    .marquee span.dot, .marquee.big span.dot { width: 1.05rem; height: 1.05rem; margin: 0 1.5rem; padding: 0; flex-shrink: 0; align-self: center; background: var(--flag-gold); clip-path: var(--star); -webkit-text-stroke: 0; }
+    .marquee.big span.dot { width: 1.6rem; height: 1.6rem; margin: 0 1.8rem; }
+    /* 2 + 3: a huge, barely-there flag cut off at a corner: bottom-left behind the contact block, bottom-right behind the hero stats */
+    .contact { position: relative; overflow: hidden; }
+    .contact-flag, .hero-flag { position: absolute; left: -6vw; bottom: -5vw; width: min(46vw, 640px); aspect-ratio: 3 / 2; container-type: inline-size; opacity: .1; transform: rotate(-9deg); pointer-events: none; z-index: 0; -webkit-mask-image: linear-gradient(60deg, #000 30%, transparent 92%); mask-image: linear-gradient(60deg, #000 30%, transparent 92%); }
+    /* the flag is cut into thin strips (built in JS); each strip bobs up and down a little later than its neighbour, so a wave runs across the cloth, with a shade band that follows the wave */
+    .flag-strip { position: absolute; top: 0; bottom: 0; background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 20' preserveAspectRatio='none'><rect width='30' height='20' fill='%23da251d'/><polygon points='15.00,1.80 16.93,7.74 23.18,7.74 18.12,11.42 20.05,17.36 15.00,13.69 9.95,17.36 11.88,11.42 6.82,7.74 13.07,7.74' fill='%23ffcd00'/></svg>") calc(var(--x) * -1cqw) 0 / 100cqw 100% no-repeat; animation: flagWave 2.6s ease-in-out infinite; animation-delay: var(--d); will-change: transform; }
+    .flag-strip::after { content: ''; position: absolute; inset: 0; background: #000; opacity: 0; animation: flagShade 2.6s ease-in-out infinite; animation-delay: var(--d); }
+    /* one full sine per loop, never reversing: the crest keeps travelling from the pole to the free end, and each strip tilts with the slope of the cloth like a real fold */
+    @keyframes flagWave {
+      0%   { transform: translateY(0) skewY(calc(var(--a) * 1.6deg)); }
+      25%  { transform: translateY(calc(var(--a) * 1cqw)) skewY(0deg); }
+      50%  { transform: translateY(0) skewY(calc(var(--a) * -1.6deg)); }
+      75%  { transform: translateY(calc(var(--a) * -1cqw)) skewY(0deg); }
+      100% { transform: translateY(0) skewY(calc(var(--a) * 1.6deg)); }
+    }
+    @keyframes flagShade { 0%, 100% { opacity: 0; } 50% { opacity: .22; } }
+    /* hero: a much bigger flag, sitting behind the PORTFOLIO word (the word is z-index 1, the flag 0) */
+    .hero-flag { left: auto; right: -14vw; bottom: auto; top: calc(50% + 2rem); width: min(64vw, 960px); opacity: .1; transform: translateY(-50%) rotate(6deg); -webkit-mask-image: linear-gradient(-75deg, #000 35%, transparent 96%); mask-image: linear-gradient(-75deg, #000 35%, transparent 96%); }
+    .contact > .wrap { position: relative; z-index: 1; }
+    @media (max-width: 980px) { .contact-flag { width: 78vw; } .hero-flag { width: 100vw; right: -20vw; } }
+    @media (prefers-reduced-motion: reduce) { .flag-strip, .flag-strip::after { animation: none; } }
+
     /* ── RESPONSIVE ── */
     /* desktop: hero fills the first screen; the big word is a background layer behind everything */
     @media (min-width: 981px) {
       .hero { --word: 26.4vw; --stretch: 1.42; height: max(580px, calc(100svh - 5rem)); display: flex; flex-direction: column; }
+      .hero-photo { transform: translateX(-46%) scale(1.16); transform-origin: 50% 100%; }
       .hero-word { position: absolute; top: 4.2rem; left: 0; right: 0; margin: 0; }
       .hero-grid { flex: 1; min-height: 0; grid-template-rows: minmax(0, 1fr); padding-bottom: 1.6rem; margin-top: 0; }
       .name { font-size: clamp(2.6rem, min(6.2vw, 9.5svh), 5.6rem); }
@@ -552,9 +571,6 @@
       .hero-word { filter: none; opacity: 1; }
       .hero-photo { scale: none; }
       .split .ch { opacity: 1; transform: none; transition: none; }
-      .sig-text { clip-path: none; transition: none; }
-      .sig-line path { stroke-dashoffset: 0; transition: none; }
-      .mag { translate: none; }
     }
   </style>
   <script>
@@ -605,6 +621,7 @@
     <!-- HERO -->
     <section class="hero">
       <div class="hero-word" aria-hidden="true"><span data-t="PORTFOLIO"><i style="--i:0">P</i><i style="--i:1">O</i><i style="--i:2">R</i><i style="--i:3">T</i><i style="--i:4">F</i><i style="--i:5">O</i><i style="--i:6">L</i><i style="--i:7">I</i><i style="--i:8">O</i></span></div>
+      <div class="hero-flag" aria-hidden="true"></div>
       <div class="hero-photo"><img src="avatar-cutout.png" alt="Raymond Tran" width="864" height="1083" fetchpriority="high" onerror="this.remove()" /></div>
 
       <div class="wrap hero-grid">
@@ -632,7 +649,7 @@
       </div>
     </section>
 
-    <div class="marquee" aria-hidden="true"><div class="marquee-track"><span>REACT</span><span class="dot">✦</span><span>PHP</span><span class="dot">✦</span><span>FIREBASE</span><span class="dot">✦</span><span>FLUTTER</span><span class="dot">✦</span><span>MYSQL</span><span class="dot">✦</span><span>TYPESCRIPT</span><span class="dot">✦</span><span>NODE.JS</span><span class="dot">✦</span><span>PYTHON</span><span class="dot">✦</span><span>LARAVEL</span><span class="dot">✦</span><span>POSTGRESQL</span><span class="dot">✦</span><span>DOCKER</span><span class="dot">✦</span><span>GITHUB ACTIONS</span><span class="dot">✦</span><span>REACT</span><span class="dot">✦</span><span>PHP</span><span class="dot">✦</span><span>FIREBASE</span><span class="dot">✦</span><span>FLUTTER</span><span class="dot">✦</span><span>MYSQL</span><span class="dot">✦</span><span>TYPESCRIPT</span><span class="dot">✦</span><span>NODE.JS</span><span class="dot">✦</span><span>PYTHON</span><span class="dot">✦</span><span>LARAVEL</span><span class="dot">✦</span><span>POSTGRESQL</span><span class="dot">✦</span><span>DOCKER</span><span class="dot">✦</span><span>GITHUB ACTIONS</span><span class="dot">✦</span></div></div>
+    <div class="marquee" aria-hidden="true"><div class="marquee-track"><span>REACT</span><span class="dot"></span><span>PHP</span><span class="dot"></span><span>FIREBASE</span><span class="dot"></span><span>FLUTTER</span><span class="dot"></span><span>MYSQL</span><span class="dot"></span><span>TYPESCRIPT</span><span class="dot"></span><span>NODE.JS</span><span class="dot"></span><span>PYTHON</span><span class="dot"></span><span>LARAVEL</span><span class="dot"></span><span>POSTGRESQL</span><span class="dot"></span><span>DOCKER</span><span class="dot"></span><span>GITHUB ACTIONS</span><span class="dot"></span><span>REACT</span><span class="dot"></span><span>PHP</span><span class="dot"></span><span>FIREBASE</span><span class="dot"></span><span>FLUTTER</span><span class="dot"></span><span>MYSQL</span><span class="dot"></span><span>TYPESCRIPT</span><span class="dot"></span><span>NODE.JS</span><span class="dot"></span><span>PYTHON</span><span class="dot"></span><span>LARAVEL</span><span class="dot"></span><span>POSTGRESQL</span><span class="dot"></span><span>DOCKER</span><span class="dot"></span><span>GITHUB ACTIONS</span><span class="dot"></span></div></div>
 
     <!-- PROJECTS -->
     <section class="projects" id="projects">
@@ -806,10 +823,11 @@
       </div>
     </section>
 
-    <div class="marquee big" aria-hidden="true"><div class="marquee-track"><span class="r">LET'S WORK TOGETHER</span><span class="dot">✦</span><span>CÙNG LÀM VIỆC NÀO</span><span class="dot">✦</span><span class="r">LET'S WORK TOGETHER</span><span class="dot">✦</span><span>CÙNG LÀM VIỆC NÀO</span><span class="dot">✦</span><span class="r">LET'S WORK TOGETHER</span><span class="dot">✦</span><span>CÙNG LÀM VIỆC NÀO</span><span class="dot">✦</span><span class="r">LET'S WORK TOGETHER</span><span class="dot">✦</span><span>CÙNG LÀM VIỆC NÀO</span><span class="dot">✦</span></div></div>
+    <div class="marquee big" aria-hidden="true"><div class="marquee-track"><span class="r">LET'S WORK TOGETHER</span><span class="dot"></span><span>CÙNG LÀM VIỆC NÀO</span><span class="dot"></span><span class="r">LET'S WORK TOGETHER</span><span class="dot"></span><span>CÙNG LÀM VIỆC NÀO</span><span class="dot"></span><span class="r">LET'S WORK TOGETHER</span><span class="dot"></span><span>CÙNG LÀM VIỆC NÀO</span><span class="dot"></span><span class="r">LET'S WORK TOGETHER</span><span class="dot"></span><span>CÙNG LÀM VIỆC NÀO</span><span class="dot"></span></div></div>
 
     <!-- CONTACT -->
     <section class="contact" id="contact">
+      <div class="contact-flag" aria-hidden="true"></div>
       <div class="wrap contact-grid">
         <div class="reveal">
           <h2 class="split"><span data-i18n="c-h">Cùng làm việc nào</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/></svg></h2>
@@ -841,14 +859,6 @@
       </div>
     </section>
     <!-- SIGNATURE -->
-    <section class="signature" aria-hidden="true">
-      <div class="wrap">
-        <div class="sig" id="sig">
-          <span class="sig-text">Raymond</span>
-          <svg class="sig-line" viewBox="0 0 600 34" preserveAspectRatio="none"><path pathLength="1" d="M4 24 C 90 4, 210 32, 340 14 S 520 6, 596 20"/></svg>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer>
@@ -1299,7 +1309,7 @@
       });
     }
     {
-      const targets = document.querySelectorAll('.split, #sig');
+      const targets = document.querySelectorAll('.split');
       if ('IntersectionObserver' in window) {
         const tio = new IntersectionObserver(es => es.forEach(e => {
           if (e.isIntersecting) { e.target.classList.add('in'); tio.unobserve(e.target); }
@@ -1366,30 +1376,6 @@
       update();
     }
 
-    // ── magnetic buttons (10)
-    if (finePointer && !reduceMotion) {
-      let mbusy = false, mx = 0, my = 0;
-      const pull = () => {
-        mbusy = false;
-        document.querySelectorAll('.mag').forEach(el => {
-          const r = el.getBoundingClientRect();
-          const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-          const dx = mx - cx, dy = my - cy;
-          const reach = Math.max(r.width, r.height) * 0.5 + 46;
-          if (Math.hypot(dx, dy) < reach) {
-            el.style.setProperty('--tx', (dx * 0.28).toFixed(1) + 'px');
-            el.style.setProperty('--ty', (dy * 0.38).toFixed(1) + 'px');
-          } else {
-            el.style.removeProperty('--tx'); el.style.removeProperty('--ty');
-          }
-        });
-      };
-      document.addEventListener('pointermove', e => {
-        mx = e.clientX; my = e.clientY;
-        if (!mbusy) { mbusy = true; requestAnimationFrame(pull); }
-      });
-    }
-
     // ── Sprint numbers come from projects.json: sum of each project's `sprints` (default 4); clients still using = clientUse
     let sprintStatsShown = false;
     const heroCounted = {};
@@ -1429,6 +1415,18 @@
     let savedLang = null;
     try { savedLang = localStorage.getItem('ss-lang'); } catch (e) {}
     setLang(savedLang === 'en' ? 'en' : 'vi');
+    // ── FLAGS: cut each background flag into strips so a wave can run through it (see .flag-strip)
+    document.querySelectorAll('.contact-flag, .hero-flag').forEach(fl => {
+      const N = 72, fromRight = fl.classList.contains('hero-flag'), frag = document.createDocumentFragment();
+      for (let i = 0; i < N; i++) {
+        const j = fromRight ? N - 1 - i : i;   // distance from the pole: the pole end barely moves, the free end moves most
+        const st = document.createElement('i'); st.className = 'flag-strip';
+        st.style.cssText = 'left:' + (i * 100 / N) + '%;width:calc(' + (100 / N) + '% + 1.5px);--x:' + (i * 100 / N) + ';--a:' + (0.4 + 2.8 * j / (N - 1)).toFixed(2) + ';--d:-' + (j * 4.76 / N).toFixed(3) + 's';
+        frag.append(st);
+      }
+      fl.append(frag);
+    });
+
     initProjects();
 
     // ── CONTACT FORM (Web3Forms)
