@@ -12,10 +12,14 @@
   <meta property="og:title" content="Raymond Tran — Coder dạo" />
   <meta property="og:description" content="Raymond Tran, freelance developer ở TP. Hồ Chí Minh. Mình làm phần mềm, web app và công cụ tự động hóa cho đúng cách bạn đang làm việc." />
   <meta property="og:url" content="https://raymondtrantm.id.vn/" />
-  <meta property="og:image" content="https://raymondtrantm.id.vn/avatar.jpg" />
+  <meta property="og:image" content="https://raymondtrantm.id.vn/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Raymond Tran, Coder dạo và Web developer" />
   <meta property="og:locale" content="vi_VN" />
   <meta property="og:locale:alternate" content="en_US" />
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://raymondtrantm.id.vn/og.png" />
   <meta name="twitter:title" content="Raymond Tran — Coder dạo" />
   <meta name="twitter:description" content="Raymond Tran, freelance developer ở TP. Hồ Chí Minh. Mình làm phần mềm, web app và công cụ tự động hóa cho đúng cách bạn đang làm việc." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23070707'/><text x='50' y='70' text-anchor='middle' font-family='Arial' font-weight='900' font-size='60' fill='%23d4151b'>R</text></svg>" />
@@ -497,6 +501,34 @@
     @media (max-width: 980px) { .contact-flag { width: 78vw; } .hero-flag { width: 100vw; right: -20vw; } }
     @media (prefers-reduced-motion: reduce) { .flag-strip, .flag-strip::after { animation: none; } }
 
+    /* ── JOURNEY (timeline) + FAQ ── */
+    .journey, .faq { padding: 4rem 0; border-bottom: 1px solid var(--line); overflow: hidden; }
+    .journey > .wrap, .faq > .wrap { position: relative; z-index: 1; }
+    .journey h2, .faq h2 { font-family: var(--display); font-weight: 600; font-size: clamp(1.9rem, 3.2vw, 2.7rem); letter-spacing: .03em; text-transform: uppercase; margin-bottom: 2.2rem; }
+    .jr { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem; }
+    .jr::before { content: ''; position: absolute; top: 6px; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, var(--line), rgba(255,59,59,.55)); }
+    .jr-i { position: relative; padding-top: 2rem; }
+    .jr-i::before { content: ''; position: absolute; top: 0; left: 0; width: 13px; height: 13px; border-radius: 50%; background: var(--bg); border: 1px solid var(--red-hi); transition: background .3s, box-shadow .3s; }
+    .jr-i:last-child::before { background: var(--red-hi); box-shadow: 0 0 14px rgba(255,59,59,.8); }
+    .jr-i:hover::before { background: var(--red-hi); box-shadow: 0 0 14px rgba(255,59,59,.6); }
+    .jr-l { font-family: var(--display); font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; color: var(--red-hi); }
+    .jr-i h4 { font-family: var(--display); font-weight: 500; font-size: 1.25rem; letter-spacing: .05em; text-transform: uppercase; margin: .25rem 0 .55rem; }
+    .jr-i p { font-size: .84rem; color: #b5b5b5; font-weight: 300; line-height: 1.7; }
+    .faq-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 3.5rem; align-items: start; }
+    .faq-lead { font-size: .98rem; color: #d2d2d2; font-weight: 300; line-height: 1.8; margin: -.8rem 0 0; }
+    .faq-grid .principles { margin-top: 1.6rem; }
+    .faq-cta { margin-top: 1.8rem; }
+    .qa { border-top: 1px solid var(--line); }
+    .qa:last-child { border-bottom: 1px solid var(--line); }
+    .qa summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 1.2rem; padding: 1.15rem 0; font-family: var(--display); font-weight: 500; font-size: 1.05rem; letter-spacing: .04em; transition: color .2s; }
+    .qa summary::-webkit-details-marker { display: none; }
+    .qa summary::after { content: ''; flex: 0 0 auto; width: 10px; height: 10px; border-right: 1.5px solid var(--red-hi); border-bottom: 1.5px solid var(--red-hi); transform: rotate(45deg) translateY(-2px); transition: transform .3s; }
+    .qa[open] summary::after { transform: rotate(-135deg) translateY(-2px); }
+    .qa summary:hover, .qa[open] summary { color: var(--red-hi); }
+    .qa p { padding: 0 2rem 1.3rem 0; font-size: .88rem; color: #b5b5b5; font-weight: 300; line-height: 1.75; }
+    @media (max-width: 1100px) { .jr { grid-template-columns: 1fr 1fr; gap: 2.5rem 2rem; } .jr::before { display: none; } .faq-grid { grid-template-columns: 1fr; gap: 2.2rem; } }
+    @media (max-width: 560px) { .jr { grid-template-columns: 1fr; } }
+
     /* ── RESPONSIVE ── */
     /* desktop: hero fills the first screen; the big word is a background layer behind everything */
     @media (min-width: 981px) {
@@ -701,6 +733,19 @@
       </div>
     </section>
 
+    <!-- JOURNEY -->
+    <section class="journey" id="journey">
+      <div class="wrap">
+        <h2 class="reveal split" data-i18n="s-journey">Hành trình</h2>
+        <div class="jr">
+          <div class="jr-i reveal"><span class="jr-l" data-i18n="j1-l">Khởi đầu</span><h4 data-i18n="j1-h">WordPress</h4><p data-i18n="j1-p">Mình bắt đầu bằng các website WordPress. Làm tới đâu cũng chạm giới hạn kiến thức, nên mình quyết định học lại cho bài bản.</p></div>
+          <div class="jr-i reveal"><span class="jr-l" data-i18n="j2-l">Học bài bản</span><h4 data-i18n="j2-h">Full stack</h4><p data-i18n="j2-p">Học đủ chiều từ front-end, back-end, cơ sở dữ liệu đến triển khai, để tự đảm đương một dự án vừa và nhỏ từ đầu đến cuối.</p></div>
+          <div class="jr-i reveal"><span class="jr-l" data-i18n="j3-l">Bài toán vận hành</span><h4 data-i18n="j3-h">Phần mềm quản lý</h4><p data-i18n="j3-p">Chuyển sang các bài toán có số liệu thật như kho, công nợ, đơn hàng, lộ trình giao hàng. Đây là lúc simpleRMS, simpleDMS và simpleWork ra đời.</p></div>
+          <div class="jr-i reveal"><span class="jr-l" data-i18n="j4-l">Hiện tại</span><h4 data-i18n="j4-h">SimpleSoft</h4><p data-i18n="j4-p">Nhận làm theo yêu cầu các hệ thống có tích hợp và eCommerce, chạy theo Sprint, và có khách đang dùng hằng ngày.</p></div>
+        </div>
+      </div>
+    </section>
+
     <!-- PROCESS -->
     <section class="process" id="process">
       <div class="bg-word" data-bg="-1" aria-hidden="true" data-i18n="bg-process">QUY TRÌNH</div>
@@ -814,6 +859,32 @@
       </div>
     </section>
 
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+      <div class="wrap">
+        <h2 class="reveal split" data-i18n="s-faq">Chi phí &amp; hỏi đáp</h2>
+        <div class="faq-grid">
+          <div class="reveal">
+            <p class="faq-lead" data-i18n="fq-p">Mình báo chi phí và thời gian rõ ràng ở bước lên phương án, trước khi bạn quyết. Chi phí phụ thuộc chủ yếu vào ba thứ:</p>
+            <ul class="principles">
+              <li><span class="pn">01</span><div><b data-i18n="f1-h">Phạm vi</b><span class="t" data-i18n="f1-t">Bao nhiêu chức năng và bao nhiêu nhóm người dùng.</span></div></li>
+              <li><span class="pn">02</span><div><b data-i18n="f2-h">Số Sprint</b><span class="t" data-i18n="f2-t">Quy mô quyết định cần bao nhiêu Sprint, mỗi Sprint dài 1 đến 2 tuần.</span></div></li>
+              <li><span class="pn">03</span><div><b data-i18n="f3-h">Tích hợp</b><span class="t" data-i18n="f3-t">Có phải nối với phần mềm khác, cổng thanh toán hay dữ liệu cũ không.</span></div></li>
+            </ul>
+            <a href="#contact" class="btn faq-cta" data-i18n="fq-cta">Nhận báo giá</a>
+          </div>
+          <div class="qa-list">
+          <details class="qa reveal"><summary data-i18n="q1">Q1</summary><p data-i18n="a1">A1</p></details>
+          <details class="qa reveal"><summary data-i18n="q2">Q2</summary><p data-i18n="a2">A2</p></details>
+          <details class="qa reveal"><summary data-i18n="q3">Q3</summary><p data-i18n="a3">A3</p></details>
+          <details class="qa reveal"><summary data-i18n="q4">Q4</summary><p data-i18n="a4">A4</p></details>
+          <details class="qa reveal"><summary data-i18n="q5">Q5</summary><p data-i18n="a5">A5</p></details>
+          <details class="qa reveal"><summary data-i18n="q6">Q6</summary><p data-i18n="a6">A6</p></details>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- QUOTE -->
     <section class="quote-band">
       <div class="wrap reveal">
@@ -858,7 +929,6 @@
         </div>
       </div>
     </section>
-    <!-- SIGNATURE -->
   </main>
 
   <footer>
@@ -940,6 +1010,18 @@
         'pr1-h':"Đơn giản trước",'pr1-t':"Làm bản đơn giản nhất mà chạy được, cần gì thêm thì tính sau.",'pr2-h':"Chạy thật sớm",'pr2-t':"Đưa bản dùng được cho người dùng thật sớm nhất có thể, rồi chỉnh theo góp ý.",'pr3-h':"Nói rõ từ đầu",'pr3-t':"Làm những gì, bao giờ xong, tốn bao nhiêu: thống nhất rõ ngay từ đầu.",
         's-skills':'Kỹ năng','sk1':"Front-end",'sk2':"Back-end",'sk3':"Cơ sở dữ liệu",'sk4':"Triển khai & vận hành",'sk5':"Mobile",'sk6':'Công cụ',
         's-process':"Mình làm việc thế nào",
+        's-journey':'Hành trình','j1-l':'Khởi đầu','j1-h':'WordPress','j1-p':"Mình bắt đầu bằng các website WordPress. Làm tới đâu cũng chạm giới hạn kiến thức, nên mình quyết định học lại cho bài bản.",
+        'j2-l':'Học bài bản','j2-h':'Full stack','j2-p':"Học đủ chiều từ front-end, back-end, cơ sở dữ liệu đến triển khai, để tự đảm đương một dự án vừa và nhỏ từ đầu đến cuối.",
+        'j3-l':'Bài toán vận hành','j3-h':'Phần mềm quản lý','j3-p':"Chuyển sang các bài toán có số liệu thật như kho, công nợ, đơn hàng, lộ trình giao hàng. Đây là lúc simpleRMS, simpleDMS và simpleWork ra đời.",
+        'j4-l':'Hiện tại','j4-h':'SimpleSoft','j4-p':"Nhận làm theo yêu cầu các hệ thống có tích hợp và eCommerce, chạy theo Sprint, và có khách đang dùng hằng ngày.",
+        's-faq':'Chi phí & hỏi đáp','fq-p':"Mình báo chi phí và thời gian rõ ràng ở bước lên phương án, trước khi bạn quyết. Chi phí phụ thuộc chủ yếu vào ba thứ:",
+        'f1-h':'Phạm vi','f1-t':'Bao nhiêu chức năng và bao nhiêu nhóm người dùng.','f2-h':'Số Sprint','f2-t':'Quy mô quyết định cần bao nhiêu Sprint, mỗi Sprint dài 1 đến 2 tuần.','f3-h':'Tích hợp','f3-t':'Có phải nối với phần mềm khác, cổng thanh toán hay dữ liệu cũ không.','fq-cta':'Nhận báo giá',
+        'q1':'Làm một website mất bao lâu?','a1':"Thường 3 đến 4 Sprint, mỗi Sprint dài 1 đến 2 tuần, gồm cả giai đoạn bạn kiểm thử (UAT). Con số cụ thể chốt sau khi mình nghe rõ yêu cầu.",
+        'q2':'Một hệ thống quản lý thì sao?','a2':"Thường 5 đến 8 Sprint, gồm cả UAT. Phần quan trọng được làm trước để bạn dùng thử sớm, phần còn lại bổ sung dần qua các Sprint sau.",
+        'q3':'Chi phí được tính thế nào?','a3':"Dựa vào phạm vi công việc, số Sprint cần để hoàn thành và mức độ tích hợp với hệ thống khác. Mình đề xuất chi phí và thời gian ở bước lên phương án, bạn biết trước rồi mới quyết.",
+        'q4':'Mình có xem được sản phẩm trong lúc đang làm không?','a4':"Có. Cuối mỗi Sprint có một bản chạy được để bạn xem và góp ý, mọi mốc quan trọng nằm trên một timeline rõ ràng.",
+        'q5':'Sau khi bàn giao có hỗ trợ không?','a5':"Có. Mình triển khai, hướng dẫn đội ngũ của bạn cách dùng, và vẫn ở đó khi bạn cần sửa hoặc mở rộng.",
+        'q6':'Mình nên chuẩn bị gì trước khi liên hệ?','a6':"Chỉ cần kể bài toán: công việc đang chạy ra sao, ai sẽ dùng, đang vướng ở đâu. Mình sẽ trả lời trong vòng 24 giờ.",
         'p1-h':"Trao đổi",'p1-p':"Mình nghe bạn kể công việc đang chạy ra sao, tìm đúng vấn đề cần giải rồi mới bắt tay vào code.",
         'p2-h':"Lên phương án",'p2-p':"Mình đề xuất cách làm, chi phí và thời gian rõ ràng. Bạn biết trước mình sẽ nhận được gì rồi mới quyết.",
         'p3-h':"Bắt tay làm",'p3-p':"Mình làm đúng theo phương án đã chốt và báo tiến độ đều đặn. Không giấu giếm, không bất ngờ.",
@@ -990,6 +1072,18 @@
         'pr1-h':'Simple first','pr1-t':'Ship the leanest version that works, then add.','pr2-h':'Go live early','pr2-t':'Put a usable version in front of real users as soon as possible, then adjust to feedback.','pr3-h':'Clear scope, clear work','pr3-t':'Scope, progress and cost made transparent from day one.',
         's-skills':'Skills','sk1':'Interface','sk2':'Behind the scenes','sk3':'Data','sk4':'Going live','sk5':'Mobile','sk6':'Tools',
         's-process':'How I work',
+        's-journey':'Journey','j1-l':'Where it began','j1-h':'WordPress','j1-p':"I started out building WordPress websites. I kept hitting the limits of what I knew, so I decided to learn it properly.",
+        'j2-l':'Learning properly','j2-h':'Full stack','j2-p':"I learned the whole stack, from front-end and back-end to databases and deployment, so I could carry a small or mid-sized project from start to finish.",
+        'j3-l':'Operations problems','j3-h':'Management software','j3-p':"I moved on to problems with real numbers: stock, debts, orders, delivery routes. This is where simpleRMS, simpleDMS and simpleWork were born.",
+        'j4-l':'Today','j4-h':'SimpleSoft','j4-p':"Custom-built systems with integrations and eCommerce, run in Sprints, with clients using them every day.",
+        's-faq':'Pricing & FAQ','fq-p':"I give you a clear cost and timeline at the proposal step, before you decide. The cost mostly depends on three things:",
+        'f1-h':'Scope','f1-t':'How many features and how many groups of users.','f2-h':'Sprints','f2-t':'The size decides how many Sprints are needed, each one to two weeks long.','f3-h':'Integrations','f3-t':'Whether it has to connect to other software, a payment gateway or legacy data.','fq-cta':'Get a quote',
+        'q1':'How long does a website take?','a1':"Usually 3 to 4 Sprints of one to two weeks each, including the testing phase on your side (UAT). The exact number is settled once I understand your requirements.",
+        'q2':'What about a management system?','a2':"Usually 5 to 8 Sprints, UAT included. The important parts are built first so you can try them early, and the rest is added over the following Sprints.",
+        'q3':'How is the cost calculated?','a3':"It depends on the scope, the number of Sprints needed and how much it integrates with other systems. I propose the cost and timeline at the proposal step, so you know before you decide.",
+        'q4':'Can I see the product while it is being built?','a4':"Yes. Every Sprint ends with a working release for you to review and comment on, and every key date sits on one clear timeline.",
+        'q5':'Is there support after handover?','a5':"Yes. I deploy it, show your team how to use it, and I'm still around when you need changes or want to extend it.",
+        'q6':'What should I prepare before getting in touch?','a6':"Just tell me the problem: how the work runs today, who will use it, and where it hurts. I'll reply within 24 hours.",
         'p1-h':'Discover','p1-p':'I listen to how your business actually runs and define the real problem before writing a single line of code.',
         'p2-h':'Design','p2-p':"I map out the solution and send a clear proposal. You know what you're getting before I start.",
         'p3-h':'Build','p3-p':'I build close to the agreed design and keep you updated. No black boxes, no surprises.',
