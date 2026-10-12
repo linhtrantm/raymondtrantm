@@ -135,6 +135,20 @@
     "sprints": 6
   },
   {
+    "title": "simpleWork Desktop",
+    "category": "app",
+    "desc": {
+      "vi": "Ứng dụng máy tính nội bộ viết bằng Electron cho macOS, gom các app nhắn tin (Zalo, WhatsApp, Teams, Messenger, Claude) vào chung một cửa sổ để nắm công việc nhanh, khỏi phải mở từng app. Mỗi dịch vụ giữ phiên đăng nhập riêng, thêm tab mới chỉ cần thêm một dòng cấu hình.",
+      "en": "An internal desktop app built with Electron for macOS that gathers the messaging apps (Zalo, WhatsApp, Teams, Messenger, Claude) into one window, so I can catch up on work fast without opening each one. Every service keeps its own login session, and a new tab is a single line of config."
+    },
+    "tags": [
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ],
+    "sprints": 0
+  },
+  {
     "repo": "linhtrantm/antgroupvn",
     "title": "Website Antgroup",
     "category": "website",
